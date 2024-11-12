@@ -1,0 +1,44 @@
+import 'package:familystars_2/infrastructure/constants/app_constants.dart';
+import 'package:familystars_2/infrastructure/constants/routes_constants.dart';
+import 'package:familystars_2/infrastructure/providers/general_provider.dart';
+import 'package:familystars_2/infrastructure/services/firebase_services.dart';
+import 'package:familystars_2/ui/commons/button_widgets/custom_button.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/all.dart';
+
+// This widget permits a user to be logged in the app with email-password
+class LoginButtonScreen extends StatefulWidget {
+  final GlobalKey<FormState>? formKey;
+  const LoginButtonScreen({Key? key, this.formKey}) : super(key: key);
+
+  @override
+  _LoginButtonScreenState createState() => _LoginButtonScreenState();
+}
+
+class _LoginButtonScreenState extends State<LoginButtonScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Consumer(builder: (context, watch, child) {
+      final logInProviderRes = watch(logInScreenProvider);
+      return CustomButton(
+        onPressed: () async {
+          // If fields are completed it check email-password
+          if (widget.formKey!.currentState!.validate()) {
+            String email = logInProviderRes.emailController.text;
+            String password = logInProviderRes.passwordController.text;
+
+            bool loginSucceed =
+                await FirebaseServices.loginUserWithFirebaseEmailCredentials(
+                    context, email, password);
+            if (loginSucceed) {
+              Navigator.popAndPushNamed(context, RoutesConstants.mainScreen);
+            }
+          }
+        },
+        title: AppConstants.signIn,
+        buttonHeight: 50,
+        fontSize: 18,
+      );
+    });
+  }
+}
