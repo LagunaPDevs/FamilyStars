@@ -19,18 +19,17 @@ class PasswordScreenButton extends StatefulWidget {
 }
 
 class _PasswordScreenButtonState extends State<PasswordScreenButton> {
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   DocumentSnapshot? documentSnapshot;
   late Future<local_user.User> _futureData;
-  local_user.User _user = local_user.User();
+  final local_user.User _user = local_user.User();
 
   ValueNotifier<int> _currentPage = ValueNotifier(0);
 
   // Retrieve specific data of a parent
   Future<local_user.User> _getAllUserData() async {
     Map<String, dynamic> mapData;
-    await FirebaseServices.getDataList(
-            'users', '${_firebaseAuth.currentUser!.uid}')
+    await FirebaseServices.getDataList('users', _firebaseAuth.currentUser!.uid)
         .then(
       (value) => {
         documentSnapshot = value,
@@ -59,7 +58,7 @@ class _PasswordScreenButtonState extends State<PasswordScreenButton> {
         future: _futureData,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
                 child:
                     CircularProgressIndicator(color: ColorConstants.blueColor));
           } else if (snapshot.connectionState == ConnectionState.done &&
@@ -86,7 +85,7 @@ class _PasswordScreenButtonState extends State<PasswordScreenButton> {
               fontSize: 18,
             );
           }
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(
               color: ColorConstants.blueColor,
             ),

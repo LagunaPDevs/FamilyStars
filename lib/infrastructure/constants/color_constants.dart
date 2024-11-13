@@ -1,9 +1,8 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ColorConstants{
+class ColorConstants {
   //all the colors of the app are defined here
 
   static const Color blueColor = Color(0xff377cf7);
@@ -29,12 +28,12 @@ class ColorConstants{
     /// divisor of 5 would mean [50] is a lightness of 1.0 or
     /// a color of #ffffff. A value of six would be near white
     /// but not quite.
-    final lowDivisor = 6;
+    const lowDivisor = 6;
 
     /// if [500] is the default color, there are at LEAST four
     /// steps above [500]. A divisor of 4 would mean [900] is
     /// a lightness of 0.0 or color of #000000
-    final highDivisor = 5;
+    const highDivisor = 5;
 
     final lowStep = (1.0 - lightness) / lowDivisor;
     final highStep = lightness / highDivisor;
@@ -53,26 +52,23 @@ class ColorConstants{
     };
   }
 
-  static  MaterialColor getMaterialColor(int colorValue,Color color){
+  static MaterialColor getMaterialColor(int colorValue, Color color) {
     return MaterialColor(colorValue, getSwatch(color));
   }
 
-  static Color generateRandomUserColor(){
+  static Color generateRandomUserColor() {
     List<Color> randomColorList = [
-      Color(0xffff7ffa),
-      Color(0xff7fff8c),
-      Color(0xffff9d7f),
-      Color(0xff7ffff0),
-      Color(0xfffffd7f),
-      Color(0xff967fff),
+      const Color(0xffff7ffa),
+      const Color(0xff7fff8c),
+      const Color(0xffff9d7f),
+      const Color(0xff7ffff0),
+      const Color(0xfffffd7f),
+      const Color(0xff967fff),
     ];
-    var random = new Random();
+    var random = Random();
 
     int randomNumber(int min, int max) => min + random.nextInt(max - min);
 
-    return randomColorList[randomNumber(0, randomColorList.length-1)];
-
+    return randomColorList[randomNumber(0, randomColorList.length - 1)];
   }
-
-
 }

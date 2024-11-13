@@ -20,10 +20,8 @@ import 'package:familystars_2/ui/screens/rewards_screen/rewards_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'infrastructure/constants/routes_constants.dart';
 
 Future<void> main() async {
@@ -31,16 +29,18 @@ Future<void> main() async {
   await SharedPreferenceService.getInstance();
   await Firebase.initializeApp();
 
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
     statusBarBrightness: Brightness.dark,
   ));
 
-  runApp(ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -56,23 +56,28 @@ class MyApp extends StatelessWidget {
 
   Map<String, WidgetBuilder> _buildNavigationRoutes() {
     return <String, WidgetBuilder>{
-      RoutesConstants.introductionScreen: (context) => IntroductionScreen(),
-      RoutesConstants.loginScreen: (context) => LoginScreen(),
-      RoutesConstants.forgotPasswordScreen: (context) => ForgotPasswordScreen(),
+      RoutesConstants.introductionScreen: (context) =>
+          const IntroductionScreen(),
+      RoutesConstants.loginScreen: (context) => const LoginScreen(),
+      RoutesConstants.forgotPasswordScreen: (context) =>
+          const ForgotPasswordScreen(),
       RoutesConstants.chooseSignUpScreen: (context) =>
-          ChooseSignUpMethodScreen(),
-      RoutesConstants.registrationScreen: (context) => RegistrationScreen(),
-      RoutesConstants.mainScreen: (context) => MainScreen(),
-      RoutesConstants.calendarScreen: (context) => CalendarScreen(),
-      RoutesConstants.rewardsScreen: (context) => RewardsScreen(),
-      RoutesConstants.activationCodeScreen: (context) => ActivationCodeScreen(),
-      RoutesConstants.createUserScreen: (context) => CreateUserScreen(),
-      RoutesConstants.createTaskScreen: (context) => CreateTaskScreen(),
-      RoutesConstants.changeUserScreen: (context) => ChangeUserScreen(),
-      RoutesConstants.childMainScreen: (context) => ChildMainScreen(),
-      RoutesConstants.childCalendarScreen: (context) => CalendarChildScreen(),
-      RoutesConstants.aboutUsScreen: (context) => AboutUsScreen(),
-      RoutesConstants.passwordScreen: (context) => PasswordScreen()
+          const ChooseSignUpMethodScreen(),
+      RoutesConstants.registrationScreen: (context) =>
+          const RegistrationScreen(),
+      RoutesConstants.mainScreen: (context) => const MainScreen(),
+      RoutesConstants.calendarScreen: (context) => const CalendarScreen(),
+      RoutesConstants.rewardsScreen: (context) => const RewardsScreen(),
+      RoutesConstants.activationCodeScreen: (context) =>
+          const ActivationCodeScreen(),
+      RoutesConstants.createUserScreen: (context) => const CreateUserScreen(),
+      RoutesConstants.createTaskScreen: (context) => const CreateTaskScreen(),
+      RoutesConstants.changeUserScreen: (context) => const ChangeUserScreen(),
+      RoutesConstants.childMainScreen: (context) => const ChildMainScreen(),
+      RoutesConstants.childCalendarScreen: (context) =>
+          const CalendarChildScreen(),
+      RoutesConstants.aboutUsScreen: (context) => const AboutUsScreen(),
+      RoutesConstants.passwordScreen: (context) => const PasswordScreen()
     };
   }
 }

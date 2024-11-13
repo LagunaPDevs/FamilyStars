@@ -4,7 +4,7 @@ import 'package:familystars_2/infrastructure/constants/image_constants.dart';
 import 'package:familystars_2/infrastructure/constants/routes_constants.dart';
 import 'package:familystars_2/infrastructure/services/shared_preference_services.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // First screen that is shown when the user installs the app
 // This is screen is not shown if the user has been already authenticated
@@ -23,7 +23,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
     super.initState();
 
     // If user has logged previously it leads to it main screen
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       if (SharedPreferenceService().getUser() != null) {
         //await FirebaseServices.getDataList("users", FirebaseAuth.instance.currentUser!.uid);
         Navigator.of(context).popAndPushNamed(RoutesConstants.mainScreen);
@@ -36,7 +36,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
     return Consumer(builder: (context, watch, child) {
       return Scaffold(
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
@@ -49,10 +49,10 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
               ? Center(
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 200,
                       ),
-                      Container(
+                      SizedBox(
                           width: 200,
                           child: Image.asset(ImageConstants.logoFamilyStars)),
                       GestureDetector(
@@ -60,8 +60,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                             Navigator.of(context)
                                 .popAndPushNamed(RoutesConstants.loginScreen);
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
                               AppConstants.start,
                               style: TextStyle(
@@ -74,7 +74,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                     ],
                   ),
                 )
-              : CircularProgressIndicator(color: ColorConstants.whiteColor),
+              : const CircularProgressIndicator(
+                  color: ColorConstants.whiteColor),
         ),
       );
     });

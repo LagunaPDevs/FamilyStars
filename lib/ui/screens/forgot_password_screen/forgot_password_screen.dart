@@ -1,10 +1,7 @@
-import 'dart:ui';
-
 import 'package:familystars_2/ui/commons/logo_appbar.dart';
 import 'package:familystars_2/ui/screens/forgot_password_screen/widgets/forgot_password_button.dart';
 import 'package:familystars_2/ui/screens/forgot_password_screen/widgets/forgot_password_fields.dart';
 import 'package:familystars_2/ui/screens/forgot_password_screen/widgets/forgot_password_title.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -24,7 +21,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: LogoAppBar(),
+      appBar: const LogoAppBar(),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Form(
@@ -32,8 +29,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                ForgotPasswordTitle(),
-                ForgotPasswordFields(),
+                const ForgotPasswordTitle(),
+                const ForgotPasswordFields(),
                 ForgotPasswordButton(
                   formKey: _formKey,
                 )

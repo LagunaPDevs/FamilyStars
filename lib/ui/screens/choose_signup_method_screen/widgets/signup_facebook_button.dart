@@ -3,7 +3,6 @@ import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/constants/image_constants.dart';
 import 'package:familystars_2/infrastructure/constants/routes_constants.dart';
 import 'package:familystars_2/infrastructure/services/firebase_services.dart';
-import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_loading.dart';
 import 'package:familystars_2/ui/commons/button_widgets/custom_flat_button_with_preicon.dart';
 import 'package:flutter/material.dart';
 
@@ -20,12 +19,12 @@ class _SignUpFacebookButtonState extends State<SignUpFacebookButton> {
   @override
   Widget build(BuildContext context) {
     return CustomFlatButtonWithPreIcon.icon(
-      label: Text(
+      label: const Text(
         AppConstants.signUpFacebook,
-        textScaleFactor: 1,
+        textScaler: TextScaler.linear(1),
       ),
       minWidth: double.infinity,
-      icon: Container(
+      icon: SizedBox(
         height: 50,
         child: Image.asset(
           ImageConstants.facebookIcon,

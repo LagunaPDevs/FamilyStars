@@ -1,4 +1,3 @@
-import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
 import 'package:familystars_2/infrastructure/providers/general_provider.dart';
@@ -9,9 +8,8 @@ import 'package:familystars_2/ui/screens/registration_screen/widgets/registratio
 import 'package:familystars_2/ui/screens/registration_screen/widgets/registration_next_button.dart';
 import 'package:familystars_2/ui/screens/registration_screen/widgets/registration_previous_button.dart';
 import 'package:familystars_2/ui/screens/registration_screen/widgets/registration_second_step.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:im_stepper/stepper.dart';
 
@@ -35,19 +33,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       int upperBound = registrationProviderRes.upperBound;
       bool isFinish = activeStep == upperBound;
       return Scaffold(
-          appBar: LogoAppBar(),
+          appBar: const LogoAppBar(),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: LayoutConstants.generalVerticalSpace,
                 ),
                 // Set a stepper to manage registration
                 // ---
                 NumberStepper(
-                  numbers: [1, 2, 3],
-                  numberStyle: TextStyle(
+                  numbers: const [1, 2, 3],
+                  numberStyle: const TextStyle(
                       color: ColorConstants.whiteColor,
                       fontFamily: 'KristenITC'),
                   activeStep: registrationProviderRes.activeStep,
@@ -61,18 +59,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   lineColor: ColorConstants.blueColor,
                 ),
                 // ---
-                SizedBox(
+                const SizedBox(
                   height: LayoutConstants.generalVerticalSpace,
                 ),
-                Container(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40.w),
-                    child: Form(
-                        key: _formKey,
-                        child: Center(child: registrationFields(activeStep))),
-                  ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 40.w),
+                  child: Form(
+                      key: _formKey,
+                      child: Center(child: registrationFields(activeStep))),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: LayoutConstants.generalVerticalSpace,
                 ),
                 // Set step buttons
@@ -102,13 +98,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   Widget registrationFields(int activeStep) {
     switch (activeStep) {
       case 0:
-        return RegistrationFirstStep();
+        return const RegistrationFirstStep();
       case 1:
-        return RegistrationSecondStep();
+        return const RegistrationSecondStep();
       case 2:
-        return RegistrationDobStep();
+        return const RegistrationDobStep();
       default:
-        return RegistrationFirstStep();
+        return const RegistrationFirstStep();
     }
   }
 }

@@ -3,9 +3,7 @@ import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/utils/task_data_source.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 // It builds a Week calendar which holds all the task assigned by a parent
@@ -21,7 +19,7 @@ class WeekEventCalendar extends StatefulWidget {
 }
 
 class _WeekEventCalendarState extends State<WeekEventCalendar> {
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   bool month = true;
 
   @override
@@ -33,10 +31,11 @@ class _WeekEventCalendarState extends State<WeekEventCalendar> {
             .snapshots(),
         builder: (context, AsyncSnapshot snapshot) {
           bool changeView = month == false;
-          if (!snapshot.hasData)
-            return Center(
+          if (!snapshot.hasData) {
+            return const Center(
                 child:
                     CircularProgressIndicator(color: ColorConstants.blueColor));
+          }
           List data = snapshot.data.docs;
           List<Appointment> appointments = [];
           for (int i = 0; i < data.length; i++) {
@@ -44,7 +43,7 @@ class _WeekEventCalendarState extends State<WeekEventCalendar> {
             List splitted = date.split('/');
             DateTime startTime = DateTime.utc(int.parse(splitted[2]),
                 int.parse(splitted[1]), int.parse(splitted[0]), 0, 0, 0);
-            final DateTime endTime = startTime.add(Duration(hours: 23));
+            final DateTime endTime = startTime.add(const Duration(hours: 23));
             if (data[i]['state'] == AppConstants.incomplete) {
               appointments.add(Appointment(
                   startTime: startTime,
@@ -67,7 +66,7 @@ class _WeekEventCalendarState extends State<WeekEventCalendar> {
           }
           return Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Container(
+            child: SizedBox(
               height: 300,
               child: SfCalendar(
                   firstDayOfWeek: 1,

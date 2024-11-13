@@ -1,12 +1,11 @@
 import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
-import 'package:familystars_2/infrastructure/providers/general_provider.dart';
 import 'package:familystars_2/ui/commons/child_appbar.dart';
 import 'package:familystars_2/ui/screens/child_main_screen/widgets/child_event_container.dart';
 import 'package:familystars_2/ui/screens/drawer_screen/drawer_child_screen.dart';
 import 'package:familystars_2/ui/screens/child_main_screen/widgets/child_calendar_button.dart';
 import 'package:familystars_2/ui/screens/child_main_screen/widgets/reward_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // This widget represent main screen for an specific child user
 
@@ -29,7 +28,7 @@ class _ChildMainScreenState extends State<ChildMainScreen> {
           childId: userPath,
         ),
         appBar: PreferredSize(
-            preferredSize: Size.fromHeight(120),
+            preferredSize: const Size.fromHeight(120),
             child: ChildAppBar(
               childId: userPath,
             )),
@@ -38,17 +37,17 @@ class _ChildMainScreenState extends State<ChildMainScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: LayoutConstants.generalVerticalSpace,
                 ),
                 ChildCalendarButton(userPath: userPath),
-                SizedBox(
+                const SizedBox(
                   height: LayoutConstants.generalVerticalSpace,
                 ),
                 ChildEventContainer(
                   userPath: userPath,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: LayoutConstants.generalVerticalSpace,
                 ),
                 RewardButton(

@@ -1,5 +1,4 @@
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Animated Dialog that shows information to users
@@ -23,7 +22,7 @@ class CustomAnimatedAlertDialog {
             child: AnimatedOpacity(
               opacity: a1.value,
               curve: Curves.easeIn,
-              duration: Duration(milliseconds: 400),
+              duration: const Duration(milliseconds: 400),
               child: _CustomDialog(
                 title: title,
                 description: content,
@@ -35,7 +34,7 @@ class CustomAnimatedAlertDialog {
             ),
           );
         },
-        transitionDuration: Duration(milliseconds: 400),
+        transitionDuration: const Duration(milliseconds: 400),
         // DURATION FOR ANIMATION
         barrierDismissible: true,
         barrierLabel: '',
@@ -54,21 +53,21 @@ class _CustomDialog extends StatelessWidget {
   final bool? isCloseIconShow;
   final MainAxisAlignment? mainAxisAlignmentForButton;
 
-  _CustomDialog(
+  const _CustomDialog(
       {this.title,
       this.description,
       this.okButtonText,
-      this.cancelButtonText,
-      this.image,
-      this.onCancelPressed,
       this.onOkPressed,
-      this.mainAxisAlignmentForButton,
-      this.isCloseIconShow = false});
+      this.cancelButtonText,
+      this.onCancelPressed,
+      this.image,
+      this.isCloseIconShow,
+      this.mainAxisAlignmentForButton});
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10.0))),
       elevation: 0.0,
       color: Colors.transparent,
@@ -82,13 +81,13 @@ class _CustomDialog extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                color: Theme.of(context).backgroundColor),
-            margin: EdgeInsets.symmetric(horizontal: 30),
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                color: Theme.of(context).colorScheme.background),
+            margin: const EdgeInsets.symmetric(horizontal: 30),
             width: double.infinity,
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: ListView(
-              padding: EdgeInsets.all(0),
+              padding: const EdgeInsets.all(0),
               shrinkWrap: true,
               children: <Widget>[
                 title != null
@@ -97,20 +96,21 @@ class _CustomDialog extends StatelessWidget {
                         child: Text(title ?? "",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context).accentColor,
+                              color: Theme.of(context).colorScheme.secondary,
                             )),
                       )
                     : Container(),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Container(
                   alignment: Alignment.centerLeft,
                   child: mainAxisAlignmentForButton != null
-                      ? Text(description ?? "", style: TextStyle(fontSize: 13))
+                      ? Text(description ?? "",
+                          style: const TextStyle(fontSize: 13))
                       : Text(description ?? "",
                           textAlign: TextAlign.start,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 13,
                           )),
                 ),
@@ -126,23 +126,23 @@ class _CustomDialog extends StatelessWidget {
                         onTap: onOkPressed,
                         child: Container(
                           child: Text(okButtonText ?? "",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: ColorConstants.whiteColor,
                               )
                               // fontSize: mainAxisAlignmentForButton != null ? 12 : null,
                               ),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 5),
                           decoration: BoxDecoration(
-                              color: Theme.of(context).accentColor,
+                              color: Theme.of(context).colorScheme.secondary,
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
+                                  const BorderRadius.all(Radius.circular(20))),
                         ),
                       ),
                       visible: okButtonText != null && onOkPressed != null,
                     ),
                     Visibility(
-                      child: SizedBox(
+                      child: const SizedBox(
                         width: 20,
                       ),
                       visible:
@@ -155,7 +155,7 @@ class _CustomDialog extends StatelessWidget {
                         onTap: onCancelPressed,
                         child: Container(
                           child: Text(cancelButtonText ?? "",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 12,
                               )),
                         ),
@@ -169,8 +169,8 @@ class _CustomDialog extends StatelessWidget {
           Visibility(
             visible: isCloseIconShow ?? true,
             child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 30),
-              padding: EdgeInsets.all(8),
+              margin: const EdgeInsets.symmetric(horizontal: 30),
+              padding: const EdgeInsets.all(8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -178,7 +178,7 @@ class _CustomDialog extends StatelessWidget {
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.close,
                         size: 16,
                       ))

@@ -5,7 +5,6 @@ import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
 import 'package:familystars_2/infrastructure/services/firebase_services.dart';
 import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_change_state_dialog.dart';
 import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_loading.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // This widget shows a container with all the events related to an specific
@@ -46,7 +45,7 @@ class _ChildEventContainerState extends State<ChildEventContainer> {
         if (document['task_state'] == AppConstants.waiting) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: ColorConstants.purpleGradient.withOpacity(0.5),
-            content: Container(
+            content: const SizedBox(
                 height: 100,
                 child: Text(AppConstants.waitingParent,
                     textAlign: TextAlign.center,
@@ -77,7 +76,7 @@ class _ChildEventContainerState extends State<ChildEventContainer> {
               CustomLoading.progressDialog(false, context);
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: ColorConstants.purpleGradient.withOpacity(0.5),
-                content: Container(
+                content: const SizedBox(
                     height: 100,
                     child: Text(AppConstants.waitingTask,
                         textAlign: TextAlign.center,
@@ -94,7 +93,7 @@ class _ChildEventContainerState extends State<ChildEventContainer> {
         if (document['task_state'] == AppConstants.completed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: ColorConstants.purpleGradient.withOpacity(0.5),
-            content: Container(
+            content: const SizedBox(
                 height: 100,
                 child: Text(AppConstants.completedTask,
                     textAlign: TextAlign.center,
