@@ -14,11 +14,11 @@ import 'package:google_sign_in/google_sign_in.dart';
 // This class contains multiple operations with Firebase database
 
 class FirebaseServices {
-  static FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  static final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   static final GoogleSignIn googleSignIn = GoogleSignIn();
   static final FirebaseFirestore _firebaseFirestore =
       FirebaseFirestore.instance;
-  static final EmailAuth emailAuth = new EmailAuth(sessionName: 'Test email');
+  static final EmailAuth emailAuth = EmailAuth(sessionName: 'Test email');
 
   // LOGIN : Login User With Email-Id and Password Credentials
   static Future<bool> loginUserWithFirebaseEmailCredentials(
@@ -45,7 +45,7 @@ class FirebaseServices {
       }
       // If error from Firebase
     } on FirebaseAuthException catch (e) {
-      print('LOGIN FAILED :' + '\n' + 'ERROR: ${e.toString()}');
+      print('LOGIN FAILED :' '\n' + 'ERROR: ${e.toString()}');
       CustomLoading.progressDialog(false, context);
       CustomAnimatedAlertDialog(
               context: context,
@@ -55,7 +55,7 @@ class FirebaseServices {
       return false;
       // If something wrong and user wont be able to login
     } catch (e) {
-      print('LOGIN FAILED :' + '\n' + 'ERROR: ${e.toString()}');
+      print('LOGIN FAILED :' '\n' + 'ERROR: ${e.toString()}');
       CustomLoading.progressDialog(false, context);
       CustomAnimatedAlertDialog(
               context: context,
@@ -150,7 +150,7 @@ class FirebaseServices {
               .saveUser(userCredential.user?.uid.toString() ?? "");
           final fullName = googleSignInAccount.displayName ?? '';
           final emailId = googleSignInAccount.email;
-          final password = '';
+          const password = '';
           await saveUserData(
               name: fullName,
               email: emailId,
@@ -212,7 +212,7 @@ class FirebaseServices {
             .saveUser(userCredential.user?.uid.toString() ?? "");
         final fullName = userData['name'] ?? '';
         final emailId = userData['email'] ?? '';
-        final password = '';
+        const password = '';
         await saveUserData(
             name: fullName,
             email: emailId,
@@ -268,7 +268,7 @@ class FirebaseServices {
         .sendPasswordResetEmail(email: emailId)
         .then(
           (value) => {
-            print('${emailId}'),
+            print(emailId),
             print('FORGET PASSWORD:  => LINK SEND TO YOUR EMAIL'),
           },
         )
@@ -341,7 +341,7 @@ class FirebaseServices {
   // FIREBASE FIRE-STORE: Take data of a collection
   static Future<DocumentSnapshot> getDataList(
       String collection, String documentId) async {
-    CollectionReference data = _firebaseFirestore.collection('$collection');
+    CollectionReference data = _firebaseFirestore.collection(collection);
     return data.doc(documentId).get();
   }
 
@@ -351,8 +351,7 @@ class FirebaseServices {
     DocumentSnapshot? documentSnapshot;
     local_user.User _user = local_user.User();
     Map<String, dynamic> mapData;
-    await FirebaseServices.getDataList(
-            'users', '${_firebaseAuth.currentUser!.uid}')
+    await FirebaseServices.getDataList('users', _firebaseAuth.currentUser!.uid)
         .then(
       (value) => {
         documentSnapshot = value,
@@ -391,10 +390,10 @@ class FirebaseServices {
       String category,
       String date,
       String stars) async {
-    Task task = new Task();
+    Task task = Task();
     List<Task> listTask = [];
 
-    TaskEvent taskEvent = new TaskEvent();
+    TaskEvent taskEvent = TaskEvent();
 
     Map<String, dynamic> taskData = {
       'created': Timestamp.fromDate(DateTime.now()),

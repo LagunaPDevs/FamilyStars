@@ -1,13 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:familystars_2/infrastructure/providers/general_provider.dart';
-import 'package:familystars_2/infrastructure/services/firebase_services.dart';
 import 'package:familystars_2/ui/screens/rewards_screen/widgets/rewards_culture_tab.dart';
 import 'package:familystars_2/ui/screens/rewards_screen/widgets/rewards_experience_tab.dart';
 import 'package:familystars_2/ui/screens/rewards_screen/widgets/rewards_material_tab.dart';
-import 'package:familystars_2/infrastructure/models/user.dart' as local_user;
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // The widget holds the different tabs for reward content
 

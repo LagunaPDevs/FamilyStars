@@ -22,6 +22,8 @@ class CustomLoading {
 }
 
 class CustomLoadingLayout extends StatefulWidget {
+  const CustomLoadingLayout({Key? key}) : super(key: key);
+
   @override
   _CustomLoadingLayoutState createState() => _CustomLoadingLayoutState();
 }
@@ -30,7 +32,7 @@ class _CustomLoadingLayoutState extends State<CustomLoadingLayout>
     with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return CupertinoActivityIndicator(
+    return const CupertinoActivityIndicator(
       radius: 15,
     );
   }

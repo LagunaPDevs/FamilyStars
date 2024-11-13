@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/constants/image_constants.dart';
@@ -10,9 +8,8 @@ import 'package:familystars_2/ui/commons/text_widgets/common_field_title.dart';
 import 'package:familystars_2/ui/screens/create_task_screen/widgets/dropdown_tasks.dart';
 import 'package:familystars_2/ui/screens/create_task_screen/widgets/gridview_child_users.dart';
 import 'package:familystars_2/ui/screens/create_task_screen/widgets/stars_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // This widget contains all necesary fields to create a new task
 
@@ -36,10 +33,9 @@ class _CreateTaskFieldsState extends State<CreateTaskFields> {
         final createTaskProviderRes = watch(createTaskScreenProvider);
         createTaskProviderRes.dateText =
             '${defaultTime.day}/${defaultTime.month}/${defaultTime.year}';
-        DateTime now = DateTime.now();
         return Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: LayoutConstants.generalVerticalSpace,
             ),
             Row(
@@ -53,7 +49,7 @@ class _CreateTaskFieldsState extends State<CreateTaskFields> {
                       createTaskProviderRes.setHome();
                     },
                     child: Container(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: createTaskProviderRes.isHome
                             ? ColorConstants.yellowColor
@@ -66,7 +62,7 @@ class _CreateTaskFieldsState extends State<CreateTaskFields> {
                         height: 30,
                       ),
                     )),
-                SizedBox(
+                const SizedBox(
                   width: LayoutConstants.generalItemSpace,
                 ),
                 GestureDetector(
@@ -74,7 +70,7 @@ class _CreateTaskFieldsState extends State<CreateTaskFields> {
                       createTaskProviderRes.setSchool();
                     },
                     child: Container(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: createTaskProviderRes.isSchool
                             ? ColorConstants.yellowColor
@@ -87,7 +83,7 @@ class _CreateTaskFieldsState extends State<CreateTaskFields> {
                         height: 30,
                       ),
                     )),
-                SizedBox(
+                const SizedBox(
                   width: LayoutConstants.generalItemSpace,
                 ),
                 GestureDetector(
@@ -95,7 +91,7 @@ class _CreateTaskFieldsState extends State<CreateTaskFields> {
                       createTaskProviderRes.setGrocery();
                     },
                     child: Container(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: createTaskProviderRes.isGrocery
                             ? ColorConstants.yellowColor
@@ -112,18 +108,18 @@ class _CreateTaskFieldsState extends State<CreateTaskFields> {
                 // --- End here
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: LayoutConstants.generalVerticalSpace,
             ),
             Text(
               createTaskProviderRes.nameText,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: LayoutConstants.generalVerticalSpace,
             ),
-            DropDownTasks(),
-            SizedBox(
+            const DropDownTasks(),
+            const SizedBox(
               height: LayoutConstants.generalVerticalSpace,
             ),
             Row(
@@ -131,13 +127,14 @@ class _CreateTaskFieldsState extends State<CreateTaskFields> {
               children: [
                 // Select date functionality
                 // --- Stars here
-                CommonFieldTitle(title: AppConstants.selectDate),
-                SizedBox(
+                const CommonFieldTitle(title: AppConstants.selectDate),
+                const SizedBox(
                   width: LayoutConstants.generalVerticalSpace,
                 ),
                 Text(
                   '${selectedDate.toLocal()}'.split(' ')[0],
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 CustomButton(
                   title: AppConstants.changeDate,
@@ -149,36 +146,36 @@ class _CreateTaskFieldsState extends State<CreateTaskFields> {
                       createTaskProviderRes.setDateText(
                           '${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}');
                     } catch (e) {}
-                    //createTaskProviderRes.dateText = '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}';
                   },
                   fontSize: 18,
                 ),
                 // --- Ends here
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: LayoutConstants.generalVerticalSpace,
             ),
             Row(
               children: [
-                CommonFieldTitle(title: AppConstants.assignTo),
-                SizedBox(
+                const CommonFieldTitle(title: AppConstants.assignTo),
+                const SizedBox(
                   width: 50,
                 ),
                 Text(
                   createTaskProviderRes.assignedName,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: LayoutConstants.generalVerticalSpace,
             ),
-            GridViewChildUsers(),
-            SizedBox(
+            const GridViewChildUsers(),
+            const SizedBox(
               height: LayoutConstants.generalVerticalSpace,
             ),
-            StarsButton(),
+            const StarsButton(),
           ],
         );
       },
@@ -199,9 +196,10 @@ class _CreateTaskFieldsState extends State<CreateTaskFields> {
           return Theme(
             data: ThemeData.light().copyWith(
               primaryColor: ColorConstants.whiteColor,
-              accentColor: ColorConstants.blueColor,
-              colorScheme: ColorScheme.light(primary: ColorConstants.blueColor),
-              buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+              colorScheme:
+                  const ColorScheme.light(secondary: ColorConstants.blueColor),
+              buttonTheme:
+                  const ButtonThemeData(textTheme: ButtonTextTheme.primary),
             ),
             child: child!,
           );

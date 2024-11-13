@@ -7,7 +7,6 @@ import 'package:familystars_2/infrastructure/providers/forgot_password_screen_pr
 import 'package:familystars_2/infrastructure/providers/password_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/registration_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/reward_screen_provider.dart';
-import 'package:familystars_2/ui/screens/password_screen/password_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'login_fields_screen_provider.dart';

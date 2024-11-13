@@ -7,12 +7,8 @@ class SharedPreferenceService {
   static SharedPreferences? _preferences;
 
   static Future<SharedPreferenceService?> getInstance() async {
-    if (_instance == null) {
-      _instance = SharedPreferenceService();
-    }
-    if (_preferences == null) {
-      _preferences = await SharedPreferences.getInstance();
-    }
+    _instance ??= SharedPreferenceService();
+    _preferences ??= await SharedPreferences.getInstance();
     return _instance;
   }
 

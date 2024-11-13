@@ -32,7 +32,7 @@ class _ChildTaskListTileState extends State<ChildTaskListTile> {
     // with task information
 
     return isCompleted
-        ? SizedBox(
+        ? const SizedBox(
             width: 10,
           )
         : Card(
@@ -73,7 +73,7 @@ class _ChildTaskListTileState extends State<ChildTaskListTile> {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   backgroundColor:
                       ColorConstants.purpleGradient.withOpacity(0.5),
-                  content: Container(
+                  content: const SizedBox(
                       height: 100,
                       child: Text(AppConstants.waitingParent,
                           textAlign: TextAlign.center,
@@ -123,14 +123,15 @@ class _ChildTaskListTileState extends State<ChildTaskListTile> {
             .where('state', isNotEqualTo: 'Completa')
             .snapshots(),
         builder: (context, AsyncSnapshot snapshot) {
-          if (!snapshot.hasData)
-            return Center(
+          if (!snapshot.hasData) {
+            return const Center(
                 child:
                     CircularProgressIndicator(color: ColorConstants.blueColor));
+          }
           return ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             itemCount: snapshot.data.docs.length,
             itemBuilder: (context, index) =>
                 _buildListOfIncompleteTasks(context, snapshot.data.docs[index]),

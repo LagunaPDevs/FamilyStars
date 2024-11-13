@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:familystars_2/infrastructure/models/user.dart' as local_user;
 import 'package:familystars_2/infrastructure/constants/app_constants.dart';
@@ -9,9 +7,8 @@ import 'package:familystars_2/infrastructure/constants/routes_constants.dart';
 import 'package:familystars_2/infrastructure/services/firebase_services.dart';
 import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_animated_alert_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // This widget is the drawer menu of a child user, it id is necessary.
 // The id is received as an argument.
@@ -29,8 +26,8 @@ class DrawerChildScreen extends StatefulWidget {
 }
 
 class _DrawerChildScreenState extends State<DrawerChildScreen> {
-  FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   DocumentSnapshot? documentSnapshot;
   late Future<local_user.User> _futureData;
   TextEditingController changeUserController = TextEditingController();
@@ -43,7 +40,7 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
   // Retrieve child user data
   Future<local_user.User> _getAllUserData() async {
     Map<String, dynamic> mapData;
-    await FirebaseServices.getDataList('users', '${widget.childId}').then(
+    await FirebaseServices.getDataList('users', widget.childId).then(
       (value) => {
         documentSnapshot = value,
         mapData = documentSnapshot!.data() as Map<String, dynamic>,
@@ -73,7 +70,7 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
               future: _futureData,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
+                  return const Center(
                       child: CircularProgressIndicator(
                           color: ColorConstants.blueColor));
                 } else if (snapshot.connectionState == ConnectionState.done &&
@@ -82,7 +79,7 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                     padding: EdgeInsets.zero,
                     children: [
                       DrawerHeader(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               //color: ColorConstants.blueColor,
                               gradient: LinearGradient(
                                   begin: Alignment.topRight,
@@ -93,18 +90,17 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                               ])),
                           // Actions of the drawer
                           // -------------
-                          child: Container(
-                              child: Column(
+                          child: Column(
                             children: [
                               Row(children: [
                                 Image.asset(
                                   ImageConstants.logoKids,
                                   width: 100,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 50,
                                 ),
-                                Text(
+                                const Text(
                                   AppConstants.menu,
                                   style: TextStyle(
                                       color: ColorConstants.whiteColor,
@@ -114,9 +110,9 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                                 )
                               ])
                             ],
-                          ))),
+                          )),
                       ListTile(
-                        title: Text(
+                        title: const Text(
                           AppConstants.main,
                           style: TextStyle(fontFamily: 'KristenITC'),
                         ),
@@ -127,14 +123,14 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                         },
                       ),
                       ListTile(
-                        title: Text(
+                        title: const Text(
                           AppConstants.editUser,
                           style: TextStyle(fontFamily: 'KristenITC'),
                         ),
                         onTap: () {},
                       ),
                       ListTile(
-                        title: Text(
+                        title: const Text(
                           AppConstants.createUser,
                           style: TextStyle(fontFamily: 'KristenITC'),
                         ),
@@ -143,7 +139,7 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                         },
                       ),
                       ListTile(
-                        title: Text(
+                        title: const Text(
                           AppConstants.changeUser,
                           style: TextStyle(fontFamily: 'KristenITC'),
                         ),
@@ -163,7 +159,7 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                                         context: context,
                                         builder: (context) {
                                           return AlertDialog(
-                                            title: Center(
+                                            title: const Center(
                                                 child: Text(
                                                     AppConstants.changeUser)),
                                             content: TextField(
@@ -176,7 +172,8 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                                                     changeUserController,
                                                 focusNode: changeUserFocus,
                                                 obscureText: true,
-                                                decoration: InputDecoration(
+                                                decoration:
+                                                    const InputDecoration(
                                                   hintText:
                                                       AppConstants.password,
                                                 )),
@@ -206,10 +203,10 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                                                                     .circular(
                                                                         5),
                                                           ),
-                                                          child: Padding(
+                                                          child: const Padding(
                                                             padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
+                                                                EdgeInsets.all(
+                                                                    8.0),
                                                             child: Text(
                                                               AppConstants.ok,
                                                               style: TextStyle(
@@ -219,7 +216,7 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                                                                           .bold),
                                                             ),
                                                           ))),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 10,
                                                   ),
                                                   GestureDetector(
@@ -235,10 +232,10 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                                                                     .circular(
                                                                         5),
                                                           ),
-                                                          child: Padding(
+                                                          child: const Padding(
                                                             padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
+                                                                EdgeInsets.all(
+                                                                    8.0),
                                                             child: Text(
                                                               AppConstants
                                                                   .cancel,
@@ -257,13 +254,13 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                                   });
                         },
                       ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                         child:
                             Divider(height: 1, color: ColorConstants.blueColor),
                       ),
                       ListTile(
-                        title: Text(
+                        title: const Text(
                           AppConstants.aboutUs,
                           style: TextStyle(fontFamily: 'KristenITC'),
                         ),
@@ -272,7 +269,7 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                         },
                       ),
                       ListTile(
-                        title: Text(
+                        title: const Text(
                           AppConstants.logOut,
                           style: TextStyle(fontFamily: 'KristenITC'),
                         ),
@@ -283,7 +280,7 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                     ],
                   );
                 }
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(
                     color: ColorConstants.blueColor,
                   ),
