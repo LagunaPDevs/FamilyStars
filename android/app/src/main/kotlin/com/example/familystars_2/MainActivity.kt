@@ -1,4 +1,4 @@
-package com.example.familystars_2
+package com.app.familystars_2
 
 import io.flutter.embedding.android.FlutterActivity
 
