@@ -7,7 +7,7 @@ import 'package:familystars_2/ui/commons/text_widgets/common_text_form_field.dar
 import 'package:familystars_2/validators/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // This widget represent a step on registration where user can set name and
 // family type

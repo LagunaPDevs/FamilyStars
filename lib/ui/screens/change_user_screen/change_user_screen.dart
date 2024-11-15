@@ -9,7 +9,7 @@ import 'package:familystars_2/ui/screens/drawer_screen/drawer_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // This widget allows to a parent user to change between child users
 

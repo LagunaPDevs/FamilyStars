@@ -7,7 +7,7 @@ import 'package:familystars_2/infrastructure/providers/general_provider.dart';
 import 'package:familystars_2/infrastructure/services/firebase_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // This class represents a widget that builds an AppBar representing a child
 // user. It works as a menu which user can interact.

@@ -7,7 +7,7 @@ import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_change_stat
 import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_loading.dart';
 import 'package:familystars_2/ui/commons/card_widgets/reward_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // This widget contains a Tab information with material rewards available for a
 // child
