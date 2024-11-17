@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CreateUserScreenProvider with ChangeNotifier {
   /// get the reference for use other providers
-  ProviderReference ref;
+  Ref ref;
 
   CreateUserScreenProvider(this.ref);
 

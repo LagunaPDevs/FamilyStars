@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CreateTaskScreenProvider extends ChangeNotifier {
   /// get the reference for use other providers
-  ProviderReference ref;
+  Ref ref;
 
   CreateTaskScreenProvider(this.ref);
 

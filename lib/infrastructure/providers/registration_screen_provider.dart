@@ -4,9 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // This class represents a provider that catch events in 'RegistrationScreen'
 // and notify about changes in it attributes
 
-class RegistrationScreenProvider extends ChangeNotifier{
-
-  ProviderReference ref;
+class RegistrationScreenProvider extends ChangeNotifier {
+  Ref ref;
   RegistrationScreenProvider(this.ref);
 
   /// active step on formulary
@@ -39,29 +38,26 @@ class RegistrationScreenProvider extends ChangeNotifier{
   /// text for date of birth
   String dobText = '';
 
-
   /// visible password
   bool _isVisiblePassword = false;
 
   bool get isVisiblePassword => _isVisiblePassword;
 
   /// set password visibility and notify UI
-  void setPasswordVisibility(){
+  void setPasswordVisibility() {
     _isVisiblePassword = !_isVisiblePassword;
     notifyListeners();
   }
 
   /// set active step up on formulary
-  void setActiveStepUp(){
+  void setActiveStepUp() {
     activeStep++;
     notifyListeners();
   }
 
   /// set active step down on formulary
-  void setActiveStepDown(){
+  void setActiveStepDown() {
     activeStep--;
     notifyListeners();
   }
-
-
 }

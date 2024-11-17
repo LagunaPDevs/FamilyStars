@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // and notify about changes in it attributes
 
 class PasswordScreenProvider extends ChangeNotifier {
-  ProviderReference ref;
+  Ref ref;
 
   PasswordScreenProvider(this.ref);
 
