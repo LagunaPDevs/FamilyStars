@@ -3,7 +3,7 @@ import 'package:familystars_2/infrastructure/constants/image_constants.dart';
 import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
 import 'package:familystars_2/infrastructure/providers/general_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Thanks to this widget the number of stars for a task is set
 

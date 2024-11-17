@@ -9,7 +9,7 @@ import 'package:familystars_2/ui/screens/main_screen/widgets/parent_event_contai
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // This widget represents the main screen of a logged parent user
 

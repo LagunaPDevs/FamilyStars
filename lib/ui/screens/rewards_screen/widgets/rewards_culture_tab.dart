@@ -8,7 +8,7 @@ import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_loading.dar
 import 'package:familystars_2/ui/commons/card_widgets/reward_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // This widget contains a Tab information with culture rewards available for a
 // child

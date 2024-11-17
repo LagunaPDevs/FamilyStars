@@ -1,18 +1,18 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // This class represents a provider that catch events in 'RewardScreen'
 // and notify about changes in it attributes
 
-class RewardScreenProvider with ChangeNotifier{
+class RewardScreenProvider with ChangeNotifier {
   ProviderReference ref;
   RewardScreenProvider(this.ref);
 
   var rewardController;
 
-  String userId ='';
+  String userId = '';
   String get getUserId => userId;
-  void setUserId(String id){
+  void setUserId(String id) {
     userId = id;
     notifyListeners();
   }
@@ -21,9 +21,8 @@ class RewardScreenProvider with ChangeNotifier{
 
   String get getChildStars => childStars;
 
-  void setChildStars(String stars){
+  void setChildStars(String stars) {
     childStars = stars;
     notifyListeners();
   }
-
 }

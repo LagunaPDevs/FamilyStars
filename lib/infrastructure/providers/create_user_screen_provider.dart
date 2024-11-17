@@ -1,6 +1,6 @@
 import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // This class represents a provider that catch events in 'CreateUserScreen'
 // and notify about changes in it attributes

@@ -7,7 +7,7 @@ import 'package:familystars_2/ui/screens/calendar_child_screen/widgets/week_even
 import 'package:familystars_2/ui/screens/calendar_screen/widgets/change_calendarview_button.dart';
 import 'package:familystars_2/ui/screens/drawer_screen/drawer_child_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // This widget represents a screen which holds all child user information about
 // past, present or future task
