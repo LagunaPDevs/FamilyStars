@@ -22,8 +22,8 @@ class _CreateTaskButtonState extends State<CreateTaskButton> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final createTaskProviderRes = watch(createTaskScreenProvider);
-      return Container(
+      final createTaskProviderRes = watch.read(createTaskScreenProvider);
+      return SizedBox(
         width: 80,
         height: 80,
         child: FloatingActionButton(
@@ -39,9 +39,9 @@ class _CreateTaskButtonState extends State<CreateTaskButton> {
                 String category = createTaskProviderRes.categoryText;
                 String date = createTaskProviderRes.dateText;
                 String stars = createTaskProviderRes.starsText;
-                if (assigned.length > 0 &&
-                        name.length > 0 &&
-                        stars.length > 0 ||
+                if (assigned.isNotEmpty &&
+                        name.isNotEmpty &&
+                        stars.isNotEmpty ||
                     stars != '0') {
                   CustomLoading.progressDialog(true, context);
                   bool created = await FirebaseServices.addNewTaskToChild(owner,
@@ -52,7 +52,7 @@ class _CreateTaskButtonState extends State<CreateTaskButton> {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       backgroundColor:
                           ColorConstants.purpleGradient.withOpacity(0.5),
-                      content: Container(
+                      content: SizedBox(
                           height: 100,
                           child: Text(AppConstants.taskCreated,
                               textAlign: TextAlign.center,
@@ -65,7 +65,7 @@ class _CreateTaskButtonState extends State<CreateTaskButton> {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     backgroundColor:
                         ColorConstants.purpleGradient.withOpacity(0.5),
-                    content: Container(
+                    content: SizedBox(
                         height: 100,
                         child: Text(AppConstants.incompleteFields,
                             textAlign: TextAlign.center,

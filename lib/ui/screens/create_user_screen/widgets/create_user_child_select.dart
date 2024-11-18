@@ -20,7 +20,7 @@ class _CreateUserChildSelectState extends State<CreateUserChildSelect> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final createUserProviderRes = watch(createUserScreenProvider);
+      final createUserProviderRes = watch.read(createUserScreenProvider);
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -23,7 +23,7 @@ class _ActivationCodeResendState extends State<ActivationCodeResend> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, watch, child) {
-        final registrationProviderRes = watch(registrationScreenProvider);
+        final registrationProviderRes = watch.read(registrationScreenProvider);
         return Column(
           children: [
             Text(

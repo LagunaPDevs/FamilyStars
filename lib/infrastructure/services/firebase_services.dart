@@ -204,7 +204,7 @@ class FirebaseServices {
       final userData = await FacebookAuth.instance.getUserData();
 
       final credential = FacebookAuthProvider.credential(
-          facebookLoginResult.accessToken!.token);
+          facebookLoginResult.accessToken?.tokenString ?? "");
       UserCredential userCredential =
           await _firebaseAuth.signInWithCredential(credential);
       if (userCredential.user != null) {

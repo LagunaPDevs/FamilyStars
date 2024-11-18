@@ -28,7 +28,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final registrationProviderRes = watch(registrationScreenProvider);
+      final registrationProviderRes = watch.read(registrationScreenProvider);
       int activeStep = registrationProviderRes.activeStep;
       int upperBound = registrationProviderRes.upperBound;
       bool isFinish = activeStep == upperBound;

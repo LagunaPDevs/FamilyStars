@@ -21,7 +21,7 @@ class _RegistrationPreviousButtonState
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, watch, child) {
-        final registrationProviderRes = watch(registrationScreenProvider);
+        final registrationProviderRes = watch.read(registrationScreenProvider);
         int activeStep = registrationProviderRes.activeStep;
         return GestureDetector(
           onTap: () {
@@ -32,7 +32,7 @@ class _RegistrationPreviousButtonState
               });
             }
           },
-          child: Container(
+          child: SizedBox(
             child: Row(
               children: [
                 Icon(

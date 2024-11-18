@@ -19,7 +19,7 @@ class _RewardsTabContentState extends State<RewardsTabContent> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final rewardProviderRes = watch(rewardScreenProvider);
+      final rewardProviderRes = watch.read(rewardScreenProvider);
       return TabBarView(
         controller: rewardProviderRes.rewardController,
         children: [

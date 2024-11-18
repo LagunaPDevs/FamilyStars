@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pinput/pin_put/pin_put.dart';
+import 'package:pinput/pinput.dart';
 
 // This widgets represents the fields where user can enter OTP received
 
@@ -23,37 +23,64 @@ class _ActivationCodeInputState extends State<ActivationCodeInput> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, watch, child) {
-        final activationCodeProviderRes = watch(activationCodeScreenProvider);
-        return PinPut(
-          controller: activationCodeProviderRes.pinPutController,
-          focusNode: activationCodeProviderRes.pinPutFocusNode,
-          fieldsCount: 6,
+        final activationCodeProviderRef =
+            watch.read(activationCodeScreenProvider);
+        final registrationScreenProviderRef =
+            watch.read(registrationScreenProvider);
+        return Pinput(
+          length: 6,
+          controller: activationCodeProviderRef.pinPutController,
+          focusNode: activationCodeProviderRef.pinPutFocusNode,
+          defaultPinTheme: PinTheme(
+            textStyle: TextStyle(
+              color: ColorConstants.greyColor,
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'KristenITC',
+            ),
+          ),
+          submittedPinTheme: PinTheme(
+            constraints: BoxConstraints(maxHeight: 70.h, maxWidth: 40.w),
+            decoration: BoxDecoration(
+              color: ColorConstants.yellowColor,
+              border: Border.all(color: ColorConstants.greyColor, width: 1),
+              borderRadius: BorderRadius.circular(3),
+            ),
+          ),
+          focusedPinTheme: PinTheme(
+            decoration: BoxDecoration(
+              color: ColorConstants.whiteColor,
+              border: Border.all(color: ColorConstants.greyColor, width: 1),
+              borderRadius: BorderRadius.circular(3),
+            ),
+          ),
+          followingPinTheme: PinTheme(
+            decoration: BoxDecoration(
+              color: ColorConstants.whiteColor,
+              border: Border.all(color: ColorConstants.greyColor, width: 1),
+              borderRadius: BorderRadius.circular(3),
+            ),
+          ),
           keyboardType: TextInputType.number,
-          mainAxisSize: MainAxisSize.max,
-          eachFieldConstraints: BoxConstraints(maxHeight: 70.h, maxWidth: 40.w),
+          // mainAxisSize: MainAxisSize.max,
+          pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
           onChanged: (String pin) {
-            context.read(activationCodeScreenProvider).setVerificationCode(pin);
+            activationCodeProviderRef.setVerificationCode(pin);
           },
           inputFormatters: [
             FilteringTextInputFormatter.allow(RegExp("[0-9]")),
           ],
-          onSaved: (String? pin) {
-            context
-                .read(activationCodeScreenProvider)
-                .setVerificationCode(pin!);
-          },
-          onSubmit: (String pin) async {
+          // onSaved: (String? pin) {
+          //   activationCodeProviderRef.setVerificationCode(pin!);
+          // },
+          onSubmitted: (String pin) async {
             String verificationID = StorageConstants.savedVerificationId;
             String verificationCode = '';
-            context.read(activationCodeScreenProvider).setVerificationCode(pin);
-            verificationCode =
-                context.read(activationCodeScreenProvider).verificationCode;
-            String email =
-                context.read(registrationScreenProvider).emailController.text;
-            String password = context
-                .read(registrationScreenProvider)
-                .passwordController
-                .text;
+            activationCodeProviderRef.setVerificationCode(pin);
+            verificationCode = activationCodeProviderRef.verificationCode;
+            String email = registrationScreenProviderRef.emailController.text;
+            String password =
+                registrationScreenProviderRef.passwordController.text;
 
             // If the OTP introduced is correct, user can continue with registration
             bool registred =
@@ -63,28 +90,7 @@ class _ActivationCodeInputState extends State<ActivationCodeInput> {
               Navigator.of(context).pop();
             }
           },
-          textStyle: TextStyle(
-            color: ColorConstants.greyColor,
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'KristenITC',
-          ),
-          withCursor: true,
-          submittedFieldDecoration: BoxDecoration(
-            color: ColorConstants.yellowColor,
-            border: Border.all(color: ColorConstants.greyColor, width: 1),
-            borderRadius: BorderRadius.circular(3),
-          ),
-          selectedFieldDecoration: BoxDecoration(
-            color: ColorConstants.whiteColor,
-            border: Border.all(color: ColorConstants.greyColor, width: 1),
-            borderRadius: BorderRadius.circular(3),
-          ),
-          followingFieldDecoration: BoxDecoration(
-            color: ColorConstants.whiteColor,
-            border: Border.all(color: ColorConstants.greyColor, width: 1),
-            borderRadius: BorderRadius.circular(3),
-          ),
+          // withCursor: true,
         );
       },
     );

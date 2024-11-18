@@ -4,7 +4,6 @@ import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
 import 'package:familystars_2/infrastructure/providers/general_provider.dart';
 import 'package:familystars_2/infrastructure/services/firebase_services.dart';
 import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_loading.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -22,14 +21,14 @@ class _CreateUserButtonsState extends State<CreateUserButtons> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final createUserProviderRes = watch(createUserScreenProvider);
+      final createUserProviderRes = watch.read(createUserScreenProvider);
       return Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Container(
+              SizedBox(
                 width: 80,
                 height: 80,
                 child: FloatingActionButton(
@@ -45,7 +44,7 @@ class _CreateUserButtonsState extends State<CreateUserButtons> {
               SizedBox(
                 width: LayoutConstants.generalItemSpace,
               ),
-              Container(
+              SizedBox(
                 width: 80,
                 height: 80,
                 child: FloatingActionButton(
@@ -65,7 +64,7 @@ class _CreateUserButtonsState extends State<CreateUserButtons> {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           backgroundColor:
                               ColorConstants.purpleGradient.withOpacity(0.5),
-                          content: Container(
+                          content: SizedBox(
                               height: 100,
                               child: Text(AppConstants.userCreated,
                                   textAlign: TextAlign.center,

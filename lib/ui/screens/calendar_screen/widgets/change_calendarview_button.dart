@@ -19,7 +19,7 @@ class _ChangeCalendarViewButtonState extends State<ChangeCalendarViewButton> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final calendarProviderRes = watch(calendarScreenProvider);
+      final calendarProviderRes = watch.read(calendarScreenProvider);
       bool month = calendarProviderRes.monthView;
       return Column(
         children: [

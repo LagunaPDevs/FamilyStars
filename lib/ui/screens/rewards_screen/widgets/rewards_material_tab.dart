@@ -31,7 +31,7 @@ class _RewardMaterialTabState extends State<RewardMaterialTab> {
     String userStarsString = '';
 
     return Consumer(builder: (context, watch, child) {
-      final childAppBarProviderRes = watch(childAppBarProvider);
+      final childAppBarProviderRes = watch.read(childAppBarProvider);
       return GestureDetector(
           onTap: () {
             CustomLoading.progressDialog(true, context);

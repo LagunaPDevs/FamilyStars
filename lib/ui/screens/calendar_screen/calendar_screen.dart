@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:familystars_2/infrastructure/providers/general_provider.dart';
 import 'package:familystars_2/ui/commons/user_appbar.dart';
 import 'package:familystars_2/ui/screens/calendar_screen/widgets/calendar_floating_button.dart';
@@ -8,7 +6,6 @@ import 'package:familystars_2/ui/screens/calendar_screen/widgets/month_event_cal
 import 'package:familystars_2/ui/screens/calendar_screen/widgets/task_list_tile.dart';
 import 'package:familystars_2/ui/screens/calendar_screen/widgets/week_event_calendar.dart';
 import 'package:familystars_2/ui/screens/drawer_screen/drawer_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -26,7 +23,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final calendarProviderRes = watch(calendarScreenProvider);
+      final calendarProviderRes = watch.read(calendarScreenProvider);
       bool month = calendarProviderRes.monthView;
       return Scaffold(
         drawer: DrawerScreen(),

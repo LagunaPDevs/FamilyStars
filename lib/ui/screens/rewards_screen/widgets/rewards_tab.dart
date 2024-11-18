@@ -1,11 +1,7 @@
-import 'dart:ui';
-
 import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/providers/general_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // This widget contains the tab title for each reward category
@@ -19,6 +15,7 @@ class RewardsTab extends StatefulWidget {
 
 class _RewardsTabState extends State<RewardsTab> with TickerProviderStateMixin {
   late TabController _rewardController;
+  @override
   void initState() {
     super.initState();
     _rewardController = TabController(length: 3, vsync: this);
@@ -29,7 +26,7 @@ class _RewardsTabState extends State<RewardsTab> with TickerProviderStateMixin {
     return DefaultTabController(
       length: 3,
       child: Consumer(builder: (context, watch, child) {
-        final rewardProviderRes = watch(rewardScreenProvider);
+        final rewardProviderRes = watch.read(rewardScreenProvider);
         rewardProviderRes.rewardController = _rewardController;
         return AppBar(
           elevation: 0,

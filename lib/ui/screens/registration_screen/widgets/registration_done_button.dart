@@ -21,7 +21,7 @@ class _RegistrationDoneButtonState extends State<RegistrationDoneButton> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final registrationProviderRes = watch(registrationScreenProvider);
+      final registrationProviderRes = watch.read(registrationScreenProvider);
       return GestureDetector(
         onTap: () async {
           // If form is validated save user information to email-password
@@ -44,7 +44,7 @@ class _RegistrationDoneButtonState extends State<RegistrationDoneButton> {
                     context, RoutesConstants.mainScreen));
           }
         },
-        child: Container(
+        child: SizedBox(
           child: Row(
             children: [
               Text(

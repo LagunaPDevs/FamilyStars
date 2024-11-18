@@ -30,7 +30,7 @@ class _CreateTaskFieldsState extends State<CreateTaskFields> {
     return Consumer(
       builder: (context, watch, child) {
         DateTime defaultTime = DateTime.now();
-        final createTaskProviderRes = watch(createTaskScreenProvider);
+        final createTaskProviderRes = watch.read(createTaskScreenProvider);
         createTaskProviderRes.dateText =
             '${defaultTime.day}/${defaultTime.month}/${defaultTime.year}';
         return Column(

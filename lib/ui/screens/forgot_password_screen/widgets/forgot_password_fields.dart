@@ -20,7 +20,8 @@ class _ForgotPasswordFieldsState extends State<ForgotPasswordFields> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final forgotPasswordProviderRes = watch(forgotPasswordScreenProvider);
+      final forgotPasswordProviderRes =
+          watch.read(forgotPasswordScreenProvider);
       return Column(
         children: [
           CommonTextFormField(
