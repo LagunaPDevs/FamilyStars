@@ -4,7 +4,6 @@ import 'package:familystars_2/infrastructure/providers/general_provider.dart';
 import 'package:familystars_2/ui/commons/text_widgets/common_text_form_field.dart';
 import 'package:familystars_2/validators/validators.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,7 +20,7 @@ class _LoginFieldsScreenState extends State<LoginFieldsScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final logInProviderRes = watch(logInScreenProvider);
+      final logInProviderRes = watch.read(logInScreenProvider);
       return Column(
         children: [
           CommonTextFormField(
@@ -53,7 +52,7 @@ class _LoginFieldsScreenState extends State<LoginFieldsScreen> {
             },
             suffixIcon: InkWell(
               onTap: () {
-                context.read(logInScreenProvider).setPasswordVisibility();
+                logInProviderRes.setPasswordVisibility();
               },
               child: Icon(
                 logInProviderRes.isVisiblePassword

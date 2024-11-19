@@ -16,7 +16,7 @@ class GridViewChildUsers extends StatefulWidget {
 }
 
 class _GridViewChildUsersState extends State<GridViewChildUsers> {
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -46,7 +46,7 @@ class _GridViewChildUsersState extends State<GridViewChildUsers> {
   Widget _buildUserList(BuildContext context, DocumentSnapshot document) {
     return Consumer(
       builder: (context, watch, child) {
-        final createTaskProvider = watch(createTaskScreenProvider);
+        final createTaskProvider = watch.read(createTaskScreenProvider);
         return GestureDetector(
           onTap: () {
             createTaskProvider.setAssigned(document.id);

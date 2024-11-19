@@ -19,7 +19,7 @@ class _PasswordScreenFieldsState extends State<PasswordScreenFields> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final passwordProviderRes = watch(passwordScreenProvider);
+      final passwordProviderRes = watch.read(passwordScreenProvider);
       return Column(
         children: [
           CommonFieldTitle(title: AppConstants.password),

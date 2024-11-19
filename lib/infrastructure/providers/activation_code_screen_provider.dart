@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ActivationCodeScreenProvider with ChangeNotifier {
   /// get the reference for use other providers
-  ProviderReference ref;
+  Ref ref;
   ActivationCodeScreenProvider(this.ref);
 
   /// pin input controller for otp

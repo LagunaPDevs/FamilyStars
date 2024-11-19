@@ -18,7 +18,7 @@ class _StarsButtonState extends State<StarsButton> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final createTaskProviderRes = watch(createTaskScreenProvider);
+      final createTaskProviderRes = watch.read(createTaskScreenProvider);
       return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         GestureDetector(
             onTap: () {
@@ -43,7 +43,7 @@ class _StarsButtonState extends State<StarsButton> {
             height: 50,
           ),
           Text(
-            '${createTaskProviderRes.starsText}',
+            createTaskProviderRes.starsText,
             style: TextStyle(fontSize: 19),
           ),
         ]),

@@ -6,7 +6,6 @@ import 'package:familystars_2/infrastructure/providers/general_provider.dart';
 import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_change_state_dialog.dart';
 import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_loading.dart';
 import 'package:familystars_2/ui/commons/card_widgets/reward_card.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -32,7 +31,7 @@ class _RewardCultureTabState extends State<RewardCultureTab> {
     String userStarsString = '';
 
     return Consumer(builder: (context, watch, child) {
-      final childAppBarProviderRes = watch(childAppBarProvider);
+      final childAppBarProviderRes = watch.read(childAppBarProvider);
       return GestureDetector(
           onTap: () async {
             await itemRef

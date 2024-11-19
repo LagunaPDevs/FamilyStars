@@ -1,7 +1,6 @@
 import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/providers/general_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,7 +19,7 @@ class _DropDownTasksState extends State<DropDownTasks> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final createTaskProviderRes = watch(createTaskScreenProvider);
+      final createTaskProviderRes = watch.read(createTaskScreenProvider);
       String category = createTaskProviderRes.categoryText;
 
       // This method retrieves a list of task

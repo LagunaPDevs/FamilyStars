@@ -26,7 +26,7 @@ class _CalendarChildScreenState extends State<CalendarChildScreen> {
     final Object? _unreceived = ModalRoute.of(context)!.settings.arguments;
     String userPath = _unreceived.toString();
     return Consumer(builder: (context, watch, child) {
-      final calendarProviderRes = watch(calendarScreenProvider);
+      final calendarProviderRes = watch.read(calendarScreenProvider);
       bool month = calendarProviderRes.monthView;
       return Scaffold(
         drawer: DrawerChildScreen(

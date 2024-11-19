@@ -27,7 +27,7 @@ class _RegistrationSecondStepState extends State<RegistrationSecondStep> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final registrationProviderRes = watch(registrationScreenProvider);
+      final registrationProviderRes = watch.read(registrationScreenProvider);
 
       return Column(
         children: [

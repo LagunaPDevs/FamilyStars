@@ -21,12 +21,13 @@ class RegistrationFirstStep extends StatefulWidget {
 }
 
 class _RegistrationFirstStepState extends State<RegistrationFirstStep> {
-  FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   bool exists = false;
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final registrationProviderRes = watch(registrationScreenProvider);
+      final registrationProviderRes = watch.read(registrationScreenProvider);
+      final logInProviderRes = watch.read(logInScreenProvider);
       return Column(
         children: [
           CommonTextFormField(
@@ -62,7 +63,7 @@ class _RegistrationFirstStepState extends State<RegistrationFirstStep> {
             },
             suffixIcon: InkWell(
               onTap: () {
-                context.read(logInScreenProvider).setPasswordVisibility();
+                logInProviderRes.setPasswordVisibility();
               },
               child: Icon(
                 registrationProviderRes.isVisiblePassword

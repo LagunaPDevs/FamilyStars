@@ -20,7 +20,8 @@ class _ForgotPasswordButtonState extends State<ForgotPasswordButton> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final forgotPasswordProviderRef = watch(forgotPasswordScreenProvider);
+      final forgotPasswordProviderRef =
+          watch.read(forgotPasswordScreenProvider);
       return CustomButton(
         onPressed: () async {
           // if field is completed it sends a reactivation email
@@ -30,7 +31,7 @@ class _ForgotPasswordButtonState extends State<ForgotPasswordButton> {
             await FirebaseServices.resetPassword(context, emailId);
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: ColorConstants.purpleGradient.withOpacity(0.5),
-              content: Container(
+              content: SizedBox(
                   height: 100,
                   child: Text(AppConstants.resetPwd,
                       textAlign: TextAlign.center,

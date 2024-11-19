@@ -4,9 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // This class represents a provider that catch events in 'LogInScreen'
 // and notify about changes in it attributes
 
-class LogInScreenProvider extends ChangeNotifier{
-
-  ProviderReference ref;
+class LogInScreenProvider extends ChangeNotifier {
+  Ref ref;
 
   LogInScreenProvider(this.ref);
 
@@ -28,9 +27,8 @@ class LogInScreenProvider extends ChangeNotifier{
   bool get isVisiblePassword => _isVisiblePassword;
 
   /// set password visibility and notify UI
-  void setPasswordVisibility(){
+  void setPasswordVisibility() {
     _isVisiblePassword = !_isVisiblePassword;
     notifyListeners();
   }
-
 }

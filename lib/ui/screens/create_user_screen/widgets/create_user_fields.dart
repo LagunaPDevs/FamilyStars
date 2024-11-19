@@ -6,7 +6,6 @@ import 'package:familystars_2/ui/commons/text_widgets/common_text_form_field.dar
 import 'package:familystars_2/ui/screens/create_user_screen/widgets/create_user_child_select.dart';
 import 'package:familystars_2/validators/validators.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // This widget contains all fields necessary to create a new child
@@ -22,7 +21,7 @@ class _CreateUserFieldsState extends State<CreateUserFields> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      final createUserProviderRes = watch(createUserScreenProvider);
+      final createUserProviderRes = watch.read(createUserScreenProvider);
       return Column(
         children: [
           CommonFieldTitle(title: AppConstants.fullname),

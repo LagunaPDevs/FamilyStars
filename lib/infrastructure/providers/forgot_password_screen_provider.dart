@@ -4,9 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // This class represents a provider that catch events in 'ForgotPasswordScreen'
 // and notify about changes in it attributes
 
-class ForgotPasswordScreenProvider extends ChangeNotifier{
-
-  ProviderReference ref;
+class ForgotPasswordScreenProvider extends ChangeNotifier {
+  Ref ref;
 
   ForgotPasswordScreenProvider(this.ref);
 
@@ -15,5 +14,4 @@ class ForgotPasswordScreenProvider extends ChangeNotifier{
 
   /// email focus node for textfield
   FocusNode emailFocus = FocusNode();
-
 }

@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // and notify about changes in it attributes
 
 class RewardScreenProvider with ChangeNotifier {
-  ProviderReference ref;
+  Ref ref;
   RewardScreenProvider(this.ref);
 
   var rewardController;
