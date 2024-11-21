@@ -16,8 +16,8 @@ class _RegistrationDobStepState extends State<RegistrationDobStep> {
   var _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final registrationProviderRes = watch.read(registrationScreenProvider);
+    return Consumer(builder: (context, ref, child) {
+      final registrationProviderRes = ref.watch(registrationScreenProvider);
       DateTime dateTime = DateTime.utc(2000, 1, 1);
       return Column(
         children: [

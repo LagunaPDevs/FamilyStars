@@ -33,7 +33,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
+    return Consumer(builder: (context, ref, child) {
       return Scaffold(
         body: Container(
           decoration: const BoxDecoration(

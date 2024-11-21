@@ -28,9 +28,9 @@ class _CreateTaskFieldsState extends State<CreateTaskFields> {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
+      builder: (context, ref, child) {
         DateTime defaultTime = DateTime.now();
-        final createTaskProviderRes = watch.read(createTaskScreenProvider);
+        final createTaskProviderRes = ref.watch(createTaskScreenProvider);
         createTaskProviderRes.dateText =
             '${defaultTime.day}/${defaultTime.month}/${defaultTime.year}';
         return Column(

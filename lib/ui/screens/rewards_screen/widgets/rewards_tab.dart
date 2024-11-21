@@ -25,8 +25,8 @@ class _RewardsTabState extends State<RewardsTab> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
-      child: Consumer(builder: (context, watch, child) {
-        final rewardProviderRes = watch.read(rewardScreenProvider);
+      child: Consumer(builder: (context, ref, child) {
+        final rewardProviderRes = ref.watch(rewardScreenProvider);
         rewardProviderRes.rewardController = _rewardController;
         return AppBar(
           elevation: 0,

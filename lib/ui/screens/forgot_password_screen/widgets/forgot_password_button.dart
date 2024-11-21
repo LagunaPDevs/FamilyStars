@@ -19,9 +19,8 @@ class ForgotPasswordButton extends StatefulWidget {
 class _ForgotPasswordButtonState extends State<ForgotPasswordButton> {
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final forgotPasswordProviderRef =
-          watch.read(forgotPasswordScreenProvider);
+    return Consumer(builder: (context, ref, child) {
+      final forgotPasswordProviderRef = ref.watch(forgotPasswordScreenProvider);
       return CustomButton(
         onPressed: () async {
           // if field is completed it sends a reactivation email

@@ -20,8 +20,8 @@ class RegistrationDoneButton extends StatefulWidget {
 class _RegistrationDoneButtonState extends State<RegistrationDoneButton> {
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final registrationProviderRes = watch.read(registrationScreenProvider);
+    return Consumer(builder: (context, ref, child) {
+      final registrationProviderRes = ref.watch(registrationScreenProvider);
       return GestureDetector(
         onTap: () async {
           // If form is validated save user information to email-password

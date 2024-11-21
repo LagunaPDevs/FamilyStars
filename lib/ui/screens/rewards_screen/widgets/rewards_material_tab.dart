@@ -30,8 +30,8 @@ class _RewardMaterialTabState extends State<RewardMaterialTab> {
     CollectionReference itemRef = rootRef.collection('users');
     String userStarsString = '';
 
-    return Consumer(builder: (context, watch, child) {
-      final childAppBarProviderRes = watch.read(childAppBarProvider);
+    return Consumer(builder: (context, ref, child) {
+      final childAppBarProviderRes = ref.watch(childAppBarProvider);
       return GestureDetector(
           onTap: () {
             CustomLoading.progressDialog(true, context);

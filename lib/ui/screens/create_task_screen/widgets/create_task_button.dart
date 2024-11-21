@@ -21,8 +21,8 @@ class _CreateTaskButtonState extends State<CreateTaskButton> {
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final createTaskProviderRes = watch.read(createTaskScreenProvider);
+    return Consumer(builder: (context, ref, child) {
+      final createTaskProviderRes = ref.watch(createTaskScreenProvider);
       return SizedBox(
         width: 80,
         height: 80,

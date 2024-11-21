@@ -13,7 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // family type
 
 class RegistrationSecondStep extends StatefulWidget {
-  const RegistrationSecondStep({Key? key}) : super(key: key);
+  const RegistrationSecondStep({super.key});
 
   @override
   _RegistrationSecondStepState createState() => _RegistrationSecondStepState();
@@ -26,8 +26,8 @@ class _RegistrationSecondStepState extends State<RegistrationSecondStep> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final registrationProviderRes = watch.read(registrationScreenProvider);
+    return Consumer(builder: (context, ref, child) {
+      final registrationProviderRes = ref.watch(registrationScreenProvider);
 
       return Column(
         children: [

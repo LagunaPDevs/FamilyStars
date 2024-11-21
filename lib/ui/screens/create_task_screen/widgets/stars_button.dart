@@ -17,8 +17,8 @@ class StarsButton extends StatefulWidget {
 class _StarsButtonState extends State<StarsButton> {
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final createTaskProviderRes = watch.read(createTaskScreenProvider);
+    return Consumer(builder: (context, ref, child) {
+      final createTaskProviderRes = ref.watch(createTaskScreenProvider);
       return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         GestureDetector(
             onTap: () {

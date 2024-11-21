@@ -52,8 +52,8 @@ class _PasswordScreenButtonState extends State<PasswordScreenButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final passwordProviderRes = watch.read(passwordScreenProvider);
+    return Consumer(builder: (context, ref, child) {
+      final passwordProviderRes = ref.watch(passwordScreenProvider);
       return FutureBuilder(
         future: _futureData,
         builder: (context, snapshot) {

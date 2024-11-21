@@ -25,7 +25,7 @@ class _RewardsScreenState extends State<RewardsScreen> {
   Widget build(BuildContext context) {
     final Object? _unreceived = ModalRoute.of(context)!.settings.arguments;
     String userPath = _unreceived.toString();
-    return Consumer(builder: (context, watch, child) {
+    return Consumer(builder: (context, ref, child) {
       return Scaffold(
           drawer: DrawerChildScreen(
             childId: userPath,

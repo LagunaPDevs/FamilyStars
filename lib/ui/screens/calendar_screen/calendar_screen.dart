@@ -22,8 +22,8 @@ class CalendarScreen extends StatefulWidget {
 class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final calendarProviderRes = watch.read(calendarScreenProvider);
+    return Consumer(builder: (context, ref, child) {
+      final calendarProviderRes = ref.watch(calendarScreenProvider);
       bool month = calendarProviderRes.monthView;
       return Scaffold(
         drawer: DrawerScreen(),

@@ -18,8 +18,8 @@ class LoginButtonScreen extends StatefulWidget {
 class _LoginButtonScreenState extends State<LoginButtonScreen> {
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final logInProviderRes = watch.read(logInScreenProvider);
+    return Consumer(builder: (context, ref, child) {
+      final logInProviderRes = ref.watch(logInScreenProvider);
       return CustomButton(
         onPressed: () async {
           // If fields are completed it check email-password
