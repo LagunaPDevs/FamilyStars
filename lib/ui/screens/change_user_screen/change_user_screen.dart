@@ -52,7 +52,7 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
+      builder: (context, ref, child) {
         return Scaffold(
           drawer: DrawerScreen(),
           appBar: PreferredSize(

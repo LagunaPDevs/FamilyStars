@@ -67,7 +67,7 @@ class _ChildAppBarState extends State<ChildAppBar> {
             ColorConstants.blueGradient,
             ColorConstants.blueColor,
           ])),
-      child: Consumer(builder: (context, watch, child) {
+      child: Consumer(builder: (context, ref, child) {
         return AppBar(
             automaticallyImplyLeading: false,
             backgroundColor: ColorConstants.blueColor.withOpacity(0.5),

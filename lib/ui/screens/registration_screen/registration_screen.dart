@@ -16,19 +16,19 @@ import 'package:im_stepper/stepper.dart';
 // This screen hold all user registration process
 
 class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({Key? key}) : super(key: key);
+  const RegistrationScreen({super.key});
 
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  var _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final registrationProviderRes = watch.read(registrationScreenProvider);
+    return Consumer(builder: (context, ref, child) {
+      final registrationProviderRes = ref.watch(registrationScreenProvider);
       int activeStep = registrationProviderRes.activeStep;
       int upperBound = registrationProviderRes.upperBound;
       bool isFinish = activeStep == upperBound;

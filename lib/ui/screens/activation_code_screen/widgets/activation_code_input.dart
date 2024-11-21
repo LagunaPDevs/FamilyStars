@@ -22,11 +22,11 @@ class _ActivationCodeInputState extends State<ActivationCodeInput> {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
+      builder: (context, ref, child) {
         final activationCodeProviderRef =
-            watch.read(activationCodeScreenProvider);
+            ref.watch(activationCodeScreenProvider);
         final registrationScreenProviderRef =
-            watch.read(registrationScreenProvider);
+            ref.watch(registrationScreenProvider);
         return Pinput(
           length: 6,
           controller: activationCodeProviderRef.pinPutController,

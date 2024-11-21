@@ -64,7 +64,7 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
+    return Consumer(builder: (context, ref, child) {
       return Drawer(
           child: FutureBuilder(
               future: _futureData,

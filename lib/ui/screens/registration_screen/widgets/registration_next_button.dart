@@ -22,8 +22,8 @@ class _RegistrationNextButtonState extends State<RegistrationNextButton> {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
-        final registrationProviderRes = watch.read(registrationScreenProvider);
+      builder: (context, ref, child) {
+        final registrationProviderRes = ref.watch(registrationScreenProvider);
         int activeStep = registrationProviderRes.activeStep;
         int upperBound = registrationProviderRes.upperBound;
         return GestureDetector(

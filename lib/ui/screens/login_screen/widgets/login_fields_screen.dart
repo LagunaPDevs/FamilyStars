@@ -19,8 +19,8 @@ class LoginFieldsScreen extends StatefulWidget {
 class _LoginFieldsScreenState extends State<LoginFieldsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final logInProviderRes = watch.read(logInScreenProvider);
+    return Consumer(builder: (context, ref, child) {
+      final logInProviderRes = ref.watch(logInScreenProvider);
       return Column(
         children: [
           CommonTextFormField(

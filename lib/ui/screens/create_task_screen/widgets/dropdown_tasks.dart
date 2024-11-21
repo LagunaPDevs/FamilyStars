@@ -18,8 +18,8 @@ class _DropDownTasksState extends State<DropDownTasks> {
   String dropdownbutton = AppConstants.selectTask;
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final createTaskProviderRes = watch.read(createTaskScreenProvider);
+    return Consumer(builder: (context, ref, child) {
+      final createTaskProviderRes = ref.watch(createTaskScreenProvider);
       String category = createTaskProviderRes.categoryText;
 
       // This method retrieves a list of task

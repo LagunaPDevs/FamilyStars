@@ -14,7 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 // If user enter a email which is valid and it does not exists on the database
 // the fields are validated
 class RegistrationFirstStep extends StatefulWidget {
-  const RegistrationFirstStep({Key? key}) : super(key: key);
+  const RegistrationFirstStep({super.key});
 
   @override
   _RegistrationFirstStepState createState() => _RegistrationFirstStepState();
@@ -25,9 +25,9 @@ class _RegistrationFirstStepState extends State<RegistrationFirstStep> {
   bool exists = false;
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final registrationProviderRes = watch.read(registrationScreenProvider);
-      final logInProviderRes = watch.read(logInScreenProvider);
+    return Consumer(builder: (context, ref, child) {
+      final registrationProviderRes = ref.watch(registrationScreenProvider);
+      final logInProviderRes = ref.watch(logInScreenProvider);
       return Column(
         children: [
           CommonTextFormField(

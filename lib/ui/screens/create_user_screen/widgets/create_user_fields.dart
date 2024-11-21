@@ -20,8 +20,8 @@ class CreateUserFields extends StatefulWidget {
 class _CreateUserFieldsState extends State<CreateUserFields> {
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final createUserProviderRes = watch.read(createUserScreenProvider);
+    return Consumer(builder: (context, ref, child) {
+      final createUserProviderRes = ref.watch(createUserScreenProvider);
       return Column(
         children: [
           CommonFieldTitle(title: AppConstants.fullname),

@@ -12,8 +12,7 @@ class LoginTitleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //padding: EdgeInsets.symmetric(horizontal: 40),
+    return SizedBox(
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

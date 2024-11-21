@@ -45,8 +45,8 @@ class _GridViewChildUsersState extends State<GridViewChildUsers> {
 
   Widget _buildUserList(BuildContext context, DocumentSnapshot document) {
     return Consumer(
-      builder: (context, watch, child) {
-        final createTaskProvider = watch.read(createTaskScreenProvider);
+      builder: (context, ref, child) {
+        final createTaskProvider = ref.watch(createTaskScreenProvider);
         return GestureDetector(
           onTap: () {
             createTaskProvider.setAssigned(document.id);
