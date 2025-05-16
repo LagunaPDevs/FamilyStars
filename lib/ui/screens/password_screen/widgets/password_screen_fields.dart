@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:familystars_2/infrastructure/providers/general_provider.dart';
 
 class PasswordScreenFields extends StatefulWidget {
-  const PasswordScreenFields({Key? key}) : super(key: key);
+  const PasswordScreenFields({super.key});
 
   @override
   State<PasswordScreenFields> createState() => _PasswordScreenFieldsState();

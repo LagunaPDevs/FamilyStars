@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RewardsTabContent extends StatefulWidget {
   final String childId;
-  const RewardsTabContent({Key? key, required this.childId}) : super(key: key);
+  const RewardsTabContent({super.key, required this.childId});
 
   @override
   _RewardsTabContentState createState() => _RewardsTabContentState();

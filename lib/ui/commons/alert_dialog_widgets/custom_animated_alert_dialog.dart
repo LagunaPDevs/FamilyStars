@@ -54,10 +54,10 @@ class _CustomDialog extends StatelessWidget {
   final MainAxisAlignment? mainAxisAlignmentForButton;
 
   const _CustomDialog(
-      {this.title,
-      this.description,
-      this.okButtonText,
-      this.onOkPressed,
+      {required this.title,
+      required this.description,
+      required this.okButtonText,
+      required this.onOkPressed,
       this.cancelButtonText,
       this.onCancelPressed,
       this.image,
@@ -82,7 +82,7 @@ class _CustomDialog extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                color: Theme.of(context).colorScheme.background),
+                color: Theme.of(context).colorScheme.surface),
             margin: const EdgeInsets.symmetric(horizontal: 30),
             width: double.infinity,
             padding: const EdgeInsets.all(20),
@@ -122,6 +122,7 @@ class _CustomDialog extends StatelessWidget {
                       mainAxisAlignmentForButton ?? MainAxisAlignment.end,
                   children: <Widget>[
                     Visibility(
+                      visible: okButtonText != null && onOkPressed != null,
                       child: InkWell(
                         onTap: onOkPressed,
                         child: Container(
@@ -139,14 +140,13 @@ class _CustomDialog extends StatelessWidget {
                                   const BorderRadius.all(Radius.circular(20))),
                         ),
                       ),
-                      visible: okButtonText != null && onOkPressed != null,
                     ),
                     Visibility(
+                      visible:
+                          cancelButtonText != null && onCancelPressed != null,
                       child: const SizedBox(
                         width: 20,
                       ),
-                      visible:
-                          cancelButtonText != null && onCancelPressed != null,
                     ),
                     Visibility(
                       visible:

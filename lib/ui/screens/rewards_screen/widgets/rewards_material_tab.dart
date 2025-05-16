@@ -17,7 +17,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RewardMaterialTab extends StatefulWidget {
   final String userId;
-  const RewardMaterialTab({Key? key, required this.userId}) : super(key: key);
+  const RewardMaterialTab({super.key, required this.userId});
 
   @override
   _RewardMaterialTabState createState() => _RewardMaterialTabState();
@@ -67,7 +67,7 @@ class _RewardMaterialTabState extends State<RewardMaterialTab> {
             } else {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: ColorConstants.purpleGradient.withOpacity(0.5),
-                content: Container(
+                content: SizedBox(
                     height: 100,
                     child: Text(AppConstants.notStars,
                         textAlign: TextAlign.center,
@@ -90,10 +90,11 @@ class _RewardMaterialTabState extends State<RewardMaterialTab> {
                 .where('category', isEqualTo: 'Material')
                 .snapshots(),
             builder: (context, AsyncSnapshot snapshot) {
-              if (!snapshot.hasData)
+              if (!snapshot.hasData) {
                 return Center(
                     child: CircularProgressIndicator(
                         color: ColorConstants.blueColor));
+              }
               return ListView.builder(
                 // Build list of culture rewards
                 physics: NeverScrollableScrollPhysics(),

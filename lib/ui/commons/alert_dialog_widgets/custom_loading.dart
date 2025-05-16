@@ -22,7 +22,7 @@ class CustomLoading {
 }
 
 class CustomLoadingLayout extends StatefulWidget {
-  const CustomLoadingLayout({Key? key}) : super(key: key);
+  const CustomLoadingLayout({super.key});
 
   @override
   _CustomLoadingLayoutState createState() => _CustomLoadingLayoutState();

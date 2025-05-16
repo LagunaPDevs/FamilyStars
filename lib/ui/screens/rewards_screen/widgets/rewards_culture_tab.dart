@@ -17,7 +17,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RewardCultureTab extends StatefulWidget {
   final String userId;
-  const RewardCultureTab({Key? key, required this.userId}) : super(key: key);
+  const RewardCultureTab({super.key, required this.userId});
 
   @override
   _RewardCultureTabState createState() => _RewardCultureTabState();
@@ -66,7 +66,7 @@ class _RewardCultureTabState extends State<RewardCultureTab> {
             } else {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: ColorConstants.purpleGradient.withOpacity(0.5),
-                content: Container(
+                content: SizedBox(
                     height: 100,
                     child: Text(AppConstants.notStars,
                         textAlign: TextAlign.center,

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/constants/image_constants.dart';
@@ -14,7 +12,7 @@ import 'package:flutter/material.dart';
 // Edit personal information to be implemented on future versions
 
 class DrawerScreen extends StatefulWidget {
-  const DrawerScreen({Key? key}) : super(key: key);
+  const DrawerScreen({super.key});
 
   @override
   _DrawerScreenState createState() => _DrawerScreenState();

@@ -17,7 +17,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RewardExperienceTab extends StatefulWidget {
   final String userId;
-  const RewardExperienceTab({Key? key, required this.userId}) : super(key: key);
+  const RewardExperienceTab({super.key, required this.userId});
 
   @override
   _RewardExperienceTabState createState() => _RewardExperienceTabState();
@@ -67,7 +67,7 @@ class _RewardExperienceTabState extends State<RewardExperienceTab> {
             } else {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: ColorConstants.purpleGradient.withOpacity(0.5),
-                content: Container(
+                content: SizedBox(
                     height: 100,
                     child: Text(AppConstants.notStars,
                         textAlign: TextAlign.center,
@@ -90,10 +90,11 @@ class _RewardExperienceTabState extends State<RewardExperienceTab> {
                 .where('category', isEqualTo: 'Experiencias')
                 .snapshots(),
             builder: (context, AsyncSnapshot snapshot) {
-              if (!snapshot.hasData)
+              if (!snapshot.hasData) {
                 return Center(
                     child: CircularProgressIndicator(
                         color: ColorConstants.blueColor));
+              }
               // Build list of culture rewards
               return ListView.builder(
                 physics: NeverScrollableScrollPhysics(),

@@ -12,7 +12,7 @@ import 'package:pinput/pinput.dart';
 // This widgets represents the fields where user can enter OTP received
 
 class ActivationCodeInput extends StatefulWidget {
-  const ActivationCodeInput({Key? key}) : super(key: key);
+  const ActivationCodeInput({super.key});
 
   @override
   _ActivationCodeInputState createState() => _ActivationCodeInputState();

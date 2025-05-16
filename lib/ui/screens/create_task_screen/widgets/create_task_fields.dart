@@ -14,7 +14,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // This widget contains all necesary fields to create a new task
 
 class CreateTaskFields extends StatefulWidget {
-  const CreateTaskFields({Key? key}) : super(key: key);
+  const CreateTaskFields({super.key});
 
   @override
   _CreateTaskFieldsState createState() => _CreateTaskFieldsState();

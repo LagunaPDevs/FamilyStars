@@ -14,8 +14,7 @@ import 'package:flutter/material.dart';
 
 class ChildEventContainer extends StatefulWidget {
   final String userPath;
-  const ChildEventContainer({Key? key, required this.userPath})
-      : super(key: key);
+  const ChildEventContainer({super.key, required this.userPath});
 
   @override
   _ChildEventContainerState createState() => _ChildEventContainerState();
@@ -24,8 +23,8 @@ class ChildEventContainer extends StatefulWidget {
 class _ChildEventContainerState extends State<ChildEventContainer> {
   // Build the list of events for a child
   Widget _buildListOfEvents(BuildContext context, DocumentSnapshot document) {
-    FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
-    CollectionReference _taskData = _firebaseFirestore.collection('tasks');
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    CollectionReference taskData = firebaseFirestore.collection('tasks');
     bool completa = document['task_state'] == AppConstants.completed;
     bool espera = document['task_state'] == AppConstants.waiting;
     bool incompleta = document['task_state'] == AppConstants.incomplete;
@@ -59,7 +58,7 @@ class _ChildEventContainerState extends State<ChildEventContainer> {
               CustomLoading.progressDialog(true, context);
 
               // Change task state
-              await _taskData
+              await taskData
                   .doc(document['task_id'])
                   .update({'state': AppConstants.waiting});
               // Create an event
@@ -173,10 +172,11 @@ class _ChildEventContainerState extends State<ChildEventContainer> {
                     .where('assigned', isEqualTo: widget.userPath)
                     .snapshots(),
                 builder: (context, AsyncSnapshot snapshot) {
-                  if (!snapshot.hasData)
+                  if (!snapshot.hasData) {
                     return Center(
                         child: CircularProgressIndicator(
                             color: ColorConstants.blueColor));
+                  }
                   // build list of items
                   return ListView.builder(
                     physics: NeverScrollableScrollPhysics(),

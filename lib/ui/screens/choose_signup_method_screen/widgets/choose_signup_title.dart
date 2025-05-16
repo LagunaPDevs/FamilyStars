@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 // Simple widget that shows title for 'ChooseSignUpMethodScreen'
 
 class ChooseSignUpTitle extends StatelessWidget {
-  const ChooseSignUpTitle({Key? key}) : super(key: key);
+  const ChooseSignUpTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       child: Center(
         child: Column(
           children: [

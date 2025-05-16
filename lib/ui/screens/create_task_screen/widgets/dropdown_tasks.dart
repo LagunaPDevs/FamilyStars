@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // on category
 
 class DropDownTasks extends StatefulWidget {
-  const DropDownTasks({Key? key}) : super(key: key);
+  const DropDownTasks({super.key});
 
   @override
   _DropDownTasksState createState() => _DropDownTasksState();

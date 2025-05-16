@@ -1,20 +1,16 @@
-import 'dart:ui';
-
 import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
 import 'package:familystars_2/ui/commons/user_appbar.dart';
 import 'package:familystars_2/ui/screens/drawer_screen/drawer_screen.dart';
 import 'package:familystars_2/ui/screens/main_screen/widgets/add_task_button.dart';
 import 'package:familystars_2/ui/screens/main_screen/widgets/calendar_button.dart';
 import 'package:familystars_2/ui/screens/main_screen/widgets/parent_event_container.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // This widget represents the main screen of a logged parent user
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  const MainScreen({super.key});
 
   @override
   _MainScreenState createState() => _MainScreenState();

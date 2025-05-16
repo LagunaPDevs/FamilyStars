@@ -12,7 +12,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PasswordScreenButton extends StatefulWidget {
   final GlobalKey<FormState>? formKey;
-  const PasswordScreenButton({Key? key, this.formKey}) : super(key: key);
+  const PasswordScreenButton({super.key, this.formKey});
 
   @override
   State<PasswordScreenButton> createState() => _PasswordScreenButtonState();
@@ -24,7 +24,7 @@ class _PasswordScreenButtonState extends State<PasswordScreenButton> {
   late Future<local_user.User> _futureData;
   final local_user.User _user = local_user.User();
 
-  ValueNotifier<int> _currentPage = ValueNotifier(0);
+  final ValueNotifier<int> _currentPage = ValueNotifier(0);
 
   // Retrieve specific data of a parent
   Future<local_user.User> _getAllUserData() async {

@@ -10,7 +10,7 @@ import 'package:sliver_tools/sliver_tools.dart';
 // This widget represent a screen where a child user can reclaim rewards
 
 class RewardsScreen extends StatefulWidget {
-  const RewardsScreen({Key? key}) : super(key: key);
+  const RewardsScreen({super.key});
 
   @override
   _RewardsScreenState createState() => _RewardsScreenState();
@@ -19,12 +19,12 @@ class RewardsScreen extends StatefulWidget {
 class _RewardsScreenState extends State<RewardsScreen> {
   DocumentSnapshot? documentSnapshot;
 
-  ValueNotifier<int> _currentPage = ValueNotifier(0);
+  final ValueNotifier<int> _currentPage = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
-    final Object? _unreceived = ModalRoute.of(context)!.settings.arguments;
-    String userPath = _unreceived.toString();
+    final Object? unreceived = ModalRoute.of(context)!.settings.arguments;
+    String userPath = unreceived.toString();
     return Consumer(builder: (context, ref, child) {
       return Scaffold(
           drawer: DrawerChildScreen(

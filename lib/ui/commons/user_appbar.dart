@@ -12,25 +12,25 @@ import 'package:flutter/material.dart';
 // personal information to be added in future versions
 
 class UserAppBar extends StatefulWidget {
-  UserAppBar({Key? key}) : super(key: key);
+  const UserAppBar({super.key});
 
   @override
   State<UserAppBar> createState() => _UserAppBarState();
 }
 
 class _UserAppBarState extends State<UserAppBar> {
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   DocumentSnapshot? documentSnapshot;
   late Future<local_user.User> _futureData;
-  local_user.User _user = local_user.User();
+  final local_user.User _user = local_user.User();
 
-  ValueNotifier<int> _currentPage = ValueNotifier(0);
+  final ValueNotifier<int> _currentPage = ValueNotifier(0);
 
   // Retrieve specific data of a parent
   Future<local_user.User> _getAllUserData() async {
     Map<String, dynamic> mapData;
     await FirebaseServices.getDataList(
-            'users', '${_firebaseAuth.currentUser!.uid}')
+            'users', _firebaseAuth.currentUser!.uid)
         .then(
       (value) => {
         documentSnapshot = value,
@@ -53,8 +53,8 @@ class _UserAppBarState extends State<UserAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    final Object? _userreceived = ModalRoute.of(context)!.settings.arguments;
-    String userpath = _userreceived.toString();
+    final Object? userreceived = ModalRoute.of(context)!.settings.arguments;
+    String userpath = userreceived.toString();
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(

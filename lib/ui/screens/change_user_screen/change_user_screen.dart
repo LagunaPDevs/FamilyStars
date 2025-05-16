@@ -7,21 +7,20 @@ import 'package:familystars_2/ui/commons/text_widgets/title_text.dart';
 import 'package:familystars_2/ui/commons/user_appbar.dart';
 import 'package:familystars_2/ui/screens/drawer_screen/drawer_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // This widget allows to a parent user to change between child users
 
 class ChangeUserScreen extends StatefulWidget {
-  const ChangeUserScreen({Key? key}) : super(key: key);
+  const ChangeUserScreen({super.key});
 
   @override
   _ChangeUserScreenState createState() => _ChangeUserScreenState();
 }
 
 class _ChangeUserScreenState extends State<ChangeUserScreen> {
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   Widget _buildUserList(BuildContext context, DocumentSnapshot document) {
     String firstLater = document['name'][0];
     return Column(

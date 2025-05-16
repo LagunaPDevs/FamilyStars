@@ -8,12 +8,11 @@ class TaskCard extends StatefulWidget {
   final String state;
   final Function() onOkTap;
   const TaskCard(
-      {Key? key,
+      {super.key,
       required this.userName,
       required this.state,
       required this.onOkTap,
-      required this.taskName})
-      : super(key: key);
+      required this.taskName});
 
   @override
   State<TaskCard> createState() => _TaskCardState();

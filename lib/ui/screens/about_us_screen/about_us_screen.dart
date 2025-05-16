@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 // This class represents a widget that holds company an contact information
 
 class AboutUsScreen extends StatelessWidget {
-  const AboutUsScreen({Key? key}) : super(key: key);
+  const AboutUsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class AboutUsScreen extends StatelessWidget {
               SizedBox(
                 height: LayoutConstants.generalVerticalSpace,
               ),
-              Container(
+              SizedBox(
                 width: 300,
                 child: Image.asset(ImageConstants.softchangingLogo),
               ),

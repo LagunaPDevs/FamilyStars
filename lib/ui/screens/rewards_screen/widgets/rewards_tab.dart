@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // This widget contains the tab title for each reward category
 
 class RewardsTab extends StatefulWidget {
-  const RewardsTab({Key? key}) : super(key: key);
+  const RewardsTab({super.key});
 
   @override
   _RewardsTabState createState() => _RewardsTabState();

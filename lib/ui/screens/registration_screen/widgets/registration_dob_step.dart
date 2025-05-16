@@ -6,14 +6,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // Widget that holds a calendar where user can select it birthdate
 
 class RegistrationDobStep extends StatefulWidget {
-  const RegistrationDobStep({Key? key}) : super(key: key);
+  const RegistrationDobStep({super.key});
 
   @override
   _RegistrationDobStepState createState() => _RegistrationDobStepState();
 }
 
 class _RegistrationDobStepState extends State<RegistrationDobStep> {
-  var _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {

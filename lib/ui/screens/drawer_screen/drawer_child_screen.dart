@@ -19,7 +19,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DrawerChildScreen extends StatefulWidget {
   final String childId;
-  const DrawerChildScreen({Key? key, required this.childId}) : super(key: key);
+  const DrawerChildScreen({super.key, required this.childId});
 
   @override
   _DrawerChildScreenState createState() => _DrawerChildScreenState();
@@ -32,10 +32,10 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
   late Future<local_user.User> _futureData;
   TextEditingController changeUserController = TextEditingController();
   FocusNode changeUserFocus = FocusNode();
-  local_user.User _user = local_user.User();
+  final local_user.User _user = local_user.User();
   late String userId;
   late String pswd;
-  ValueNotifier<int> _currentPage = ValueNotifier(0);
+  final ValueNotifier<int> _currentPage = ValueNotifier(0);
 
   // Retrieve child user data
   Future<local_user.User> _getAllUserData() async {

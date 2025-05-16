@@ -10,7 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // Simple widget with a field to enter user email
 
 class ForgotPasswordFields extends StatefulWidget {
-  const ForgotPasswordFields({Key? key}) : super(key: key);
+  const ForgotPasswordFields({super.key});
 
   @override
   _ForgotPasswordFieldsState createState() => _ForgotPasswordFieldsState();

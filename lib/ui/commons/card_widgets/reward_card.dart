@@ -1,10 +1,5 @@
-import 'dart:ui';
-
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/constants/image_constants.dart';
-import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
-import 'package:familystars_2/ui/commons/button_widgets/custom_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Helper widget to create list of rewards
@@ -13,8 +8,7 @@ class RewardCard extends StatelessWidget {
   final String name;
   final String stars;
   const RewardCard(
-      {Key? key, required this.name, required this.stars, this.onTap})
-      : super(key: key);
+      {super.key, required this.name, required this.stars, this.onTap});
 
   @override
   Widget build(BuildContext context) {

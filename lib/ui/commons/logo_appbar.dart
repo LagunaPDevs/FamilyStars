@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 // the registration process
 
 class LogoAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const LogoAppBar({Key? key}) : super(key: key);
+  const LogoAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {

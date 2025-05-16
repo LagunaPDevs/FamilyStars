@@ -10,7 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // This widget represent main screen for an specific child user
 
 class ChildMainScreen extends StatefulWidget {
-  const ChildMainScreen({Key? key}) : super(key: key);
+  const ChildMainScreen({super.key});
 
   @override
   _ChildMainScreenState createState() => _ChildMainScreenState();
@@ -20,8 +20,8 @@ class _ChildMainScreenState extends State<ChildMainScreen> {
   @override
   Widget build(BuildContext context) {
     // User path is received from another screen and paint user information
-    final Object? _unreceived = ModalRoute.of(context)!.settings.arguments;
-    String userPath = _unreceived.toString();
+    final Object? unreceived = ModalRoute.of(context)!.settings.arguments;
+    String userPath = unreceived.toString();
     return Consumer(builder: (context, ref, child) {
       return Scaffold(
         drawer: DrawerChildScreen(

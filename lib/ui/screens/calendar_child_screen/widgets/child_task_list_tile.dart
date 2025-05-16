@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 class ChildTaskListTile extends StatefulWidget {
   final String userPath;
-  const ChildTaskListTile({Key? key, required this.userPath}) : super(key: key);
+  const ChildTaskListTile({super.key, required this.userPath});
 
   @override
   _ChildTaskListTileState createState() => _ChildTaskListTileState();
@@ -20,9 +20,9 @@ class _ChildTaskListTileState extends State<ChildTaskListTile> {
   // Build of the task items
   Widget _buildListOfIncompleteTasks(
       BuildContext context, DocumentSnapshot document) {
-    FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    CollectionReference _childRef = _firestore.collection('users');
-    CollectionReference _taskRef = _firestore.collection('tasks');
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference childRef = firestore.collection('users');
+    CollectionReference taskRef = firestore.collection('tasks');
 
     // Depending on value the widget will be painted in different ways
     bool isIncomplete = document['state'] == AppConstants.incomplete;
@@ -51,7 +51,7 @@ class _ChildTaskListTileState extends State<ChildTaskListTile> {
               if (document['state'] == AppConstants.incomplete) {
                 CustomChangeStateDialog(
                   onOkTap: () async {
-                    await _taskRef
+                    await taskRef
                         .doc(document.id)
                         .update({'state': 'En espera'});
                     await FirebaseServices.creteNewEvent(

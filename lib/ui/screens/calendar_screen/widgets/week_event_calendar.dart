@@ -12,7 +12,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 // 'En espera' it will be painted on yellow, otherwise it will be red
 
 class WeekEventCalendar extends StatefulWidget {
-  const WeekEventCalendar({Key? key}) : super(key: key);
+  const WeekEventCalendar({super.key});
 
   @override
   _WeekEventCalendarState createState() => _WeekEventCalendarState();

@@ -29,12 +29,10 @@ class ThemeConstants {
               secondary: ColorConstants.getMaterialColor(
                   ColorConstants.blueColor.value, ColorConstants.blueColor),
               surface: ColorConstants.whiteColor,
-              background: ColorConstants.whiteColor,
               error: ColorConstants.redColor,
               onPrimary: ColorConstants.whiteColor,
               onSecondary: ColorConstants.blueColor,
               onSurface: ColorConstants.whiteColor,
-              onBackground: ColorConstants.whiteColor,
               onError: ColorConstants.redColor,
               brightness: Brightness.light)
           .copyWith(

@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // a task to a child user
 
 class GridViewChildUsers extends StatefulWidget {
-  const GridViewChildUsers({Key? key}) : super(key: key);
+  const GridViewChildUsers({super.key});
 
   @override
   _GridViewChildUsersState createState() => _GridViewChildUsersState();

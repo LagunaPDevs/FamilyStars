@@ -45,7 +45,7 @@ class FirebaseServices {
       }
       // If error from Firebase
     } on FirebaseAuthException catch (e) {
-      print('LOGIN FAILED :' '\n' + 'ERROR: ${e.toString()}');
+      print('LOGIN FAILED :' '\n' 'ERROR: ${e.toString()}');
       CustomLoading.progressDialog(false, context);
       CustomAnimatedAlertDialog(
               context: context,
@@ -55,7 +55,7 @@ class FirebaseServices {
       return false;
       // If something wrong and user wont be able to login
     } catch (e) {
-      print('LOGIN FAILED :' '\n' + 'ERROR: ${e.toString()}');
+      print('LOGIN FAILED :' '\n' 'ERROR: ${e.toString()}');
       CustomLoading.progressDialog(false, context);
       CustomAnimatedAlertDialog(
               context: context,
@@ -349,18 +349,18 @@ class FirebaseServices {
   static Future<bool> addChildUserToFirestore(
       BuildContext context, String name, String familiar, String dob) async {
     DocumentSnapshot? documentSnapshot;
-    local_user.User _user = local_user.User();
+    local_user.User user = local_user.User();
     Map<String, dynamic> mapData;
     await FirebaseServices.getDataList('users', _firebaseAuth.currentUser!.uid)
         .then(
       (value) => {
         documentSnapshot = value,
         mapData = documentSnapshot!.data() as Map<String, dynamic>,
-        _user.id = _firebaseAuth.currentUser!.uid,
-        _user.name = mapData['name'],
-        _user.email = mapData['email'],
-        _user.familiar = mapData['familiar'],
-        _user.dob = mapData['date_of_birth'],
+        user.id = _firebaseAuth.currentUser!.uid,
+        user.name = mapData['name'],
+        user.email = mapData['email'],
+        user.familiar = mapData['familiar'],
+        user.dob = mapData['date_of_birth'],
       },
     );
     Map<String, dynamic> userData = {

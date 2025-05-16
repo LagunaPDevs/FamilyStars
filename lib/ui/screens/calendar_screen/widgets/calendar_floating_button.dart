@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 // This widget permits to parent user to be led to 'CreateTaskScreen'
 
 class CalendarFloatingButton extends StatefulWidget {
-  const CalendarFloatingButton({Key? key}) : super(key: key);
+  const CalendarFloatingButton({super.key});
 
   @override
   _CalendarFloatingButtonState createState() => _CalendarFloatingButtonState();
@@ -14,7 +14,7 @@ class CalendarFloatingButton extends StatefulWidget {
 class _CalendarFloatingButtonState extends State<CalendarFloatingButton> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 80,
       height: 80,
       child: FloatingActionButton(

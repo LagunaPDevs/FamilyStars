@@ -3,14 +3,13 @@ import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
 import 'package:familystars_2/infrastructure/constants/routes_constants.dart';
 import 'package:familystars_2/infrastructure/services/firebase_services.dart';
 import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_animated_alert_dialog.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // The class contains circular button widgets which permit to the user to be
 // logged with Social Media credentials (Facebook, Google, Twitter)
 
 class SocialMediaButtonScreen extends StatefulWidget {
-  const SocialMediaButtonScreen({Key? key}) : super(key: key);
+  const SocialMediaButtonScreen({super.key});
 
   @override
   _SocialMediaButtonScreenState createState() =>
@@ -29,7 +28,7 @@ class _SocialMediaButtonScreenState extends State<SocialMediaButtonScreen> {
             // ---
             // Facebook
             // ---
-            Container(
+            SizedBox(
               child: GestureDetector(
                 onTap: () async {
                   bool isLoggedIn = await FirebaseServices

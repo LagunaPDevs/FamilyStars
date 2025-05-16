@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/utils/task_data_source.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -11,8 +10,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class MonthEventChildEvent extends StatefulWidget {
   final String userPath;
-  const MonthEventChildEvent({Key? key, required this.userPath})
-      : super(key: key);
+  const MonthEventChildEvent({super.key, required this.userPath});
 
   @override
   _MonthEventChildEventState createState() => _MonthEventChildEventState();
@@ -27,10 +25,11 @@ class _MonthEventChildEventState extends State<MonthEventChildEvent> {
             .where('assigned', isEqualTo: widget.userPath)
             .snapshots(),
         builder: (context, AsyncSnapshot snapshot) {
-          if (!snapshot.hasData)
+          if (!snapshot.hasData) {
             return Center(
                 child:
                     CircularProgressIndicator(color: ColorConstants.blueColor));
+          }
           List data = snapshot.data.docs;
           List<Appointment> appointments = [];
           for (int i = 0; i < data.length; i++) {
@@ -61,7 +60,7 @@ class _MonthEventChildEventState extends State<MonthEventChildEvent> {
           }
           return Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Container(
+            child: SizedBox(
                 height: 300,
                 child: SfCalendar(
                     firstDayOfWeek: 1,

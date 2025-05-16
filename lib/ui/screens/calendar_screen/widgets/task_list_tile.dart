@@ -11,21 +11,21 @@ import 'package:flutter/material.dart';
 // children owned by an specific parent user in CalendarScreen
 
 class TasksListTile extends StatefulWidget {
-  const TasksListTile({Key? key}) : super(key: key);
+  const TasksListTile({super.key});
 
   @override
   _TasksListTileState createState() => _TasksListTileState();
 }
 
 class _TasksListTileState extends State<TasksListTile> {
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   // Build of the task items
   Widget _buildListOfIncompleteTasks(
       BuildContext context, DocumentSnapshot document) {
-    FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    CollectionReference _childRef = _firestore.collection('users');
-    CollectionReference _taskRef = _firestore.collection('tasks');
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference childRef = firestore.collection('users');
+    CollectionReference taskRef = firestore.collection('tasks');
 
     String name = document['assigned_name'];
     String stars = '0';
@@ -44,7 +44,7 @@ class _TasksListTileState extends State<TasksListTile> {
         child: ClipRRect(
             child: GestureDetector(
       onTap: () async {
-        await _childRef
+        await childRef
             .doc(document['assigned'])
             .get()
             .then((value) => stars = value['stars']);
@@ -61,10 +61,10 @@ class _TasksListTileState extends State<TasksListTile> {
             onOkTap: () async {
               CustomLoading.progressDialog(true, context);
 
-              await _childRef
+              await childRef
                   .doc(document['assigned'])
                   .update({'stars': total});
-              await _taskRef.doc(document.id).update({'state': 'Completa'});
+              await taskRef.doc(document.id).update({'state': 'Completa'});
               await FirebaseServices.creteNewEvent(
                   todayDate,
                   document['owner'],
@@ -80,7 +80,7 @@ class _TasksListTileState extends State<TasksListTile> {
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: ColorConstants.purpleGradient.withOpacity(0.5),
-                content: Container(
+                content: SizedBox(
                     height: 100,
                     child: Text(AppConstants.completedTask,
                         textAlign: TextAlign.center,
@@ -89,13 +89,13 @@ class _TasksListTileState extends State<TasksListTile> {
               ));
             },
             title: 'Cambiar estado de tarea',
-            content: '¿Quiere cambiar el estado de la tarea de \'${name}\'?',
+            content: '¿Quiere cambiar el estado de la tarea de \'$name\'?',
             context: context,
           ).show();
         } else {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: ColorConstants.purpleGradient.withOpacity(0.5),
-            content: Container(
+            content: SizedBox(
                 height: 100,
                 child: Text(AppConstants.waitingChild,
                     textAlign: TextAlign.center,
@@ -149,10 +149,11 @@ class _TasksListTileState extends State<TasksListTile> {
             .where('state', isNotEqualTo: 'Completa')
             .snapshots(),
         builder: (context, AsyncSnapshot snapshot) {
-          if (!snapshot.hasData)
+          if (!snapshot.hasData) {
             return Center(
                 child:
                     CircularProgressIndicator(color: ColorConstants.blueColor));
+          }
           return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,

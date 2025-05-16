@@ -3,9 +3,7 @@ import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/utils/task_data_source.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 // It builds a Month calendar which holds all the task assigned by a parent
@@ -14,14 +12,14 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 // 'En espera' it will be painted on yellow, otherwise it will be red
 
 class MonthEventCalendar extends StatefulWidget {
-  const MonthEventCalendar({Key? key}) : super(key: key);
+  const MonthEventCalendar({super.key});
 
   @override
   _MonthEventCalendarState createState() => _MonthEventCalendarState();
 }
 
 class _MonthEventCalendarState extends State<MonthEventCalendar> {
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   bool month = true;
 
   @override
@@ -32,10 +30,11 @@ class _MonthEventCalendarState extends State<MonthEventCalendar> {
             .where('owner', isEqualTo: _firebaseAuth.currentUser!.uid)
             .snapshots(),
         builder: (context, AsyncSnapshot snapshot) {
-          if (!snapshot.hasData)
+          if (!snapshot.hasData) {
             return Center(
                 child:
                     CircularProgressIndicator(color: ColorConstants.blueColor));
+          }
           List data = snapshot.data.docs;
           List<Appointment> appointments = [];
           for (int i = 0; i < data.length; i++) {
@@ -66,7 +65,7 @@ class _MonthEventCalendarState extends State<MonthEventCalendar> {
           }
           return Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Container(
+            child: SizedBox(
                 height: 300,
                 child: SfCalendar(
                     firstDayOfWeek: 1,
