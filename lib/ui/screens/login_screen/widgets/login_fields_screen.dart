@@ -32,7 +32,7 @@ class _LoginFieldsScreenState extends State<LoginFieldsScreen> {
               return Validators.validateEmail(context, value!);
             },
             inputFormatter: [
-              FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9.@]')),
+              FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9.+@]')),
               FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s")),
             ],
             hintText: AppConstants.emailHint,

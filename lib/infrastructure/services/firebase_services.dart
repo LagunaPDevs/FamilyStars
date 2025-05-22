@@ -79,37 +79,32 @@ class FirebaseServices {
     }
   }
 
-  // REGISTER : verify OTP-code and register user
-  static Future<bool> registerUserWithFirebaseEmailCredentials(
-      BuildContext context,
-      String verificationID,
-      String verificationCode,
-      String email,
-      String password) async {
-    bool isValidated =
-        emailAuth.validateOtp(recipientMail: email, userOtp: verificationCode);
-
+  /// REGISTER : register email-password user. Throws an error if user exists in the database
+  static Future<dynamic> registerUserWithFirebaseEmailCredentials(
+      BuildContext context, String email, String password) async {
     try {
-      if (isValidated) {
-        UserCredential userCredential =
-            await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
-        if (userCredential.user != null) {
-          await SharedPreferenceService()
-              .saveUser(userCredential.user?.uid.toString() ?? "");
-        }
+      UserCredential userCredential =
+          await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      if (userCredential.user != null) {
+        await SharedPreferenceService()
+            .saveUser(userCredential.user?.uid.toString() ?? "");
         return true;
-      } else {
-        print('REGISTRATION : => ERROR: INVALID CODE');
-        CustomAnimatedAlertDialog(
-                context: context,
-                title: "Registration Failed",
-                content: 'INVALID CODE')
-            .show();
-        return false;
       }
+      return false;
+    } on FirebaseAuthException catch (e) {
+      print('REGISTRATION : => ERROR:  $e');
+
+      CustomLoading.progressDialog(false, context);
+
+      CustomAnimatedAlertDialog(
+              context: context,
+              title: e.message,
+              content: e.toString().split("]")[1])
+          .show();
+      return e.message;
     } catch (error) {
       print('REGISTRATION : => ERROR:  $error');
 
@@ -117,7 +112,7 @@ class FirebaseServices {
 
       CustomAnimatedAlertDialog(
               context: context,
-              title: "Registration Failed",
+              title: "Registration failed",
               content: error.toString().split("]")[1])
           .show();
       return false;
