@@ -10,34 +10,23 @@ class ThemeConstants {
       appBarTheme: const AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
-      primaryColorLight: ColorConstants.getMaterialColor(
-          ColorConstants.whiteColor.value, ColorConstants.whiteColor),
-      splashColor: ColorConstants.getMaterialColor(
-          ColorConstants.whiteColor.value, ColorConstants.whiteColor),
+      primaryColorLight:ColorConstants.whiteColor,
+      splashColor:  ColorConstants.whiteColor,
       textSelectionTheme: TextSelectionThemeData(
-          cursorColor: ColorConstants.getMaterialColor(
-              ColorConstants.blueColor.value, ColorConstants.blueColor)),
+          cursorColor: ColorConstants.blueColor),
       visualDensity: VisualDensity.adaptivePlatformDensity,
       cardColor: ColorConstants.greyColor,
-      scaffoldBackgroundColor: ColorConstants.getMaterialColor(
-          ColorConstants.whiteColor.value, ColorConstants.whiteColor),
-      primaryColor: ColorConstants.getMaterialColor(
-          ColorConstants.blueColor.value, ColorConstants.blueColor),
+      scaffoldBackgroundColor:  ColorConstants.whiteColor,
+      primaryColor: ColorConstants.blueColor,
       colorScheme: ColorScheme(
-              primary: ColorConstants.getMaterialColor(
-                  ColorConstants.whiteColor.value, ColorConstants.whiteColor),
-              secondary: ColorConstants.getMaterialColor(
-                  ColorConstants.blueColor.value, ColorConstants.blueColor),
+              primary: ColorConstants.blackColor,
+              secondary:  ColorConstants.blueColor,
               surface: ColorConstants.whiteColor,
               error: ColorConstants.redColor,
               onPrimary: ColorConstants.whiteColor,
               onSecondary: ColorConstants.blueColor,
-              onSurface: ColorConstants.whiteColor,
+              onSurface: ColorConstants.blackColor,
               onError: ColorConstants.redColor,
               brightness: Brightness.light)
-          .copyWith(
-              primary: ColorConstants.getMaterialColor(
-                  ColorConstants.whiteColor.value, ColorConstants.whiteColor),
-              secondary: ColorConstants.getMaterialColor(
-                  ColorConstants.blueColor.value, ColorConstants.blueColor)));
+  );
 }
