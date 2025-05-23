@@ -73,7 +73,7 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
                     stream: FirebaseFirestore.instance
                         .collection('users')
                         .where('parent',
-                            isEqualTo: _firebaseAuth.currentUser!.uid)
+                            isEqualTo: _firebaseAuth.currentUser?.uid)
                         .snapshots(),
                     builder: (context, AsyncSnapshot snapshot) {
                       if (!snapshot.hasData) {

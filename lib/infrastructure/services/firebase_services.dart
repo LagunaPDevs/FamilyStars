@@ -287,7 +287,7 @@ class FirebaseServices {
     String? date_of_birth,
   }) async {
     Map<String, dynamic> userData = {
-      'id': _firebaseAuth.currentUser!.uid,
+      'id': _firebaseAuth.currentUser?.uid,
       'name': name,
       'email': email,
       'password': password,
@@ -300,7 +300,7 @@ class FirebaseServices {
     try {
       _firebaseFirestore
           .collection('users')
-          .doc(_firebaseAuth.currentUser!.uid)
+          .doc(_firebaseAuth.currentUser?.uid)
           .set(userData);
       return true;
     } catch (error) {
@@ -312,7 +312,7 @@ class FirebaseServices {
   static Future<bool> saveUserPassword(
       String name, String email, String password) async {
     Map<String, dynamic> userData = {
-      'id': _firebaseAuth.currentUser!.uid,
+      'id': _firebaseAuth.currentUser?.uid,
       'name': name,
       'email': email,
       'password': password,
@@ -325,7 +325,7 @@ class FirebaseServices {
     try {
       _firebaseFirestore
           .collection('users')
-          .doc(_firebaseAuth.currentUser!.uid)
+          .doc(_firebaseAuth.currentUser?.uid)
           .set(userData);
       return true;
     } catch (error) {
@@ -335,7 +335,7 @@ class FirebaseServices {
 
   // FIREBASE FIRE-STORE: Take data of a collection
   static Future<DocumentSnapshot> getDataList(
-      String collection, String documentId) async {
+      String collection, String? documentId) async {
     CollectionReference data = _firebaseFirestore.collection(collection);
     return data.doc(documentId).get();
   }
@@ -345,13 +345,14 @@ class FirebaseServices {
       BuildContext context, String name, String familiar, String dob) async {
     DocumentSnapshot? documentSnapshot;
     local_user.User user = local_user.User();
+    // TODO: CHECK NULL OPERATOR
     Map<String, dynamic> mapData;
-    await FirebaseServices.getDataList('users', _firebaseAuth.currentUser!.uid)
+    await FirebaseServices.getDataList('users', _firebaseAuth.currentUser?.uid)
         .then(
       (value) => {
         documentSnapshot = value,
         mapData = documentSnapshot!.data() as Map<String, dynamic>,
-        user.id = _firebaseAuth.currentUser!.uid,
+        user.id = _firebaseAuth.currentUser?.uid,
         user.name = mapData['name'],
         user.email = mapData['email'],
         user.familiar = mapData['familiar'],
@@ -363,7 +364,7 @@ class FirebaseServices {
       'email': '',
       'password': '',
       'familiar': familiar,
-      'parent': _firebaseAuth.currentUser!.uid,
+      'parent': _firebaseAuth.currentUser?.uid,
       'date_of_birth': dob,
       'stars': '0',
       'tasks': [],
@@ -392,7 +393,7 @@ class FirebaseServices {
 
     Map<String, dynamic> taskData = {
       'created': Timestamp.fromDate(DateTime.now()),
-      'owner': _firebaseAuth.currentUser!.uid,
+      'owner': _firebaseAuth.currentUser?.uid,
       'assigned': assigned,
       'assigned_name': assignedName,
       'name': name,
@@ -402,7 +403,7 @@ class FirebaseServices {
       'state': 'Incompleta'
     };
     task.created = Timestamp.fromDate(DateTime.now()).toString();
-    task.owner = _firebaseAuth.currentUser!.uid;
+    task.owner = _firebaseAuth.currentUser?.uid;
     task.assigned = assigned;
     task.assigned_name = assignedName;
     task.name = name;
@@ -414,7 +415,7 @@ class FirebaseServices {
     Map<String, dynamic> eventData = {
       'date': date,
       'created': Timestamp.fromDate(DateTime.now()),
-      'owner': _firebaseAuth.currentUser!.uid,
+      'owner': _firebaseAuth.currentUser?.uid,
       'assigned': assigned,
       'assigned_name': assignedName,
       'task_name': name,
@@ -430,7 +431,7 @@ class FirebaseServices {
             }),
             _firebaseFirestore
                 .collection('users')
-                .doc(_firebaseAuth.currentUser!.uid)
+                .doc(_firebaseAuth.currentUser?.uid)
                 .update({
               'tasks': FieldValue.arrayUnion([value.id])
             }),
@@ -461,7 +462,7 @@ class FirebaseServices {
     Map<String, dynamic> eventData = {
       'date': date,
       'created': Timestamp.fromDate(DateTime.now()),
-      'owner': _firebaseAuth.currentUser!.uid,
+      'owner': _firebaseAuth.currentUser?.uid,
       'assigned': assigned,
       'assigned_name': assignedName,
       'task_id': taskId,
@@ -469,7 +470,7 @@ class FirebaseServices {
       'task_state': taskState,
       'task_stars': taskStars,
     };
-    event.owner = _firebaseAuth.currentUser!.uid;
+    event.owner = _firebaseAuth.currentUser?.uid;
     event.created = DateTime.now().toString();
     event.assigned = assigned;
     event.assigned_name = assignedName;
