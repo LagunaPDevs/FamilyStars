@@ -27,7 +27,7 @@ class _MonthEventCalendarState extends State<MonthEventCalendar> {
     return StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection('tasks')
-            .where('owner', isEqualTo: _firebaseAuth.currentUser!.uid)
+            .where('owner', isEqualTo: _firebaseAuth.currentUser?.uid)
             .snapshots(),
         builder: (context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
