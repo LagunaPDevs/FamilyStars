@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 // This widget represents a button that leads to 'CreateTaskScreen'
 
 class AddTaskButton extends StatefulWidget {
-  const AddTaskButton({Key? key}) : super(key: key);
+  const AddTaskButton({super.key});
 
   @override
   _AddTaskButtonState createState() => _AddTaskButtonState();

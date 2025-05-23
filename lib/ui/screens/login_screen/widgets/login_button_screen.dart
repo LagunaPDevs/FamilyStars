@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // This widget permits a user to be logged in the app with email-password
 class LoginButtonScreen extends StatefulWidget {
   final GlobalKey<FormState>? formKey;
-  const LoginButtonScreen({Key? key, this.formKey}) : super(key: key);
+  const LoginButtonScreen({super.key, this.formKey});
 
   @override
   _LoginButtonScreenState createState() => _LoginButtonScreenState();

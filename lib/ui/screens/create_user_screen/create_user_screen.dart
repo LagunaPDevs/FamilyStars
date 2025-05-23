@@ -5,7 +5,6 @@ import 'package:familystars_2/ui/commons/user_appbar.dart';
 import 'package:familystars_2/ui/screens/create_user_screen/widgets/create_user_button.dart';
 import 'package:familystars_2/ui/screens/create_user_screen/widgets/create_user_fields.dart';
 import 'package:familystars_2/ui/screens/drawer_screen/drawer_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,14 +12,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 // user
 
 class CreateUserScreen extends StatefulWidget {
-  const CreateUserScreen({Key? key}) : super(key: key);
+  const CreateUserScreen({super.key});
 
   @override
   _CreateUserScreenState createState() => _CreateUserScreenState();
 }
 
 class _CreateUserScreenState extends State<CreateUserScreen> {
-  var _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

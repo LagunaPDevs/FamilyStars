@@ -29,7 +29,7 @@ dependencies:
   google_sign_in: ^6.2.2
   email_auth: ^2.0.0
   flutter_facebook_auth: ^7.1.1
-  syncfusion_flutter_calendar: ^27.1.58
+  syncfusion_flutter_calendar: ^29.2.4
   sliver_tools: ^0.2.5
   provider: ^6.0.2
 

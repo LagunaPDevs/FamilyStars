@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 // This widget led to user to register with 'Facebook' credentials
 
 class SignUpFacebookButton extends StatefulWidget {
-  const SignUpFacebookButton({Key? key}) : super(key: key);
+  const SignUpFacebookButton({super.key});
 
   @override
   _SignUpFacebookButtonState createState() => _SignUpFacebookButtonState();

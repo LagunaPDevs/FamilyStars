@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 // This widget led to user to register with 'Google' credentials
 
 class SignUpGoogleButton extends StatefulWidget {
-  const SignUpGoogleButton({Key? key}) : super(key: key);
+  const SignUpGoogleButton({super.key});
 
   @override
   _SignUpGoogleButtonState createState() => _SignUpGoogleButtonState();
@@ -24,7 +24,7 @@ class _SignUpGoogleButtonState extends State<SignUpGoogleButton> {
         textScaleFactor: 1,
       ),
       minWidth: double.infinity,
-      icon: Container(
+      icon: SizedBox(
         height: 50,
         child: Image.asset(
           ImageConstants.googleIcon,

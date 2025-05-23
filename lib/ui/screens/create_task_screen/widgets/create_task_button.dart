@@ -11,14 +11,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CreateTaskButton extends StatefulWidget {
   final GlobalKey<FormState>? formKey;
-  const CreateTaskButton({Key? key, this.formKey}) : super(key: key);
+  const CreateTaskButton({super.key, this.formKey});
 
   @override
   _CreateTaskButtonState createState() => _CreateTaskButtonState();
 }
 
 class _CreateTaskButtonState extends State<CreateTaskButton> {
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {

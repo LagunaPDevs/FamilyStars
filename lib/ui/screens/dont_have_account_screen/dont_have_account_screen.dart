@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/constants/routes_constants.dart';
@@ -9,7 +7,7 @@ import 'package:flutter/material.dart';
 // Simple widget which leads the user to 'ChooseSignUpMethodScreen'
 
 class DontHaveAccountScreen extends StatefulWidget {
-  const DontHaveAccountScreen({Key? key}) : super(key: key);
+  const DontHaveAccountScreen({super.key});
 
   @override
   _DontHaveAccountScreenState createState() => _DontHaveAccountScreenState();

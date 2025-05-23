@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 // Simple widget which all title and text of 'ForgotPasswordScreen'
 
 class ForgotPasswordTitle extends StatelessWidget {
-  const ForgotPasswordTitle({Key? key}) : super(key: key);
+  const ForgotPasswordTitle({super.key});
 
   @override
   Widget build(BuildContext context) {

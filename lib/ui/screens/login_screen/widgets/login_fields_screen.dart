@@ -10,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // This widget contains the fields for email and password to be logged in
 class LoginFieldsScreen extends StatefulWidget {
-  const LoginFieldsScreen({Key? key}) : super(key: key);
+  const LoginFieldsScreen({super.key});
 
   @override
   _LoginFieldsScreenState createState() => _LoginFieldsScreenState();
@@ -32,7 +32,7 @@ class _LoginFieldsScreenState extends State<LoginFieldsScreen> {
               return Validators.validateEmail(context, value!);
             },
             inputFormatter: [
-              FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9.@]')),
+              FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9.+@]')),
               FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s")),
             ],
             hintText: AppConstants.emailHint,

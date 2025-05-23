@@ -11,7 +11,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // on the device
 
 class IntroductionScreen extends StatefulWidget {
-  const IntroductionScreen({Key? key}) : super(key: key);
+  const IntroductionScreen({super.key});
 
   @override
   _IntroductionScreenState createState() => _IntroductionScreenState();

@@ -11,7 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 // screen
 
 class ActivationCodeScreen extends StatelessWidget {
-  const ActivationCodeScreen({Key? key}) : super(key: key);
+  const ActivationCodeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

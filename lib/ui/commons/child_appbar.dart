@@ -3,9 +3,7 @@ import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/models/user.dart' as local_user;
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/constants/image_constants.dart';
-import 'package:familystars_2/infrastructure/providers/general_provider.dart';
 import 'package:familystars_2/infrastructure/services/firebase_services.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -17,7 +15,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ChildAppBar extends StatefulWidget {
   final String childId;
-  ChildAppBar({Key? key, required this.childId}) : super(key: key);
+  const ChildAppBar({super.key, required this.childId});
 
   @override
   State<ChildAppBar> createState() => _ChildAppBarState();
@@ -28,14 +26,14 @@ class _ChildAppBarState extends State<ChildAppBar> {
   late String userId;
   DocumentSnapshot? documentSnapshot;
   late Future<local_user.User> _futureData;
-  local_user.User _user = local_user.User();
+  final local_user.User _user = local_user.User();
 
-  ValueNotifier<int> _currentPage = ValueNotifier(0);
+  final ValueNotifier<int> _currentPage = ValueNotifier(0);
 
   // Retrieve specific data of a child
   Future<local_user.User> _getAllUserData() async {
     Map<String, dynamic> mapData;
-    await FirebaseServices.getDataList('users', '${widget.childId}').then(
+    await FirebaseServices.getDataList('users', widget.childId).then(
       (value) => {
         documentSnapshot = value,
         mapData = documentSnapshot!.data() as Map<String, dynamic>,

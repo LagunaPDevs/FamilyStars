@@ -10,8 +10,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class WeekEventChildCalendar extends StatefulWidget {
   final String userPath;
-  const WeekEventChildCalendar({Key? key, required this.userPath})
-      : super(key: key);
+  const WeekEventChildCalendar({super.key, required this.userPath});
 
   @override
   _WeekEventChildCalendarState createState() => _WeekEventChildCalendarState();
@@ -26,10 +25,11 @@ class _WeekEventChildCalendarState extends State<WeekEventChildCalendar> {
             .where('assigned', isEqualTo: widget.userPath)
             .snapshots(),
         builder: (context, AsyncSnapshot snapshot) {
-          if (!snapshot.hasData)
+          if (!snapshot.hasData) {
             return Center(
                 child:
                     CircularProgressIndicator(color: ColorConstants.blueColor));
+          }
           List data = snapshot.data.docs;
           List<Appointment> appointments = [];
           for (int i = 0; i < data.length; i++) {
@@ -60,7 +60,7 @@ class _WeekEventChildCalendarState extends State<WeekEventChildCalendar> {
           }
           return Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Container(
+            child: SizedBox(
               height: 300,
               child: SfCalendar(
                   firstDayOfWeek: 1,

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class RewardButton extends StatefulWidget {
   final String userPath;
-  const RewardButton({Key? key, required this.userPath}) : super(key: key);
+  const RewardButton({super.key, required this.userPath});
 
   @override
   _RewardButtonState createState() => _RewardButtonState();

@@ -1,5 +1,4 @@
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // General interface button
@@ -12,14 +11,13 @@ class CustomButton extends StatelessWidget {
   final Color? disableColor;
 
   const CustomButton(
-      {Key? key,
+      {super.key,
       required this.onPressed,
       required this.title,
       this.fontSize,
       this.fontWeight,
       this.buttonHeight,
-      this.disableColor})
-      : super(key: key);
+      this.disableColor});
 
   @override
   Widget build(BuildContext context) {

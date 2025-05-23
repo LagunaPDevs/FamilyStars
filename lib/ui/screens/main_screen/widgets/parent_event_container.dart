@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
@@ -8,7 +6,6 @@ import 'package:familystars_2/infrastructure/services/firebase_services.dart';
 import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_change_state_dialog.dart';
 import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // This widget shows a container with all the events related to an specific
@@ -19,20 +16,20 @@ import 'package:flutter/material.dart';
 // container
 
 class ParentEventContainer extends StatefulWidget {
-  const ParentEventContainer({Key? key}) : super(key: key);
+  const ParentEventContainer({super.key});
 
   @override
   _ParentEventContainerState createState() => _ParentEventContainerState();
 }
 
 class _ParentEventContainerState extends State<ParentEventContainer> {
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   // Build the list of events related to a parent user
   Widget _buildListOfEvents(BuildContext context, DocumentSnapshot document) {
-    FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
-    CollectionReference _taskData = _firebaseFirestore.collection('tasks');
-    CollectionReference _childData = _firebaseFirestore.collection('users');
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    CollectionReference taskData = firebaseFirestore.collection('tasks');
+    CollectionReference childData = firebaseFirestore.collection('users');
     bool completa = document['task_state'] == AppConstants.completed;
     bool espera = document['task_state'] == AppConstants.waiting;
 
@@ -54,7 +51,7 @@ class _ParentEventContainerState extends State<ParentEventContainer> {
         // 'Completa' the child user attached to it receive the appropriate stars
 
         if (document['task_state'] == AppConstants.waiting) {
-          await _childData
+          await childData
               .doc(document['assigned'])
               .get()
               .then((value) => stars = value['stars']);
@@ -67,11 +64,11 @@ class _ParentEventContainerState extends State<ParentEventContainer> {
             onOkTap: () async {
               CustomLoading.progressDialog(true, context);
               // Change task state
-              await _taskData
+              await taskData
                   .doc(document['task_id'])
                   .update({'state': AppConstants.completed});
               // Set child stars
-              await _childData
+              await childData
                   .doc(document['assigned'])
                   .update({'stars': total});
               // Create an event
@@ -89,7 +86,7 @@ class _ParentEventContainerState extends State<ParentEventContainer> {
 
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: ColorConstants.purpleGradient.withOpacity(0.5),
-                content: Container(
+                content: SizedBox(
                     height: 100,
                     child: Text(AppConstants.completedTask,
                         textAlign: TextAlign.center,
@@ -108,7 +105,7 @@ class _ParentEventContainerState extends State<ParentEventContainer> {
         if (document['task_state'] == AppConstants.incomplete) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: ColorConstants.purpleGradient.withOpacity(0.5),
-            content: Container(
+            content: SizedBox(
                 height: 100,
                 child: Text(AppConstants.waitingChild,
                     textAlign: TextAlign.center,
@@ -119,7 +116,7 @@ class _ParentEventContainerState extends State<ParentEventContainer> {
         if (document['task_state'] == AppConstants.completed) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: ColorConstants.purpleGradient.withOpacity(0.5),
-            content: Container(
+            content: SizedBox(
                 height: 100,
                 child: Text(AppConstants.completedTask,
                     textAlign: TextAlign.center,
@@ -198,11 +195,11 @@ class _ParentEventContainerState extends State<ParentEventContainer> {
                     .where('owner', isEqualTo: _firebaseAuth.currentUser!.uid)
                     .snapshots(),
                 builder: (context, AsyncSnapshot snapshot) {
-                  if (!snapshot.hasData)
+                  if (!snapshot.hasData) {
                     return Center(
                         child: CircularProgressIndicator(
                             color: ColorConstants.blueColor));
-                  else {
+                  } else {
                     Text(
                       AppConstants.noData,
                       textAlign: TextAlign.center,

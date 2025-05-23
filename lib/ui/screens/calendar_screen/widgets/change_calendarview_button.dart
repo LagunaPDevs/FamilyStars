@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // Works both for parent and child
 
 class ChangeCalendarViewButton extends StatefulWidget {
-  const ChangeCalendarViewButton({Key? key}) : super(key: key);
+  const ChangeCalendarViewButton({super.key});
 
   @override
   _ChangeCalendarViewButtonState createState() =>

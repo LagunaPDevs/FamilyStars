@@ -11,7 +11,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CreateUserButtons extends StatefulWidget {
   final GlobalKey<FormState>? formKey;
-  const CreateUserButtons({Key? key, this.formKey}) : super(key: key);
+  const CreateUserButtons({super.key, this.formKey});
 
   @override
   _CreateUserButtonsState createState() => _CreateUserButtonsState();

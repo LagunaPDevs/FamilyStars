@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 // Currently this functionality is not available
 
 class SignUpTwitterButton extends StatefulWidget {
-  const SignUpTwitterButton({Key? key}) : super(key: key);
+  const SignUpTwitterButton({super.key});
 
   @override
   _SignUpTwitterButtonState createState() => _SignUpTwitterButtonState();
@@ -24,7 +24,7 @@ class _SignUpTwitterButtonState extends State<SignUpTwitterButton> {
         textScaleFactor: 1,
       ),
       minWidth: double.infinity,
-      icon: Container(
+      icon: SizedBox(
         height: 50,
         child: Image.asset(
           ImageConstants.twitterIcon,

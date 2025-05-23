@@ -14,7 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 // account on app
 
 class ChooseSignUpMethodScreen extends StatefulWidget {
-  const ChooseSignUpMethodScreen({Key? key}) : super(key: key);
+  const ChooseSignUpMethodScreen({super.key});
 
   @override
   _ChooseSignUpMethodScreenState createState() =>

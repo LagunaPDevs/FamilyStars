@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 // account can be created
 
 class SignUpEmailButton extends StatefulWidget {
-  const SignUpEmailButton({Key? key}) : super(key: key);
+  const SignUpEmailButton({super.key});
 
   @override
   _SignUpEmailButtonState createState() => _SignUpEmailButtonState();
@@ -24,7 +24,7 @@ class _SignUpEmailButtonState extends State<SignUpEmailButton> {
         textScaleFactor: 1,
       ),
       minWidth: double.infinity,
-      icon: Container(
+      icon: SizedBox(
         height: 50,
         child: Image.asset(
           ImageConstants.userIcon,

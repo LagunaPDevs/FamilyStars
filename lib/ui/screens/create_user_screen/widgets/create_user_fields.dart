@@ -11,7 +11,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // This widget contains all fields necessary to create a new child
 
 class CreateUserFields extends StatefulWidget {
-  const CreateUserFields({Key? key}) : super(key: key);
+  const CreateUserFields({super.key});
 
   @override
   _CreateUserFieldsState createState() => _CreateUserFieldsState();

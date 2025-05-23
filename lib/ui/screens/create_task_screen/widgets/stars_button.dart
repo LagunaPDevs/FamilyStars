@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // Thanks to this widget the number of stars for a task is set
 
 class StarsButton extends StatefulWidget {
-  const StarsButton({Key? key}) : super(key: key);
+  const StarsButton({super.key});
 
   @override
   _StarsButtonState createState() => _StarsButtonState();

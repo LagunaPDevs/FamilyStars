@@ -10,7 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ForgotPasswordButton extends StatefulWidget {
   final GlobalKey<FormState>? formKey;
-  const ForgotPasswordButton({Key? key, this.formKey}) : super(key: key);
+  const ForgotPasswordButton({super.key, this.formKey});
 
   @override
   _ForgotPasswordButtonState createState() => _ForgotPasswordButtonState();

@@ -26,7 +26,7 @@ class CommonTextFormField extends StatelessWidget {
   final FormFieldValidator<String>? validation;
 
   const CommonTextFormField(
-      {Key? key,
+      {super.key,
       required this.controller,
       required this.onChanged,
       this.errorText,
@@ -45,8 +45,7 @@ class CommonTextFormField extends StatelessWidget {
       this.inputFormatter,
       this.suffixIcon,
       this.validation,
-      this.prefixIcon})
-      : super(key: key);
+      this.prefixIcon});
 
   @override
   Widget build(BuildContext context) {

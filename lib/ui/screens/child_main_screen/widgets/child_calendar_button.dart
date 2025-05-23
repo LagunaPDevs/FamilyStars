@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 
 class ChildCalendarButton extends StatefulWidget {
   final String userPath;
-  const ChildCalendarButton({Key? key, required this.userPath})
-      : super(key: key);
+  const ChildCalendarButton({super.key, required this.userPath});
 
   @override
   _ChildCalendarButtonState createState() => _ChildCalendarButtonState();

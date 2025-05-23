@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 // Simple widget that contains image and title of 'LoginScreen'
 
 class LoginTitleScreen extends StatelessWidget {
-  const LoginTitleScreen({Key? key}) : super(key: key);
+  const LoginTitleScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

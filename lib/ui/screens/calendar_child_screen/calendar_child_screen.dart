@@ -13,7 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // past, present or future task
 
 class CalendarChildScreen extends StatefulWidget {
-  const CalendarChildScreen({Key? key}) : super(key: key);
+  const CalendarChildScreen({super.key});
 
   @override
   _CalendarChildScreenState createState() => _CalendarChildScreenState();
@@ -23,8 +23,8 @@ class _CalendarChildScreenState extends State<CalendarChildScreen> {
   @override
   Widget build(BuildContext context) {
     // User path is received from another screen and paint user information
-    final Object? _unreceived = ModalRoute.of(context)!.settings.arguments;
-    String userPath = _unreceived.toString();
+    final Object? unreceived = ModalRoute.of(context)!.settings.arguments;
+    String userPath = unreceived.toString();
     return Consumer(builder: (context, ref, child) {
       final calendarProviderRes = ref.watch(calendarScreenProvider);
       bool month = calendarProviderRes.monthView;

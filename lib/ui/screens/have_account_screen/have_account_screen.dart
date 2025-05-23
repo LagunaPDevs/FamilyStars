@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 // Simple widget that lead user to 'LoginScreen'
 
 class HaveAccountScreen extends StatefulWidget {
-  const HaveAccountScreen({Key? key}) : super(key: key);
+  const HaveAccountScreen({super.key});
 
   @override
   _HaveAccountScreenState createState() => _HaveAccountScreenState();

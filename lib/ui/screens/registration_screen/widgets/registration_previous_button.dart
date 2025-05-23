@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RegistrationPreviousButton extends StatefulWidget {
   final GlobalKey<FormState>? formKey;
-  const RegistrationPreviousButton({Key? key, this.formKey}) : super(key: key);
+  const RegistrationPreviousButton({super.key, this.formKey});
 
   @override
   _RegistrationPreviousButtonState createState() =>

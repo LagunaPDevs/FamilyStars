@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
 import 'package:familystars_2/infrastructure/providers/general_provider.dart';
@@ -21,7 +21,6 @@ class RegistrationFirstStep extends StatefulWidget {
 }
 
 class _RegistrationFirstStepState extends State<RegistrationFirstStep> {
-  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   bool exists = false;
   @override
   Widget build(BuildContext context) {
@@ -34,16 +33,16 @@ class _RegistrationFirstStepState extends State<RegistrationFirstStep> {
             controller: registrationProviderRes.emailController,
             focusNode: registrationProviderRes.emailFocus,
             onChanged: (value) async {
-              await emailExists(value);
+              return Validators.validateEmail(context, value);
             },
             onFieldSubmitted: (value) async {
-              await emailExists(value);
+              return Validators.validateEmail(context, value);
             },
             validation: (value) {
-              return Validators.emailExists(context, value!, exists);
+              return Validators.validateEmail(context, value ?? "");
             },
             inputFormatter: [
-              FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9.@]')),
+              FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9.+@]')),
               FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s")),
             ],
             hintText: AppConstants.emailHint,
@@ -82,24 +81,5 @@ class _RegistrationFirstStepState extends State<RegistrationFirstStep> {
         ],
       );
     });
-  }
-
-  // Function that search on the database for the email introduced
-  // If it is found, user could not be registered with the typed email
-
-  Future<void> emailExists(String value) async {
-    var document = await _firebaseFirestore
-        .collection('users')
-        .where("email_id", isEqualTo: value)
-        .get();
-    if (document.size > 0) {
-      setState(() {
-        exists = true;
-      });
-    } else {
-      setState(() {
-        exists = false;
-      });
-    }
   }
 }

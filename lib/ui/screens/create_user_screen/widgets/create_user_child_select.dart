@@ -10,7 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // The type selected is shown in yellow collor
 
 class CreateUserChildSelect extends StatefulWidget {
-  const CreateUserChildSelect({Key? key}) : super(key: key);
+  const CreateUserChildSelect({super.key});
 
   @override
   _CreateUserChildSelectState createState() => _CreateUserChildSelectState();

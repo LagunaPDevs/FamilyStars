@@ -12,7 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 // to email user
 
 class ActivationCodeResend extends StatefulWidget {
-  const ActivationCodeResend({Key? key}) : super(key: key);
+  const ActivationCodeResend({super.key});
 
   @override
   _ActivationCodeResendState createState() => _ActivationCodeResendState();
