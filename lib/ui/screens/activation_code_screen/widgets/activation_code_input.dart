@@ -10,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
 
 // This widgets represents the fields where user can enter OTP received
-
+@Deprecated("OTP is not longer needed to register")
 class ActivationCodeInput extends StatefulWidget {
   const ActivationCodeInput({super.key});
 
@@ -83,9 +83,10 @@ class _ActivationCodeInputState extends State<ActivationCodeInput> {
                 registrationScreenProviderRef.passwordController.text;
 
             // If the OTP introduced is correct, user can continue with registration
+            // No OTP needed to register
             bool registred =
                 await FirebaseServices.registerUserWithFirebaseEmailCredentials(
-                    context, verificationID, verificationCode, email, password);
+                    context, email, password);
             if (registred) {
               Navigator.of(context).pop();
             }

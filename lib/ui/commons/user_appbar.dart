@@ -30,12 +30,12 @@ class _UserAppBarState extends State<UserAppBar> {
   Future<local_user.User> _getAllUserData() async {
     Map<String, dynamic> mapData;
     await FirebaseServices.getDataList(
-            'users', _firebaseAuth.currentUser!.uid)
+            'users', _firebaseAuth.currentUser?.uid)
         .then(
       (value) => {
         documentSnapshot = value,
         mapData = documentSnapshot!.data() as Map<String, dynamic>,
-        _user.id = _firebaseAuth.currentUser!.uid,
+        _user.id = _firebaseAuth.currentUser?.uid,
         _user.name = mapData['name'],
         _user.email = mapData['email'],
         _user.familiar = mapData['familiar'],
@@ -116,6 +116,8 @@ class _UserAppBarState extends State<UserAppBar> {
                         )
                       ],
                     );
+                  } else {
+                    FirebaseServices.signOutAuthorizedUser();
                   }
                   return Center(
                     child: CircularProgressIndicator(

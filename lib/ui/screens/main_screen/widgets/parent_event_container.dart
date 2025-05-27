@@ -192,7 +192,7 @@ class _ParentEventContainerState extends State<ParentEventContainer> {
                     .collection('event')
                     .orderBy('created', descending: true)
                     .limit(10)
-                    .where('owner', isEqualTo: _firebaseAuth.currentUser!.uid)
+                    .where('owner', isEqualTo: _firebaseAuth.currentUser?.uid)
                     .snapshots(),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (!snapshot.hasData) {

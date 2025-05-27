@@ -1,6 +1,5 @@
 import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
-import 'package:familystars_2/infrastructure/constants/routes_constants.dart';
 import 'package:familystars_2/infrastructure/providers/general_provider.dart';
 import 'package:familystars_2/infrastructure/services/firebase_services.dart';
 import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_loading.dart';
@@ -26,24 +25,24 @@ class _RegistrationNextButtonState extends State<RegistrationNextButton> {
         final registrationProviderRes = ref.watch(registrationScreenProvider);
         int activeStep = registrationProviderRes.activeStep;
         int upperBound = registrationProviderRes.upperBound;
+
         return GestureDetector(
-          onTap: () {
+          onTap: () async {
             if (widget.formKey!.currentState!.validate()) {
               String email = registrationProviderRes.emailController.text;
               if (activeStep < upperBound) {
+                if (registrationProviderRes.activeStep == 0) {
+                  // If email-password registration valid continue with the registration
+                  CustomLoading.progressDialog(true, context);
+                  final registrationSuccess = await FirebaseServices
+                      .registerUserWithFirebaseEmailCredentials(context, email,
+                          registrationProviderRes.passwordController.text);
+                  CustomLoading.progressDialog(false, context);
+                  if (!registrationSuccess) return;
+                }
                 setState(() {
                   // Go forward
                   registrationProviderRes.setActiveStepUp();
-                  if (registrationProviderRes.activeStep == 1) {
-                    // If user is in step one (email-password), the interface
-                    // will lead it previously to 'ActivationCodeScreen' to
-                    // validate the OTP sent to it email account
-
-                    CustomLoading.progressDialog(true, context);
-                    FirebaseServices.verifyUserEmailAccount(
-                        context, email, RoutesConstants.activationCodeScreen);
-                    CustomLoading.progressDialog(false, context);
-                  }
                 });
               }
             }

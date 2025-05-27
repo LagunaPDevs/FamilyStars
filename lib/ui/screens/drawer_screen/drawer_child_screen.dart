@@ -6,6 +6,7 @@ import 'package:familystars_2/infrastructure/constants/image_constants.dart';
 import 'package:familystars_2/infrastructure/constants/routes_constants.dart';
 import 'package:familystars_2/infrastructure/services/firebase_services.dart';
 import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_animated_alert_dialog.dart';
+import 'package:familystars_2/ui/screens/drawer_screen/widgets/drawer_menu_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -80,7 +81,6 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                     children: [
                       DrawerHeader(
                           decoration: const BoxDecoration(
-                              //color: ColorConstants.blueColor,
                               gradient: LinearGradient(
                                   begin: Alignment.topRight,
                                   end: Alignment.bottomLeft,
@@ -111,38 +111,26 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                               ])
                             ],
                           )),
-                      ListTile(
-                        title: const Text(
-                          AppConstants.main,
-                          style: TextStyle(fontFamily: 'KristenITC'),
-                        ),
+                      DrawerMenuItem(
+                        title: AppConstants.main,
                         onTap: () {
                           Navigator.popAndPushNamed(
                               context, RoutesConstants.childMainScreen,
                               arguments: widget.childId);
                         },
                       ),
-                      ListTile(
-                        title: const Text(
-                          AppConstants.editUser,
-                          style: TextStyle(fontFamily: 'KristenITC'),
-                        ),
+                      DrawerMenuItem(
+                        title: AppConstants.editUser,
                         onTap: () {},
                       ),
-                      ListTile(
-                        title: const Text(
-                          AppConstants.createUser,
-                          style: TextStyle(fontFamily: 'KristenITC'),
-                        ),
+                      DrawerMenuItem(
+                        title: AppConstants.createUser,
                         onTap: () {
                           deniedAccess(context);
                         },
                       ),
-                      ListTile(
-                        title: const Text(
-                          AppConstants.changeUser,
-                          style: TextStyle(fontFamily: 'KristenITC'),
-                        ),
+                      DrawerMenuItem(
+                        title: AppConstants.changeUser,
                         onTap: () async {
                           // Async function which retrieve the password for
                           // current parent user
@@ -259,20 +247,14 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                         child:
                             Divider(height: 1, color: ColorConstants.blueColor),
                       ),
-                      ListTile(
-                        title: const Text(
-                          AppConstants.aboutUs,
-                          style: TextStyle(fontFamily: 'KristenITC'),
-                        ),
+                      DrawerMenuItem(
+                        title: AppConstants.aboutUs,
                         onTap: () {
                           deniedAccess(context);
                         },
                       ),
-                      ListTile(
-                        title: const Text(
-                          AppConstants.logOut,
-                          style: TextStyle(fontFamily: 'KristenITC'),
-                        ),
+                      DrawerMenuItem(
+                        title: AppConstants.logOut,
                         onTap: () {
                           deniedAccess(context);
                         },

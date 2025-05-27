@@ -4,6 +4,7 @@ import 'package:familystars_2/infrastructure/constants/image_constants.dart';
 import 'package:familystars_2/infrastructure/constants/routes_constants.dart';
 import 'package:familystars_2/infrastructure/services/firebase_services.dart';
 import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_animated_alert_dialog.dart';
+import 'package:familystars_2/ui/screens/drawer_screen/widgets/drawer_menu_item.dart';
 import 'package:flutter/material.dart';
 
 // This widget is the drawer menu of a parent user.
@@ -27,7 +28,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
       children: [
         DrawerHeader(
             decoration: BoxDecoration(
-                //color: ColorConstants.blueColor,
                 gradient: LinearGradient(
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
@@ -37,7 +37,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 ])),
             // Actions of the drawer
             // -------------
-            child: Container(
+            child: SizedBox(
                 child: Column(
               children: [
                 Row(children: [
@@ -59,43 +59,29 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 ])
               ],
             ))),
-        ListTile(
-          title: Text(
-            AppConstants.main,
-            style: TextStyle(fontFamily: 'KristenITC'),
-          ),
-          onTap: () {
-            Navigator.popAndPushNamed(context, RoutesConstants.mainScreen);
-          },
-        ),
-        ListTile(
-          title: Text(
-            AppConstants.editUser,
-            style: TextStyle(fontFamily: 'KristenITC'),
-          ),
-          onTap: () {
-            CustomAnimatedAlertDialog(
-                    title: 'Función deshabilitada',
-                    content: 'Función desahbilitada en la versión beta',
-                    context: context)
-                .show();
-          },
-        ),
-        ListTile(
-          title: Text(
-            AppConstants.createUser,
-            style: TextStyle(fontFamily: 'KristenITC'),
-          ),
+        DrawerMenuItem(
+            onTap: () {
+              Navigator.popAndPushNamed(context, RoutesConstants.mainScreen);
+            },
+            title: AppConstants.main),
+        DrawerMenuItem(
+            onTap: () {
+              CustomAnimatedAlertDialog(
+                      title: 'Función deshabilitada',
+                      content: 'Función desahbilitada en la versión beta',
+                      context: context)
+                  .show();
+            },
+            title: AppConstants.editUser),
+        DrawerMenuItem(
+          title: AppConstants.createUser,
           onTap: () {
             Navigator.popAndPushNamed(
                 context, RoutesConstants.createUserScreen);
           },
         ),
-        ListTile(
-          title: Text(
-            AppConstants.changeUser,
-            style: TextStyle(fontFamily: 'KristenITC'),
-          ),
+        DrawerMenuItem(
+          title: AppConstants.changeUser,
           onTap: () {
             Navigator.popAndPushNamed(
                 context, RoutesConstants.changeUserScreen);
@@ -105,20 +91,14 @@ class _DrawerScreenState extends State<DrawerScreen> {
           padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
           child: Divider(height: 1, color: ColorConstants.blueColor),
         ),
-        ListTile(
-          title: Text(
-            AppConstants.aboutUs,
-            style: TextStyle(fontFamily: 'KristenITC'),
-          ),
+        DrawerMenuItem(
+          title: AppConstants.aboutUs,
           onTap: () {
             Navigator.popAndPushNamed(context, RoutesConstants.aboutUsScreen);
           },
         ),
-        ListTile(
-          title: Text(
-            AppConstants.logOut,
-            style: TextStyle(fontFamily: 'KristenITC'),
-          ),
+        DrawerMenuItem(
+          title: AppConstants.logOut,
           onTap: () async {
             await FirebaseServices.signOutAuthorizedUser();
             Navigator.popAndPushNamed(context, RoutesConstants.loginScreen);
