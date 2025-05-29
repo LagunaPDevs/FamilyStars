@@ -62,7 +62,7 @@ class _GridViewChildUsersState extends State<GridViewChildUsers> {
               child: Center(
                   child: Text(
                 document['name'],
-                style: TextStyle(fontFamily: 'KristenITC', fontSize: 14),
+                style: TextStyle(fontFamily: 'KristenITC', fontSize: 14, color: ColorConstants.blueColor),
               )),
             ),
           ),

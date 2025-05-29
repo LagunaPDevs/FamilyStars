@@ -35,8 +35,6 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
   FocusNode changeUserFocus = FocusNode();
   final local_user.User _user = local_user.User();
   late String userId;
-  late String pswd;
-  final ValueNotifier<int> _currentPage = ValueNotifier(0);
 
   // Retrieve child user data
   Future<local_user.User> _getAllUserData() async {
@@ -134,14 +132,10 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                         onTap: () async {
                           // Async function which retrieve the password for
                           // current parent user
-                          String parentPwd = '';
                           await _firebaseFirestore
                               .collection('users')
                               .doc(_firebaseAuth.currentUser!.uid)
                               .get()
-                              .then(
-                                (value) => parentPwd = value['password'],
-                              )
                               .then((value) => {
                                     showDialog(
                                         context: context,
@@ -149,22 +143,27 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                                           return AlertDialog(
                                             title: const Center(
                                                 child: Text(
-                                                    AppConstants.changeUser)),
-                                            content: TextField(
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    pswd = value;
-                                                  });
-                                                },
-                                                controller:
-                                                    changeUserController,
-                                                focusNode: changeUserFocus,
-                                                obscureText: true,
-                                                decoration:
-                                                    const InputDecoration(
-                                                  hintText:
-                                                      AppConstants.password,
-                                                )),
+                                                    AppConstants.changeUser, style: TextStyle(color: ColorConstants.blueColor))),
+                                            content: SizedBox(
+                                              child: TextField(
+                                                  controller:
+                                                      changeUserController,
+                                                  focusNode: changeUserFocus,
+                                                  obscureText: true,
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: ColorConstants.blueColor,
+                                                    fontFamily: "KristenITC"
+                                                  ),
+                                                  decoration:
+                                                      const InputDecoration(
+                                                    hintText:
+                                                        AppConstants.password,
+                                                        focusColor: ColorConstants.greyColor,
+                                                    hintStyle: TextStyle(color: ColorConstants.greyColor)
+                                                    
+                                                  )),
+                                            ),
                                             actions: [
                                               Row(
                                                 mainAxisAlignment:
@@ -173,7 +172,7 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                                                   GestureDetector(
                                                       onTap: () {
                                                         // if password fits go to parent main screen
-                                                        if (pswd == parentPwd) {
+                                                        if (value["password"] == changeUserController.text) {
                                                           Navigator.popAndPushNamed(
                                                               context,
                                                               RoutesConstants
@@ -185,7 +184,7 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                                                       child: Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            //border: Border.all(color: ColorConstants.blueColor),
+                                                            border: Border.all(color: ColorConstants.blueColor),
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
@@ -201,7 +200,7 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
                                                                   fontSize: 18,
                                                                   fontWeight:
                                                                       FontWeight
-                                                                          .bold),
+                                                                          .bold, color: ColorConstants.greenColor),
                                                             ),
                                                           ))),
                                                   const SizedBox(

@@ -38,12 +38,12 @@ class _ChangeUserScreenState extends State<ChangeUserScreen> {
               padding: const EdgeInsets.all(40.0),
               child: Text(
                 firstLater,
-                style: TextStyle(fontFamily: 'KristenITC', fontSize: 28),
+                style: TextStyle(fontFamily: 'KristenITC', fontSize: 28, color: ColorConstants.whiteColor),
               ),
             ),
           ),
         ),
-        Text(document['name']),
+        Text(document['name'], style: TextStyle( color:ColorConstants.blueColor)),
       ],
     );
   }

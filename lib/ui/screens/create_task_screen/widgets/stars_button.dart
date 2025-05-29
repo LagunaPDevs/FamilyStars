@@ -44,7 +44,7 @@ class _StarsButtonState extends State<StarsButton> {
           ),
           Text(
             createTaskProviderRes.starsText,
-            style: TextStyle(fontSize: 19),
+            style: TextStyle(fontSize: 19, color: ColorConstants.greyColor),
           ),
         ]),
         SizedBox(
