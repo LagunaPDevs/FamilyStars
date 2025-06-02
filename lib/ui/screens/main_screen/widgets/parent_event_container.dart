@@ -72,7 +72,7 @@ class _ParentEventContainerState extends State<ParentEventContainer> {
                   .doc(document['assigned'])
                   .update({'stars': total});
               // Create an event
-              await FirebaseServices.creteNewEvent(
+              await FirebaseServices.createNewEvent(
                   todayDate,
                   document['owner'],
                   document['assigned'],

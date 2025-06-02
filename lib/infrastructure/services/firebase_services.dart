@@ -448,7 +448,7 @@ class FirebaseServices {
   }
 
   // FIREFASE FIRESTORE: Add a task event
-  static Future<bool> creteNewEvent(
+  static Future<bool> createNewEvent(
       String date,
       String owner,
       String assigned,
@@ -457,7 +457,17 @@ class FirebaseServices {
       String taskName,
       String taskState,
       String taskStars) async {
-    TaskEvent event = TaskEvent();
+    TaskEvent event = TaskEvent(
+      owner: _firebaseAuth.currentUser?.uid,
+      created: DateTime.now().toString(),
+      assigned: assigned,
+      assignedName: assignedName,
+      taskName: taskName,
+      date: date,
+      taskId: taskId,
+      taskState: taskState,
+      taskStars: taskStars,
+    );
     List<TaskEvent> listEvent = [];
     Map<String, dynamic> eventData = {
       'date': date,
@@ -473,12 +483,12 @@ class FirebaseServices {
     event.owner = _firebaseAuth.currentUser?.uid;
     event.created = DateTime.now().toString();
     event.assigned = assigned;
-    event.assigned_name = assignedName;
-    event.task_name = taskName;
+    event.assignedName = assignedName;
+    event.taskName = taskName;
     event.date = date;
-    event.task_id = taskId;
-    event.task_state = taskState;
-    event.task_stars = taskStars;
+    event.taskId = taskId;
+    event.taskState = taskState;
+    event.taskStars = taskStars;
 
     listEvent.add(event);
     try {

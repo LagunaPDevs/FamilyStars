@@ -65,7 +65,7 @@ class _TasksListTileState extends State<TasksListTile> {
                   .doc(document['assigned'])
                   .update({'stars': total});
               await taskRef.doc(document.id).update({'state': 'Completa'});
-              await FirebaseServices.creteNewEvent(
+              await FirebaseServices.createNewEvent(
                   todayDate,
                   document['owner'],
                   document['assigned'],

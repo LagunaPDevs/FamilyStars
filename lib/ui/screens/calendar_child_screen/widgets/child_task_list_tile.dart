@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/services/firebase_services.dart';
+import 'package:familystars_2/infrastructure/utils/date_utils.dart';
 import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_change_state_dialog.dart';
 import 'package:flutter/material.dart';
 
@@ -39,11 +40,7 @@ class _ChildTaskListTileState extends State<ChildTaskListTile> {
             child: ClipRRect(
                 child: GestureDetector(
             onTap: () async {
-              DateTime today = DateTime.now();
-              String onlyDate = today.toLocal().toString().split(' ')[0];
-              List splittedDate = onlyDate.split('-');
-              String todayDate =
-                  '${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}';
+              String todayDate = dateToDDMMYY(DateTime.now());
 
               // If task state is 'Incompleta'
               // It change not only the task state, also create an event
@@ -54,7 +51,7 @@ class _ChildTaskListTileState extends State<ChildTaskListTile> {
                     await taskRef
                         .doc(document.id)
                         .update({'state': 'En espera'});
-                    await FirebaseServices.creteNewEvent(
+                    await FirebaseServices.createNewEvent(
                         todayDate,
                         document['owner'],
                         document['assigned'],

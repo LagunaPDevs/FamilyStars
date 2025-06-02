@@ -62,7 +62,7 @@ class _ChildEventContainerState extends State<ChildEventContainer> {
                   .doc(document['task_id'])
                   .update({'state': AppConstants.waiting});
               // Create an event
-              await FirebaseServices.creteNewEvent(
+              await FirebaseServices.createNewEvent(
                   todayDate,
                   document['owner'],
                   document['assigned'],
