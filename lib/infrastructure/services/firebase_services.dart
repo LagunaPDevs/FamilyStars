@@ -344,7 +344,7 @@ class FirebaseServices {
   static Future<bool> addChildUserToFirestore(
       BuildContext context, String name, String familiar, String dob) async {
     DocumentSnapshot? documentSnapshot;
-    local_user.User user = local_user.User();
+    local_user.UserModel user = local_user.UserModel();
     // TODO: CHECK NULL OPERATOR
     Map<String, dynamic> mapData;
     await FirebaseServices.getDataList('users', _firebaseAuth.currentUser?.uid)
