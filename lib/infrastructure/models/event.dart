@@ -1,6 +1,9 @@
 // This class represents a event related to a task
 // Mostly detects state changes
 
+import 'package:familystars_2/infrastructure/models/task.dart';
+import 'package:familystars_2/infrastructure/utils/date_utils.dart';
+
 class TaskEvent {
   String? id;
   String? created;
@@ -39,7 +42,18 @@ class TaskEvent {
       taskState: json["task_state"],
       taskStars: json["task_stars"]);
 
-  Map<String, dynamic> toJson(String? owner) => {
+  factory TaskEvent.fromTask(Task task) => TaskEvent(
+      date: task.date,
+      created: dateToDDMMYY(DateTime.now()),
+      owner: task.owner,
+      assigned: task.assigned,
+      assignedName: task.assigned,
+      taskName: task.name,
+      taskState: "Incompleta",
+      taskStars: task.stars,
+    ); 
+
+  Map<String, dynamic> toJson() => {
         "date": date,
         "created": created,
         "owner": owner,

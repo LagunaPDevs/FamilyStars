@@ -405,7 +405,7 @@ class FirebaseServices {
     task.created = Timestamp.fromDate(DateTime.now()).toString();
     task.owner = _firebaseAuth.currentUser?.uid;
     task.assigned = assigned;
-    task.assigned_name = assignedName;
+    task.assignedName = assignedName;
     task.name = name;
     task.category = category;
     task.date = date;
@@ -435,6 +435,7 @@ class FirebaseServices {
                 .update({
               'tasks': FieldValue.arrayUnion([value.id])
             }),
+            // BEFORE REMOVING THIS REMEMBER TO CALL ADD EVENT ANYTIME CREATING NEW TASK
             _firebaseFirestore.collection('event').add(eventData).then(
                 (event) => _firebaseFirestore
                     .collection('event')

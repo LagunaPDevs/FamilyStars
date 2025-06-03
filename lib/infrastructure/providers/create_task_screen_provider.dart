@@ -62,7 +62,8 @@ class CreateTaskScreenProvider extends ChangeNotifier {
   /// text for stars
   int stars = 0;
   String starsText = '0';
-  void setCeroStars() {
+  
+  void setZeroStars() {
     stars = 0;
     notifyListeners();
   }
@@ -122,7 +123,7 @@ class CreateTaskScreenProvider extends ChangeNotifier {
     setName('');
     setAssigned('');
     setHome();
-    setCeroStars();
+    setZeroStars();
     setStarsText('0');
     notifyListeners();
   }
@@ -152,4 +153,6 @@ class CreateTaskScreenProvider extends ChangeNotifier {
     'Comprar leche',
     'Ir de compras con abuelos'
   ];
+
+  
 }
