@@ -23,26 +23,15 @@ class TaskDataSourceImpl extends TaskDataSource {
   Future<String?> addNewTaskToChild(Task task) async {
     try {
       final taskData = task.toJson();
-      String? taskId;
-      await firebaseFirestore
+      final result = await firebaseFirestore
           .collection("tasks")
           .add(taskData)
-          .then((value) async {
-        // add task to the child
-        await firebaseFirestore.collection("users").doc(task.assigned).update({
-          "tasks": FieldValue.arrayUnion([value.id])
-        });
-        // assign task to parent owner
-        await firebaseFirestore.collection("users").doc(task.owner).update({
-          "tasks": FieldValue.arrayUnion([value.id])
-        });
-        // set the task id
-        taskId = value.id;
-      }).onError((e, stack) {
+          .then((value) => value.id)
+          .onError((e, stack) {
         firebaseCrashlytics.recordError(e, stack);
         throw TaskException(message: "Error creating new task");
       });
-      return taskId;
+      return result;
     } catch (e, stack) {
       firebaseCrashlytics.recordError(e, stack);
       throw TaskException(message: ErrorConstants.unhandled);

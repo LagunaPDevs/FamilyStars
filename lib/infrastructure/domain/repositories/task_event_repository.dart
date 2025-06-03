@@ -4,7 +4,7 @@ import 'package:familystars_2/infrastructure/errors/exceptions.dart';
 import 'package:familystars_2/infrastructure/models/event.dart';
 
 abstract class TaskEventRepository {
-  Future<String?> createNewEvent(TaskEvent event, String userId);
+  Future<String?> createNewEvent(TaskEvent event);
   Future<bool> updateEvent(
       {required String eventId, required Map<String, dynamic> newData});
   Stream<QuerySnapshot<Map<String, dynamic>>>? getUserEventList(String userId,
@@ -17,10 +17,10 @@ class TaskEventRepositoryImpl extends TaskEventRepository {
   TaskEventRepositoryImpl({required this.dataSource});
 
   @override
-  Future<String?> createNewEvent(TaskEvent event, String userId) async {
+  Future<String?> createNewEvent(TaskEvent event) async {
     try {
       final result =
-          await dataSource.createNewEvent(event: event, user: userId);
+          await dataSource.createNewEvent(event: event);
       return result;
     } on TaskEventException catch (_) {
       return null;

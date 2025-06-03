@@ -8,7 +8,7 @@ import 'package:familystars_2/infrastructure/models/event.dart';
 
 abstract class TaskEventDataSource {
   Future<String?> createNewEvent(
-      {required TaskEvent event, required String user});
+      {required TaskEvent event});
   Future<bool> updateEvent(
       {required String eventId, required Map<String, dynamic> newData});
   Stream<QuerySnapshot<Map<String, dynamic>>>? getUserEventList(String userId,
@@ -24,7 +24,7 @@ class TaskEventDataSourceImpl extends TaskEventDataSource {
 
   @override
   Future<String?> createNewEvent(
-      {required TaskEvent event, required String user}) async {
+      {required TaskEvent event}) async {
     try {
       final result = await firebaseFirestore
           .collection('event')
