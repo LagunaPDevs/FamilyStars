@@ -72,7 +72,7 @@ class _ParentEventContainerState extends State<ParentEventContainer> {
                   .doc(document['assigned'])
                   .update({'stars': total});
               // Create an event
-              await FirebaseServices.creteNewEvent(
+              await FirebaseServices.createNewEvent(
                   todayDate,
                   document['owner'],
                   document['assigned'],
@@ -145,17 +145,18 @@ class _ParentEventContainerState extends State<ParentEventContainer> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
+                      color: ColorConstants.greenColor
                     ),
                   )
                 : espera
                     ? Text(
                         'Revisar \'${document['task_name']}\' de \'${document['assigned_name']}\'',
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16))
+                        style: TextStyle(fontSize: 16, color: ColorConstants.yellowColor))
                     : Text(
                         'Se ha asignado \'${document['task_name']}\' a \'${document['assigned_name']}\'',
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16)),
+                        style: TextStyle(fontSize: 16, color: ColorConstants.blueColor)),
             SizedBox(
               height: LayoutConstants.generalVerticalSpace,
             ),

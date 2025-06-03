@@ -62,7 +62,7 @@ class _ChildEventContainerState extends State<ChildEventContainer> {
                   .doc(document['task_id'])
                   .update({'state': AppConstants.waiting});
               // Create an event
-              await FirebaseServices.creteNewEvent(
+              await FirebaseServices.createNewEvent(
                   todayDate,
                   document['owner'],
                   document['assigned'],
@@ -121,17 +121,18 @@ class _ChildEventContainerState extends State<ChildEventContainer> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
+                      color: ColorConstants.greenColor
                     ),
                   )
                 : incompleta
                     ? Text(
                         'Se te ha asignado \'${document['task_name']}\' por un valor de ${document['task_stars']} estrellas.',
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16))
+                        style: TextStyle(fontSize: 16, color: ColorConstants.blueColor))
                     : Text(
                         'La tarea \'${document['task_name']}\' está a la espera de ser revisada.',
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16)),
+                        style: TextStyle(fontSize: 16, color: ColorConstants.yellowColor)),
             SizedBox(
               height: LayoutConstants.generalVerticalSpace,
             ),

@@ -32,7 +32,6 @@ class _RewardsTabState extends State<RewardsTab> with TickerProviderStateMixin {
           elevation: 0,
           automaticallyImplyLeading: false,
           centerTitle: true,
-          //backgroundColor: ColorConstants.blueColor,
           title: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
@@ -43,19 +42,14 @@ class _RewardsTabState extends State<RewardsTab> with TickerProviderStateMixin {
               indicator: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: ColorConstants.yellowColor,
-                  gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      colors: [
-                        ColorConstants.whiteColor,
-                        ColorConstants.blueColor
-                      ])),
+                      ),
               labelColor: ColorConstants.greyColor,
               labelStyle: TextStyle(
                   color: ColorConstants.greyColor,
                   fontSize: 14,
                   fontFamily: 'KristenITC',
                   fontWeight: FontWeight.bold),
+                  unselectedLabelColor: ColorConstants.greyColor,
               labelPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
               tabs: [
                 Tab(

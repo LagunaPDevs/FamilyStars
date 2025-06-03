@@ -18,7 +18,7 @@ class ColorConstants {
   static const Color pinkGradient = Color(0xffff7ffa);
   static const Color lightBlueGradient = Color(0xff5a97ef);
   static const Color blueGradient = Color(0xff0d60e0);
-  static const Color blackColor = Color(0xff000);
+  static const Color blackColor = Color(0xff000000);
 
   static Map<int, Color> getSwatch(Color color) {
     final hslColor = HSLColor.fromColor(color);

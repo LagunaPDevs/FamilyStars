@@ -25,7 +25,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
     // If user has logged previously it leads to it main screen
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       if (SharedPreferenceService().getUser() != null) {
-        //await FirebaseServices.getDataList("users", FirebaseAuth.instance.currentUser!.uid);
         Navigator.of(context).popAndPushNamed(RoutesConstants.mainScreen);
       }
     });
