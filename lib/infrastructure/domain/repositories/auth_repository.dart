@@ -2,19 +2,20 @@ import 'package:familystars_2/infrastructure/data_sources/auth_data_source.dart'
 import 'package:familystars_2/infrastructure/domain/model/facebook_sso_result.dart';
 import 'package:familystars_2/infrastructure/domain/model/google_sso_result.dart';
 import 'package:familystars_2/infrastructure/errors/exceptions.dart';
+import 'package:familystars_2/infrastructure/errors/result.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthRepository {
-  Future<String?> getCurrentUserUID();
-  Future<User?> loginWithEmail(
+  Future<Result<String?>> getCurrentUserUID();
+  Future<Result<User?>> loginWithEmail(
       {required String email, required String password});
-  Future<void> logout();
-  Future<bool> resetEmailPassword(String email);
-  Future<User?> signUpWithEmail(
+  Future<Result<void>> logout();
+  Future<Result<bool>> resetEmailPassword(String email);
+  Future<Result<User?>> signUpWithEmail(
       {required String email, required String password});
-  Future<GoogleSsoResult> googleSSO();
-  Future<FacebookSsoResult> facebookSSO();
+  Future<Result<GoogleSsoResult>> googleSSO();
+  Future<Result<FacebookSsoResult>> facebookSSO();
 }
 
 class AuthRepositoryImpl extends AuthRepository {
@@ -23,76 +24,76 @@ class AuthRepositoryImpl extends AuthRepository {
   AuthRepositoryImpl({required this.dataSource});
 
   @override
-  Future<String?> getCurrentUserUID() async {
+  Future<Result<String?>> getCurrentUserUID() async {
     try {
       final result = await dataSource.getCurrentUserUID();
-      return result;
-    } on AuthException catch (_) {
-      return null;
+      return Result.ok(result);
+    } on AuthException catch (e) {
+      return Result.error(e);
     }
   }
 
   @override
-  Future<User?> loginWithEmail(
+  Future<Result<User?>> loginWithEmail(
       {required String email, required String password}) async {
     try {
       final result =
           await dataSource.loginWithEmail(email: email, password: password);
-      return result;
-    } on AuthException catch (_) {
-      return null;
+      return Result.ok(result);
+    } on AuthException catch (e) {
+      return Result.error(e);
     }
   }
 
   @override
-  Future<void> logout() async {
+  Future<Result<void>> logout() async {
     try {
       final result = await dataSource.logout();
-      return result;
-    } on AuthException catch (_) {
-      return;
+      return Result.ok(result);
+    } on AuthException catch (e) {
+      return Result.error(e);
     }
   }
 
   @override
-  Future<bool> resetEmailPassword(String email) async {
+  Future<Result<bool>> resetEmailPassword(String email) async {
     try {
       final result = await dataSource.resetEmailPassword(email);
-      return result;
-    } on AuthException catch (_) {
-      return false;
+      return Result.ok(result);
+    } on AuthException catch (e) {
+      return Result.error(e);
     }
   }
 
   @override
-  Future<User?> signUpWithEmail(
+  Future<Result<User?>> signUpWithEmail(
       {required String email, required String password}) async {
     try {
       final result =
           await dataSource.signUpWithEmail(email: email, password: password);
-      return result;
-    } on AuthException catch (_) {
-      return null;
+      return Result.ok(result);
+    } on AuthException catch (e) {
+      return Result.error(e);
     }
   }
 
   @override
-  Future<FacebookSsoResult> facebookSSO() async {
+  Future<Result<FacebookSsoResult>> facebookSSO() async {
     try {
       final result = await dataSource.facebookSSO();
-      return result;
-    } on AuthException catch (_) {
-      return FacebookSsoResult.fromNoData();
+      return Result.ok(result);
+    } on AuthException catch (e) {
+      return Result.error(e);
     }
   }
 
   @override
-  Future<GoogleSsoResult> googleSSO() async {
+  Future<Result<GoogleSsoResult>> googleSSO() async {
     try {
       final result = await dataSource.googleSSO();
-      return result;
-    } on AuthException catch (_) {
-      return GoogleSsoResult.fromNoData();
+      return Result.ok(result);
+    } on AuthException catch (e) {
+      return Result.error(e);
     }
   }
 }

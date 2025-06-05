@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:familystars_2/infrastructure/data_sources/task_event_data_source.dart';
 import 'package:familystars_2/infrastructure/errors/exceptions.dart';
+import 'package:familystars_2/infrastructure/errors/result.dart';
 import 'package:familystars_2/infrastructure/models/event.dart';
 
 abstract class TaskEventRepository {
-  Future<String?> createNewEvent(TaskEvent event);
-  Future<bool> updateEvent(
+  Future <Result<String?>> createNewEvent(TaskEvent event);
+  Future<Result<bool>> updateEvent(
       {required String eventId, required Map<String, dynamic> newData});
   Stream<QuerySnapshot<Map<String, dynamic>>>? getUserEventList(String userId,
       {int? limit});
@@ -17,13 +18,13 @@ class TaskEventRepositoryImpl extends TaskEventRepository {
   TaskEventRepositoryImpl({required this.dataSource});
 
   @override
-  Future<String?> createNewEvent(TaskEvent event) async {
+  Future <Result<String?>> createNewEvent(TaskEvent event) async {
     try {
       final result =
           await dataSource.createNewEvent(event: event);
-      return result;
-    } on TaskEventException catch (_) {
-      return null;
+      return Result.ok(result);
+    } on TaskEventException catch (e) {
+      return Result.error(e);
     }
   }
 
@@ -39,12 +40,12 @@ class TaskEventRepositoryImpl extends TaskEventRepository {
   }
   
   @override
-  Future<bool> updateEvent({required String eventId, required Map<String, dynamic> newData}) async {
+  Future<Result<bool>> updateEvent({required String eventId, required Map<String, dynamic> newData}) async {
     try{
       final result = await dataSource.updateEvent(eventId: eventId, newData: newData);
-      return result;
-    } on TaskEventException catch(_){
-      return false;
+      return Result.ok(result);
+    } on TaskEventException catch(e){
+      return Result.error(e);
     }
   }
 }

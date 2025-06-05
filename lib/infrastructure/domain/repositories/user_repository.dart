@@ -1,14 +1,15 @@
 import 'package:familystars_2/infrastructure/data_sources/user_data_source.dart';
 import 'package:familystars_2/infrastructure/errors/exceptions.dart';
+import 'package:familystars_2/infrastructure/errors/result.dart';
 import 'package:familystars_2/infrastructure/models/user.dart';
 
 abstract class UserRepository {
-  Future<bool> assignTaskToUser(
+  Future<Result<bool>> assignTaskToUser(
       {required String userId, required String taskId});
-  Future<String?> createNewChildUser(UserModel child);
-  Future<UserModel?> getUserById(String userId);
-  Future<bool> updateCurrentUser(UserModel user);
-  Future<List<UserModel>> getParentUserChildren(String parentId);
+  Future<Result<String?>> createNewChildUser(UserModel child);
+  Future<Result<UserModel?>> getUserById(String userId);
+  Future<Result<bool>> updateCurrentUser(UserModel user);
+  Future<Result<List<UserModel>>> getParentUserChildren(String parentId);
 }
 
 class UserRepositoryImpl implements UserRepository {
@@ -17,54 +18,54 @@ class UserRepositoryImpl implements UserRepository {
   UserRepositoryImpl({required this.dataSource});
 
   @override
-  Future<bool> assignTaskToUser(
+  Future<Result<bool>> assignTaskToUser(
       {required String userId, required String taskId}) async {
     try {
       final result =
           await dataSource.assignTaskToUser(userId: userId, taskId: taskId);
-      return result;
-    } on UserException catch (_) {
-      return false;
+      return Result.ok(result);
+    } on UserException catch (e) {
+      return Result.error(e);
     }
   }
 
   @override
-  Future<String?> createNewChildUser(UserModel child) async {
+  Future<Result<String?>> createNewChildUser(UserModel child) async {
     try {
       final result = await dataSource.createNewChildUser(child);
-      return result;
-    } on UserException catch (_) {
-      return null;
+      return Result.ok(result);
+    } on UserException catch (e) {
+      return Result.error(e);
     }
   }
 
   @override
-  Future<List<UserModel>> getParentUserChildren(String parentId) async {
+  Future<Result<List<UserModel>>> getParentUserChildren(String parentId) async {
     try {
       final result = await dataSource.getParentUserChildren(parentId);
-      return result;
-    } on UserException catch (_) {
-      return [];
+      return Result.ok(result);
+    } on UserException catch (e) {
+      return Result.error(e);
     }
   }
 
   @override
-  Future<UserModel?> getUserById(String userId) async {
+  Future<Result<UserModel?>> getUserById(String userId) async {
     try {
       final result = await dataSource.getUserById(userId);
-      return result;
-    } on UserException catch (_) {
-      return null;
+      return Result.ok(result);
+    } on UserException catch (e) {
+      return Result.error(e);
     }
   }
 
   @override
-  Future<bool> updateCurrentUser(UserModel user) async {
+  Future<Result<bool>> updateCurrentUser(UserModel user) async {
     try {
       final result = await dataSource.updateCurrentUser(user);
-      return result;
-    } on UserException catch (_) {
-      return false;
+      return Result.ok(result);
+    } on UserException catch (e) {
+      return Result.error(e);
     }
   }
 }

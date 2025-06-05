@@ -1,17 +1,32 @@
 import 'package:familystars_2/infrastructure/domain/repositories/auth_repository.dart';
+import 'package:familystars_2/infrastructure/errors/result.dart';
 import 'package:familystars_2/infrastructure/services/shared_preference_services.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginWithEmailCredentialsUserCase {
   final AuthRepository authRepository;
 
   LoginWithEmailCredentialsUserCase({required this.authRepository});
 
-  Future<bool> loginWithEmailCredentials({required String email, required String password}) async {
-    final user = await authRepository.loginWithEmail(email: email, password: password);
-    if(user != null){
+  Future<bool> loginWithEmailCredentials(
+      {required String email, required String password}) async {
+    final user = await _handleLoginWithEmail(email, password);
+    if (user != null) {
       await SharedPreferenceService().saveUser(user.uid);
       return true;
     }
     return false;
+  }
+
+  Future<User?> _handleLoginWithEmail(String email, String password) async {
+    final result =
+        await authRepository.loginWithEmail(email: email, password: password);
+    switch (result) {
+      case Ok():
+        return result.result;
+      case Error():
+        return null;
+    }
   }
 }
