@@ -30,14 +30,14 @@ class _DrawerChildScreenState extends State<DrawerChildScreen> {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   DocumentSnapshot? documentSnapshot;
-  late Future<local_user.User> _futureData;
+  late Future<local_user.UserModel> _futureData;
   TextEditingController changeUserController = TextEditingController();
   FocusNode changeUserFocus = FocusNode();
-  final local_user.User _user = local_user.User();
+  final local_user.UserModel _user = local_user.UserModel();
   late String userId;
 
   // Retrieve child user data
-  Future<local_user.User> _getAllUserData() async {
+  Future<local_user.UserModel> _getAllUserData() async {
     Map<String, dynamic> mapData;
     await FirebaseServices.getDataList('users', widget.childId).then(
       (value) => {

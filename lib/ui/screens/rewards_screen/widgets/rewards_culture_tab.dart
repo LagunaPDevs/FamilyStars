@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/constants/routes_constants.dart';
-import 'package:familystars_2/infrastructure/providers/general_provider.dart';
+import 'package:familystars_2/infrastructure/dependency_injection.dart';
 import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_change_state_dialog.dart';
 import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_loading.dart';
 import 'package:familystars_2/ui/commons/card_widgets/reward_card.dart';

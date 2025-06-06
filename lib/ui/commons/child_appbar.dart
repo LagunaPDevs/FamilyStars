@@ -25,13 +25,13 @@ class _ChildAppBarState extends State<ChildAppBar> {
   late String userStars;
   late String userId;
   DocumentSnapshot? documentSnapshot;
-  late Future<local_user.User> _futureData;
-  final local_user.User _user = local_user.User();
+  late Future<local_user.UserModel> _futureData;
+  final local_user.UserModel _user = local_user.UserModel();
 
   final ValueNotifier<int> _currentPage = ValueNotifier(0);
 
   // Retrieve specific data of a child
-  Future<local_user.User> _getAllUserData() async {
+  Future<local_user.UserModel> _getAllUserData() async {
     Map<String, dynamic> mapData;
     await FirebaseServices.getDataList('users', widget.childId).then(
       (value) => {

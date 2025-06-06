@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// This class represents a task which is a assigned to a child user by a
-// parent user
+/// This class represents a task which is a assigned to a child user by a
+/// parent user
 
-class Task{
+class Task {
   String? id;
   String? created;
   String? name;
   String? assigned;
-  String? assigned_name;
+  String? assignedName;
   String? category;
   String? startTime;
   String? date;
@@ -17,31 +17,40 @@ class Task{
   String? stars;
   String? state;
 
-  Task({
-    this.id,
-    this.created,
-    this.name,
-    this.assigned,
-    this.assigned_name,
-    this.category,
-    this.startTime,
-    this.date,
-    this.endTime,
-    this.owner,
-    this.stars,
-    this.state
-  });
+  Task(
+      {this.id,
+      this.created,
+      this.name,
+      this.assigned,
+      this.assignedName,
+      this.category,
+      this.startTime,
+      this.date,
+      this.endTime,
+      this.owner,
+      this.stars,
+      this.state});
 
-  factory Task.fromDoc(DocumentSnapshot doc){
-    return Task(
-      id: doc.id,
-      name: doc.get('name'),
-      assigned: doc.get('asigned'),
-      category: doc.get('category'),
-      date: doc.get('date'),
-      owner: doc.get('owner'),
-      stars: doc.get('stars'),
-      state: doc.get('state'),
-    );
-  }
+  factory Task.fromJson(Map<String, dynamic> json) => Task(
+        id: json["id"],
+        name: json['name'],
+        assigned: json['asigned'],
+        category: json['category'],
+        date: json['date'],
+        owner: json['owner'],
+        stars: json['stars'],
+        state: json['state'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'created': Timestamp.fromDate(DateTime.now()),
+        'owner': owner,
+        'assigned': assigned,
+        'assigned_name': assignedName,
+        'name': name,
+        'category': category,
+        'date': date,
+        'stars': stars,
+        'state': 'Incompleta'
+      };
 }

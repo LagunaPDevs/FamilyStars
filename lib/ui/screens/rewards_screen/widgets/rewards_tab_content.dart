@@ -1,4 +1,4 @@
-import 'package:familystars_2/infrastructure/providers/general_provider.dart';
+import 'package:familystars_2/infrastructure/dependency_injection.dart';
 import 'package:familystars_2/ui/screens/rewards_screen/widgets/rewards_culture_tab.dart';
 import 'package:familystars_2/ui/screens/rewards_screen/widgets/rewards_experience_tab.dart';
 import 'package:familystars_2/ui/screens/rewards_screen/widgets/rewards_material_tab.dart';
