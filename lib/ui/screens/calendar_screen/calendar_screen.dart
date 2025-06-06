@@ -1,4 +1,4 @@
-import 'package:familystars_2/infrastructure/providers/general_provider.dart';
+import 'package:familystars_2/infrastructure/dependency_injection.dart';
 import 'package:familystars_2/ui/commons/user_appbar.dart';
 import 'package:familystars_2/ui/screens/calendar_screen/widgets/calendar_floating_button.dart';
 import 'package:familystars_2/ui/screens/calendar_screen/widgets/change_calendarview_button.dart';

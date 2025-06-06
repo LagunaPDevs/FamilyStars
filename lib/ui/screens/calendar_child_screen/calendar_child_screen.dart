@@ -1,4 +1,4 @@
-import 'package:familystars_2/infrastructure/providers/general_provider.dart';
+import 'package:familystars_2/infrastructure/dependency_injection.dart';
 import 'package:familystars_2/ui/commons/child_appbar.dart';
 
 import 'package:familystars_2/ui/screens/calendar_child_screen/widgets/child_task_list_tile.dart';
