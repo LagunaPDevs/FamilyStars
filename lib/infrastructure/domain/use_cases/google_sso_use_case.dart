@@ -20,7 +20,7 @@ class GoogleSSOUseCase {
       final String? id = await _handleGetCurrentUserUID();
       final UserModel user = UserModel(
           id: id,
-          name: result.userEmail,
+          name: result.userName,
           email: result.userEmail,
           familiar: 'Otro');
       final isUpdatedUser = await _handleUpdateUser(user, result);

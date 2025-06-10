@@ -1,23 +1,28 @@
+
 plugins {
     id "com.android.application"
-    id "org.jetbrains.kotlin.android"
+    id "kotlin-android"
+
     id "dev.flutter.flutter-gradle-plugin"
     id "com.google.gms.google-services"
     id "com.google.firebase.crashlytics"
 }
 
+def Properties properties = new Properties()
+properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
 android {
     namespace = "com.app.familystars"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = "27.0.12077973"    
+    ndkVersion = flutter.ndkVersion    
     
     compileOptions {
-        sourceCompatibility  = JavaVersion.VERSION_17
-        targetCompatibility  = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17
+        jvmTarget = '11'
     }
 
     defaultConfig {
@@ -29,6 +34,10 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+
+        resValue "string", "facebook_app_id", properties.getProperty("facebookAppId", "")
+        resValue "string", "fb_login_protocol_scheme", properties.getProperty("fbLoginProtocolScheme", "")
+        resValue "string", "facebook_client_token", properties.getProperty("facebookClientToken", "")
     }
 
     buildTypes {
@@ -38,7 +47,13 @@ android {
             signingConfig = signingConfigs.debug
         }
     }
+
+    dependencies{
+         implementation 'com.facebook.android:facebook-login:latest.release'
+    }
+
 }
+
 
 flutter {
     source '../..'
