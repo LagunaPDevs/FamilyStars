@@ -16,6 +16,7 @@ import 'package:familystars_2/infrastructure/domain/use_cases/get_user_event_lis
 import 'package:familystars_2/infrastructure/domain/use_cases/get_user_tasks_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/google_sso_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/login_with_email_credentials_user_case.dart';
+import 'package:familystars_2/infrastructure/domain/use_cases/logout_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/sign_up_with_email_credentials_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/update_task_use_case.dart';
 import 'package:familystars_2/infrastructure/providers/activation_code_screen_provider.dart';
@@ -114,3 +115,4 @@ final googleSSOUseCase = Provider<GoogleSSOUseCase>((ref)=> GoogleSSOUseCase(aut
 final loginWithEmailCrendentialsUseCase = Provider<LoginWithEmailCredentialsUserCase>((ref)=> LoginWithEmailCredentialsUserCase(authRepository: ref.watch(authRepository)));
 final signUpWithEmailCredentialsUseCase = Provider<SignUpWithEmailCredentialsUseCase>((ref)=> SignUpWithEmailCredentialsUseCase(authRepository: ref.watch(authRepository)));
 final updateTaskUseCase = Provider<UpdateTaskUseCase>((ref)=> UpdateTaskUseCase(taskEventRepository: ref.watch(taskEventRepository)));
+final logoutUseCase = Provider<LogoutUseCase>((ref)=> LogoutUseCase(authRepository: ref.watch(authRepository)));
