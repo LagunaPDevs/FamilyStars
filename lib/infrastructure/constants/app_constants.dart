@@ -149,4 +149,10 @@ class AppConstants {
   static const String deniedAccess = 'Acceso denegado';
   static const String ok = 'Aceptar';
   static const String cancel = 'Cancelar';
+
+  // Error constants
+  static const String errorCreateUserWithEmail = 'Error creando usuario con email';
+  static const String errorRegisteringUser = 'Error registrando usuario';
+  static const String errorUpdatingUser = 'Error actualizando datos de usuario';
+  static const String unexpectedError = 'Error inexperado';
 }

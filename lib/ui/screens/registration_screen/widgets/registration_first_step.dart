@@ -26,7 +26,6 @@ class _RegistrationFirstStepState extends State<RegistrationFirstStep> {
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
       final registrationProviderRes = ref.watch(registrationScreenProvider);
-      final logInProviderRes = ref.watch(logInScreenProvider);
       return Column(
         children: [
           CommonTextFormField(
@@ -62,7 +61,7 @@ class _RegistrationFirstStepState extends State<RegistrationFirstStep> {
             },
             suffixIcon: InkWell(
               onTap: () {
-                logInProviderRes.setPasswordVisibility();
+                registrationProviderRes.setPasswordVisibility();
               },
               child: Icon(
                 registrationProviderRes.isVisiblePassword

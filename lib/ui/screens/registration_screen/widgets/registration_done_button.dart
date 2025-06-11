@@ -1,10 +1,9 @@
-import 'package:familystars_2/infrastructure/constants/app_constants.dart';
-import 'package:familystars_2/infrastructure/constants/color_constants.dart';
-import 'package:familystars_2/infrastructure/constants/routes_constants.dart';
-import 'package:familystars_2/infrastructure/dependency_injection.dart';
-import 'package:familystars_2/infrastructure/services/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:familystars_2/infrastructure/constants/app_constants.dart';
+import 'package:familystars_2/infrastructure/constants/color_constants.dart';
+import 'package:familystars_2/infrastructure/dependency_injection.dart';
 
 // This widget complete the registration process if all fields are valid
 // It only appears in the last step of registration
@@ -27,21 +26,9 @@ class _RegistrationDoneButtonState extends State<RegistrationDoneButton> {
           // If form is validated save user information to email-password
           // account previously validated
           if (widget.formKey!.currentState!.validate()) {
-            String email = registrationProviderRes.emailController.text;
-            String password = registrationProviderRes.passwordController.text;
-            String name = registrationProviderRes.fullnameController.text;
-            String familiar = registrationProviderRes.familiarText;
-            String dob = registrationProviderRes.dobText;
-
-            // If it succeed lead to the registered user to it main screen
-            await FirebaseServices.saveUserData(
-                    name: name,
-                    email: email,
-                    password: password,
-                    familiar: familiar,
-                    date_of_birth: dob)
-                .then((value) => Navigator.popAndPushNamed(
-                    context, RoutesConstants.mainScreen));
+            final register =
+                await registrationProviderRes.updateUserData(context);
+            if (!register && context.mounted) {_registrationErrorScaffold(context);}
           }
         },
         child: SizedBox(
@@ -59,4 +46,15 @@ class _RegistrationDoneButtonState extends State<RegistrationDoneButton> {
       );
     });
   }
+}
+
+_registrationErrorScaffold(BuildContext context) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    backgroundColor: ColorConstants.purpleGradient.withValues(alpha: 0.5),
+    content: SizedBox(
+        height: 100,
+        child: Text(AppConstants.errorUpdatingUser,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))),
+  ));
 }

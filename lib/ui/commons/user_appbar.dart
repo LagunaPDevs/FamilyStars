@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:familystars_2/infrastructure/constants/routes_constants.dart';
 import 'package:familystars_2/infrastructure/models/user.dart' as local_user;
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/constants/image_constants.dart';
@@ -118,6 +119,7 @@ class _UserAppBarState extends State<UserAppBar> {
                     );
                   } else {
                     FirebaseServices.signOutAuthorizedUser();
+                    Navigator.popAndPushNamed(context,RoutesConstants.loginScreen);
                   }
                   return Center(
                     child: CircularProgressIndicator(

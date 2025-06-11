@@ -7,5 +7,6 @@ abstract class UserRepository {
   Future<Result<String?>> createNewChildUser(UserModel child);
   Future<Result<UserModel?>> getUserById(String userId);
   Future<Result<bool>> updateCurrentUser(UserModel user);
+  Future<Result<bool>> setCurrentUser(UserModel user);
   Future<Result<List<UserModel>>> getParentUserChildren(String parentId);
 }

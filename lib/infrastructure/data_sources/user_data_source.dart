@@ -12,6 +12,7 @@ abstract class UserDataSource {
   Future<List<UserModel>> getParentUserChildren(String parentId);
   Future<UserModel> getUserById(String userId);
   Future<bool> updateCurrentUser(UserModel user);
+  Future<bool> setCurrentUser(UserModel user);
 }
 
 class UserDataSourceImpl extends UserDataSource {
@@ -110,6 +111,25 @@ class UserDataSourceImpl extends UserDataSource {
           .collection("users")
           .doc(user.id)
           .update(user.toJson())
+          .then((_) => true)
+          .onError((e, stack) {
+        firebaseCrashlytics.recordError(e, stack);
+        throw UserException(message: "Error updating user");
+      });
+      return result;
+    } catch (e, stack) {
+      firebaseCrashlytics.recordError(e, stack);
+      throw UserException(message: ErrorConstants.unhandled);
+    }
+  }
+  
+  @override
+  Future<bool> setCurrentUser(UserModel user) async {
+    try {
+      final result = await firebaseFirestore
+          .collection("users")
+          .doc(user.id)
+          .set(user.toJson())
           .then((_) => true)
           .onError((e, stack) {
         firebaseCrashlytics.recordError(e, stack);

@@ -22,16 +22,8 @@ class _RegistrationPreviousButtonState
     return Consumer(
       builder: (context, ref, child) {
         final registrationProviderRes = ref.watch(registrationScreenProvider);
-        int activeStep = registrationProviderRes.activeStep;
         return GestureDetector(
-          onTap: () {
-            if (activeStep > 0) {
-              setState(() {
-                // Go backward
-                registrationProviderRes.setActiveStepDown();
-              });
-            }
-          },
+          onTap: () => registrationProviderRes.setActiveStepDown(),
           child: SizedBox(
             child: Row(
               children: [

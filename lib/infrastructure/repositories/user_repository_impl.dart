@@ -62,4 +62,16 @@ class UserRepositoryImpl implements UserRepository {
       return Result.error(e);
     }
   }
+  
+  @override
+  Future<Result<bool>> setCurrentUser(UserModel user) async {
+    try {
+      final result = await dataSource.setCurrentUser(user);
+      return Result.ok(result);
+    } on UserException catch (e) {
+      return Result.error(e);
+    }
+  }
+
+  
 }

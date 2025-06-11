@@ -87,8 +87,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             formKey: _formKey,
                           )
                   ],
-                )
-                // ---
+                ),
+                registrationProviderRes.isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(
+                            color: ColorConstants.blueColor))
+                    : SizedBox(),
               ],
             ),
           ));
