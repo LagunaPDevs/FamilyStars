@@ -155,4 +155,9 @@ class AppConstants {
   static const String errorRegisteringUser = 'Error registrando usuario';
   static const String errorUpdatingUser = 'Error actualizando datos de usuario';
   static const String unexpectedError = 'Error inexperado';
+
+  // Categories constants
+  static const String homeCategory = 'Hogar';
+  static const String schoolCategory = 'Escolar';
+  static const String groceryCategory = 'Compras';
 }

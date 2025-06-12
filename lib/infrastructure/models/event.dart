@@ -1,8 +1,8 @@
 // This class represents a event related to a task
 // Mostly detects state changes
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:familystars_2/infrastructure/models/task.dart';
-import 'package:familystars_2/infrastructure/utils/date_utils.dart';
 
 class TaskEvent {
   String? id;
@@ -44,20 +44,21 @@ class TaskEvent {
 
   factory TaskEvent.fromTask(Task task) => TaskEvent(
       date: task.date,
-      created: dateToDDMMYY(DateTime.now()),
+      created: task.created,
       owner: task.owner,
       assigned: task.assigned,
-      assignedName: task.assigned,
+      assignedName: task.assignedName,
+      taskId: task.id,
       taskName: task.name,
-      taskState: "Incompleta",
+      taskState: task.state,
       taskStars: task.stars,
     ); 
 
   Map<String, dynamic> toJson() => {
         "date": date,
-        "created": created,
+        "created": Timestamp.fromDate(DateTime.now()),
         "owner": owner,
-        "asigned": assigned,
+        "assigned": assigned,
         "assigned_name": assignedName,
         "task_id": taskId,
         "task_name": taskName,

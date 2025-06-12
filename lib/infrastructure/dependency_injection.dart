@@ -12,6 +12,7 @@ import 'package:familystars_2/infrastructure/domain/repositories/user_repository
 
 import 'package:familystars_2/infrastructure/domain/use_cases/add_new_task_to_child_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/facebook_sso_use_case.dart';
+import 'package:familystars_2/infrastructure/domain/use_cases/get_parent_user_children_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/get_user_event_list_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/get_user_tasks_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/google_sso_use_case.dart';
@@ -116,3 +117,4 @@ final loginWithEmailCrendentialsUseCase = Provider<LoginWithEmailCredentialsUser
 final signUpWithEmailCredentialsUseCase = Provider<SignUpWithEmailCredentialsUseCase>((ref)=> SignUpWithEmailCredentialsUseCase(authRepository: ref.watch(authRepository)));
 final updateTaskUseCase = Provider<UpdateTaskUseCase>((ref)=> UpdateTaskUseCase(taskEventRepository: ref.watch(taskEventRepository)));
 final logoutUseCase = Provider<LogoutUseCase>((ref)=> LogoutUseCase(authRepository: ref.watch(authRepository)));
+final getParentUserChildrenUseCase = Provider<GetParentUserChildrenUseCase>((ref)=> GetParentUserChildrenUseCase(userRepository: ref.watch(userRepository)));
