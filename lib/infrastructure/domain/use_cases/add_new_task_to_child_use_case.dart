@@ -21,9 +21,10 @@ class AddNewTaskToChildUseCase {
     final Result<String?> result = await taskRepository.addNewTaskToChild(task);
     switch (result) {
       case Ok<String?>():
-        {
+        { 
+          task.id = result.result;
           final taskAddedToUsers = await _addTaskToParendAndChild(task);
-          final eventCreated = await _handleAddTaskEvent(task);
+          final eventCreated = await _handleAddTaskEvent(task); 
           return taskAddedToUsers && eventCreated;
         }
       case Error<String?>():

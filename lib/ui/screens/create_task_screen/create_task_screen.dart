@@ -36,7 +36,6 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                   SizedBox(
                     height: 15,
                   ),
-                  //TitleText(title: AppConstants.addTask),
                   CreateTaskFields(),
                 ],
               ),

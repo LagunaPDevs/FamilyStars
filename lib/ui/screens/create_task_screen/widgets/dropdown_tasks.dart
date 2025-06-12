@@ -52,7 +52,7 @@ class _DropDownTasksState extends State<DropDownTasks> {
             decoration: BoxDecoration(
               border: Border.all(color: ColorConstants.yellowColor),
               borderRadius: BorderRadius.circular(10),
-              color: ColorConstants.yellowColor.withOpacity(0.3),
+              color: ColorConstants.yellowColor.withValues(alpha: 0.3),
             ),
             child: ListView.builder(
                 itemCount: dropdownList(category).length,
@@ -65,7 +65,6 @@ class _DropDownTasksState extends State<DropDownTasks> {
                                 color: ColorConstants.greyColor,
                                 fontFamily: 'KristenITC')),
                         onTap: () {
-                          //createTaskProviderRes.setTaskName(dropdownList(category)[index]);
                           createTaskProviderRes
                               .setName(dropdownList(category)[index]);
                         },
