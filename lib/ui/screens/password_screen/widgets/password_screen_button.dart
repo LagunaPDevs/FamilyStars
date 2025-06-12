@@ -3,7 +3,7 @@ import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/models/user.dart' as local_user;
 import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/routes_constants.dart';
-import 'package:familystars_2/infrastructure/providers/general_provider.dart';
+import 'package:familystars_2/infrastructure/dependency_injection.dart';
 import 'package:familystars_2/infrastructure/services/firebase_services.dart';
 import 'package:familystars_2/ui/commons/button_widgets/custom_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,13 +21,13 @@ class PasswordScreenButton extends StatefulWidget {
 class _PasswordScreenButtonState extends State<PasswordScreenButton> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   DocumentSnapshot? documentSnapshot;
-  late Future<local_user.User> _futureData;
-  final local_user.User _user = local_user.User();
+  late Future<local_user.UserModel> _futureData;
+  final local_user.UserModel _user = local_user.UserModel();
 
   final ValueNotifier<int> _currentPage = ValueNotifier(0);
 
   // Retrieve specific data of a parent
-  Future<local_user.User> _getAllUserData() async {
+  Future<local_user.UserModel> _getAllUserData() async {
     Map<String, dynamic> mapData;
     await FirebaseServices.getDataList('users', _firebaseAuth.currentUser!.uid)
         .then(

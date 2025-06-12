@@ -1,7 +1,7 @@
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/constants/image_constants.dart';
 import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
-import 'package:familystars_2/infrastructure/providers/general_provider.dart';
+import 'package:familystars_2/infrastructure/dependency_injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

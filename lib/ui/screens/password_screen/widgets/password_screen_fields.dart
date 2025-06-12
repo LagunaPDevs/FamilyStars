@@ -6,7 +6,7 @@ import 'package:familystars_2/validators/validators.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:familystars_2/infrastructure/providers/general_provider.dart';
+import 'package:familystars_2/infrastructure/dependency_injection.dart';
 
 class PasswordScreenFields extends StatefulWidget {
   const PasswordScreenFields({super.key});

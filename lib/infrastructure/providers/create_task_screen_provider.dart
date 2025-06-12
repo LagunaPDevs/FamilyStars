@@ -1,5 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:familystars_2/infrastructure/constants/app_constants.dart';
+import 'package:familystars_2/infrastructure/models/user.dart';
+import 'package:familystars_2/infrastructure/models/task.dart';
+import 'package:familystars_2/infrastructure/services/shared_preference_services.dart';
+import 'package:familystars_2/infrastructure/dependency_injection.dart';
 
 // This class represents a provider that catch events in 'CreateTaskScreen'
 // and notify about changes in it attributes
@@ -10,6 +16,12 @@ class CreateTaskScreenProvider extends ChangeNotifier {
 
   CreateTaskScreenProvider(this.ref);
 
+  /// child list for current user
+  List<UserModel> childList = [];
+
+  /// is loading
+  bool isLoading = false;
+
   /// text field for name
   TextEditingController nameController = TextEditingController();
 
@@ -18,114 +30,25 @@ class CreateTaskScreenProvider extends ChangeNotifier {
 
   /// test for task name
   String nameText = '';
-  void setName(String id) {
-    nameText = id;
-    notifyListeners();
-  }
 
   bool emptyName = true;
-  void isEmptyName() {
-    if (nameText.length < 0) {
-      emptyName = true;
-    } else {
-      emptyName = false;
-    }
-    notifyListeners();
-  }
-
+  
   /// text for task date
-  String dateText = '';
-  void setDateText(String date) {
-    dateText = date;
-    notifyListeners();
-  }
+  String dateText = DateTime.now().toLocal().toString();
 
   /// text for task category
-  String categoryText = 'Hogar';
+  String categoryText = AppConstants.homeCategory;
 
   /// text for child assigned
   String assignedText = '';
   String assignedName = '';
-  void setAssigned(String id) {
-    assignedText = id;
-    notifyListeners();
-  }
-
-  void setAssignedName(String childName) {
-    assignedName = childName;
-    notifyListeners();
-  }
-
+  
   /// text for owner
   String ownerText = '';
 
   /// text for stars
   int stars = 0;
   String starsText = '0';
-  void setCeroStars() {
-    stars = 0;
-    notifyListeners();
-  }
-
-  void setStarsText(String stars) {
-    starsText = stars;
-    notifyListeners();
-  }
-
-  void setStarsUp() {
-    stars++;
-    notifyListeners();
-  }
-
-  void setStarsDown() {
-    if (stars > 0) {
-      stars--;
-    }
-    notifyListeners();
-  }
-
-  /// set home category
-  bool isHome = true;
-
-  void setHome() {
-    isHome = true;
-    isSchool = false;
-    isGrocery = false;
-    categoryText = 'Hogar';
-    notifyListeners();
-  }
-
-  /// set school category
-  bool isSchool = false;
-
-  void setSchool() {
-    isHome = false;
-    isSchool = true;
-    isGrocery = false;
-    categoryText = 'Escolar';
-    notifyListeners();
-  }
-
-  /// set grocery category
-  bool isGrocery = false;
-
-  void setGrocery() {
-    isHome = false;
-    isSchool = false;
-    isGrocery = true;
-    categoryText = 'Compras';
-    notifyListeners();
-  }
-
-  void cleanFields() {
-    setAssignedName('');
-    setName('');
-    setAssigned('');
-    setHome();
-    setCeroStars();
-    setStarsText('0');
-    notifyListeners();
-  }
 
   /// list of home tasks
   List<String> homeTasks = [
@@ -152,4 +75,112 @@ class CreateTaskScreenProvider extends ChangeNotifier {
     'Comprar leche',
     'Ir de compras con abuelos'
   ];
+  
+  void setName(String id) {
+    nameText = id;
+    notifyListeners();
+  }
+
+  void isEmptyName() {
+    if (nameText.isEmpty) {
+      emptyName = true;
+    } else {
+      emptyName = false;
+    }
+    notifyListeners();
+  }
+
+  void setDateText(DateTime date) {
+    final pickedDate = date.toLocal();
+    dateText = '${pickedDate.day}/${pickedDate.month}/${pickedDate.year}';
+    notifyListeners();
+  }
+
+  void setAssigned(String id) {
+    assignedText = id;
+    notifyListeners();
+  }
+
+  void setAssignedName(String childName) {
+    assignedName = childName;
+    notifyListeners();
+  }
+
+
+  void setZeroStars() {
+    stars = 0;
+    notifyListeners();
+  }
+
+  void setStarsText(String stars) {
+    starsText = stars;
+    notifyListeners();
+  }
+
+  void setStarsUp() {
+    stars++;
+    notifyListeners();
+  }
+
+  void setStarsDown() {
+    if (stars > 0) {
+      stars--;
+    }
+    notifyListeners();
+  }
+
+  void setIsLoading(bool loading) {
+    isLoading = !loading;
+    notifyListeners();
+  }
+
+  
+  void setCategory(String category) {
+    categoryText = category;
+    notifyListeners();
+  }
+
+  void setChildList(List<UserModel> list) {
+    childList = list;
+    notifyListeners();
+  }
+
+  void cleanFields() {
+    setAssignedName('');
+    setName('');
+    setAssigned('');
+    setCategory(AppConstants.homeCategory);
+    setZeroStars();
+    setStarsText('0');
+    notifyListeners();
+  }
+
+
+  Future<bool> addNewTaskToChild() async {
+    final addNewTaskToChildRef = ref.watch(addNewTaskToChildUseCase);
+    final currentUser = SharedPreferenceService().getUser();
+    final Task task = Task(
+      owner: currentUser,
+      assigned: assignedText,
+      assignedName: assignedName,
+      name: nameText,
+      category: categoryText,
+      date: dateText,
+      stars: starsText,
+      state: "Incompleta"
+    );
+    setIsLoading(true);
+    final result = await addNewTaskToChildRef.addNewTaskToChild(task);
+    setIsLoading(false);
+    if (result) {
+      cleanFields();
+    }
+    return result;
+  }
+
+  Future<List<UserModel>> getChildList() async {
+    final getParentChildrenRef = ref.watch(getParentUserChildrenUseCase);
+    final result = await getParentChildrenRef.getParentUserChildren();
+    return result;
+  }
 }

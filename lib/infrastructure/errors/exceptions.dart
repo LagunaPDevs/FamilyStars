@@ -1,0 +1,22 @@
+class AuthException implements Exception{
+  final String message;
+
+  AuthException({required this.message});
+}
+
+class TaskEventException implements Exception {
+  final String message;
+
+  TaskEventException({required this.message});
+}
+
+class TaskException implements Exception {
+  final String message;
+  TaskException({required this.message});
+}
+
+class UserException implements Exception {
+  final String message;
+
+  UserException({required this.message});
+}

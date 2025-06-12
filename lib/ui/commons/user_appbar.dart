@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:familystars_2/infrastructure/constants/routes_constants.dart';
 import 'package:familystars_2/infrastructure/models/user.dart' as local_user;
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/constants/image_constants.dart';
@@ -21,13 +22,13 @@ class UserAppBar extends StatefulWidget {
 class _UserAppBarState extends State<UserAppBar> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   DocumentSnapshot? documentSnapshot;
-  late Future<local_user.User> _futureData;
-  final local_user.User _user = local_user.User();
+  late Future<local_user.UserModel> _futureData;
+  final local_user.UserModel _user = local_user.UserModel();
 
   final ValueNotifier<int> _currentPage = ValueNotifier(0);
 
   // Retrieve specific data of a parent
-  Future<local_user.User> _getAllUserData() async {
+  Future<local_user.UserModel> _getAllUserData() async {
     Map<String, dynamic> mapData;
     await FirebaseServices.getDataList(
             'users', _firebaseAuth.currentUser?.uid)
@@ -118,6 +119,7 @@ class _UserAppBarState extends State<UserAppBar> {
                     );
                   } else {
                     FirebaseServices.signOutAuthorizedUser();
+                    Navigator.popAndPushNamed(context,RoutesConstants.loginScreen);
                   }
                   return Center(
                     child: CircularProgressIndicator(
