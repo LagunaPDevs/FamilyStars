@@ -14,16 +14,17 @@ import 'package:familystars_2/infrastructure/domain/use_cases/add_new_task_to_ch
 import 'package:familystars_2/infrastructure/domain/use_cases/facebook_sso_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/get_parent_user_children_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/get_user_event_list_use_case.dart';
-import 'package:familystars_2/infrastructure/domain/use_cases/get_user_tasks_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/google_sso_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/login_with_email_credentials_user_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/logout_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/sign_up_with_email_credentials_use_case.dart';
+import 'package:familystars_2/infrastructure/domain/use_cases/update_task_state_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/update_task_use_case.dart';
 import 'package:familystars_2/infrastructure/providers/activation_code_screen_provider.dart';
 
 import 'package:familystars_2/infrastructure/providers/calendar_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/child_appabar_provider.dart';
+import 'package:familystars_2/infrastructure/providers/child_calendar_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/create_task_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/create_user_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/forgot_password_screen_provider.dart';
@@ -74,14 +75,20 @@ final childAppBarProvider =
 final calendarScreenProvider =
     ChangeNotifierProvider.autoDispose((ref) => CalendarScreenProvider(ref));
 
+final childCalendarScreenProvider = ChangeNotifierProvider.autoDispose(
+    (ref) => ChildCalendarScreenProvider(ref));
+
 // firebase
-final firebaseAuth = Provider<FirebaseAuth>((ref)=> FirebaseAuth.instance);
-final  firebaseCrashlytics = Provider<FirebaseCrashlytics>((ref)=> FirebaseCrashlytics.instance);
-final firebaseFirestore = Provider<FirebaseFirestore>((ref)=>  FirebaseFirestore.instance);
+final firebaseAuth = Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
+final firebaseCrashlytics =
+    Provider<FirebaseCrashlytics>((ref) => FirebaseCrashlytics.instance);
+final firebaseFirestore =
+    Provider<FirebaseFirestore>((ref) => FirebaseFirestore.instance);
 
 // data sources injection
 final authDataSource = Provider<AuthDataSource>((ref) => AuthDataSourceImpl(
-    firebaseAuth: ref.watch(firebaseAuth), firebaseCrashlytics: ref.watch(firebaseCrashlytics)));
+    firebaseAuth: ref.watch(firebaseAuth),
+    firebaseCrashlytics: ref.watch(firebaseCrashlytics)));
 final taskDataSource = Provider<TaskDataSource>((ref) => TaskDataSourceImpl(
     firebaseFirestore: ref.watch(firebaseFirestore),
     firebaseCrashlytics: ref.watch(firebaseCrashlytics)));
@@ -109,12 +116,32 @@ final addNewTaskToChildUseCase = Provider<AddNewTaskToChildUseCase>((ref) =>
         taskEventRepository: ref.watch(taskEventRepository),
         taskRepository: ref.watch(taskRepository),
         userRepository: ref.watch(userRepository)));
-final facebookSSOUseCase = Provider<FacebookSsoUseCase>((ref)=> FacebookSsoUseCase(authRepository: ref.watch(authRepository), userRepository: ref.watch(userRepository)));
-final getUserEventListUseCase = Provider<GetUserEventListUseCase>((ref)=> GetUserEventListUseCase(taskEventRepository: ref.watch(taskEventRepository)));
-final getUserTasksUseCase = Provider<GetUserTasksUseCase>((ref)=> GetUserTasksUseCase(taskRepository: ref.watch(taskRepository)));
-final googleSSOUseCase = Provider<GoogleSSOUseCase>((ref)=> GoogleSSOUseCase(authRepository: ref.watch(authRepository), userRepository: ref.watch(userRepository)));
-final loginWithEmailCrendentialsUseCase = Provider<LoginWithEmailCredentialsUserCase>((ref)=> LoginWithEmailCredentialsUserCase(authRepository: ref.watch(authRepository)));
-final signUpWithEmailCredentialsUseCase = Provider<SignUpWithEmailCredentialsUseCase>((ref)=> SignUpWithEmailCredentialsUseCase(authRepository: ref.watch(authRepository)));
-final updateTaskUseCase = Provider<UpdateTaskUseCase>((ref)=> UpdateTaskUseCase(taskEventRepository: ref.watch(taskEventRepository)));
-final logoutUseCase = Provider<LogoutUseCase>((ref)=> LogoutUseCase(authRepository: ref.watch(authRepository)));
-final getParentUserChildrenUseCase = Provider<GetParentUserChildrenUseCase>((ref)=> GetParentUserChildrenUseCase(userRepository: ref.watch(userRepository)));
+final facebookSSOUseCase = Provider<FacebookSsoUseCase>((ref) =>
+    FacebookSsoUseCase(
+        authRepository: ref.watch(authRepository),
+        userRepository: ref.watch(userRepository)));
+final getUserEventListUseCase = Provider<GetUserEventListUseCase>((ref) =>
+    GetUserEventListUseCase(
+        taskEventRepository: ref.watch(taskEventRepository)));
+final googleSSOUseCase = Provider<GoogleSSOUseCase>((ref) => GoogleSSOUseCase(
+    authRepository: ref.watch(authRepository),
+    userRepository: ref.watch(userRepository)));
+final loginWithEmailCrendentialsUseCase =
+    Provider<LoginWithEmailCredentialsUserCase>((ref) =>
+        LoginWithEmailCredentialsUserCase(
+            authRepository: ref.watch(authRepository)));
+final signUpWithEmailCredentialsUseCase =
+    Provider<SignUpWithEmailCredentialsUseCase>((ref) =>
+        SignUpWithEmailCredentialsUseCase(
+            authRepository: ref.watch(authRepository)));
+final updateTaskUseCase = Provider<UpdateTaskUseCase>((ref) =>
+    UpdateTaskUseCase(taskEventRepository: ref.watch(taskEventRepository)));
+final logoutUseCase = Provider<LogoutUseCase>(
+    (ref) => LogoutUseCase(authRepository: ref.watch(authRepository)));
+final getParentUserChildrenUseCase = Provider<GetParentUserChildrenUseCase>(
+    (ref) => GetParentUserChildrenUseCase(
+        userRepository: ref.watch(userRepository)));
+final updateTaskStateUseCase = Provider<UpdateTaskStateUseCase>((ref) =>
+    UpdateTaskStateUseCase(
+        taskRepository: ref.watch(taskRepository),
+        taskEventRepository: ref.watch(taskEventRepository)));

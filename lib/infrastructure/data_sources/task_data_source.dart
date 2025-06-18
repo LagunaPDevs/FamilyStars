@@ -8,8 +8,9 @@ import 'package:familystars_2/infrastructure/models/task.dart';
 
 abstract class TaskDataSource {
   Stream<QuerySnapshot<Map<String, dynamic>>>? getUserTasks(
-      {required String userId, String? state});
+      {required String userId, String? isNotState});
   Future<String?> addNewTaskToChild(Task task);
+  Future<bool> updateTask(String? taskId, Map<String, dynamic> newData);
 }
 
 class TaskDataSourceImpl extends TaskDataSource {
@@ -40,15 +41,34 @@ class TaskDataSourceImpl extends TaskDataSource {
 
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>>? getUserTasks(
-      {required String userId, String? state}) {
+      {required String userId, String? isNotState}) {
     try {
-      var result = firebaseFirestore
+      final result = firebaseFirestore
           .collection('tasks')
           .where('assigned', isEqualTo: userId);
-      if (state != null) {
-        result.where('state', isNotEqualTo: state);
+      if (isNotState != null) {
+        result.where('state', isNotEqualTo: isNotState);
       }
       return result.snapshots();
+    } catch (e, stack) {
+      firebaseCrashlytics.recordError(e, stack);
+      throw TaskException(message: ErrorConstants.unhandled);
+    }
+  }
+
+  @override
+  Future<bool> updateTask(String? taskId, Map<String, dynamic> newData) {
+    try {
+      final result = firebaseFirestore
+          .collection("tasks")
+          .doc(taskId)
+          .update(newData)
+          .then((value) => true)
+          .onError((e, stack) {
+        firebaseCrashlytics.recordError(e, stack);
+        throw TaskEventException(message: "Error updating task");
+      });
+      return result;
     } catch (e, stack) {
       firebaseCrashlytics.recordError(e, stack);
       throw TaskException(message: ErrorConstants.unhandled);

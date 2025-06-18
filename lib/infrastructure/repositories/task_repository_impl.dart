@@ -25,12 +25,23 @@ class TaskRepositoryImpl extends TaskRepository {
 
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>>? getUserTasks(
-      {required String userId, String? state}) {
+      {required String userId, String? isNotState}) {
     try {
-      final result = dataSource.getUserTasks(userId: userId, state: state);
+      final result = dataSource.getUserTasks(userId: userId, isNotState: isNotState);
       return result;
     } on TaskException catch (_) {
       return null;
+    }
+  }
+
+  @override
+  Future<Result<bool>> updateTask(
+      String? taskId, Map<String, dynamic> newData) async {
+    try {
+      final result = await dataSource.updateTask(taskId, newData);
+      return Result.ok(result);
+    } on TaskException catch (e) {
+      return Result.error(e);
     }
   }
 }
