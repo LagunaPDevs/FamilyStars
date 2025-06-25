@@ -21,13 +21,28 @@ class AddNewTaskToChildUseCase {
     final Result<String?> result = await taskRepository.addNewTaskToChild(task);
     switch (result) {
       case Ok<String?>():
-        { 
+        {
           task.id = result.result;
-          final taskAddedToUsers = await _addTaskToParendAndChild(task);
-          final eventCreated = await _handleAddTaskEvent(task); 
-          return taskAddedToUsers && eventCreated;
+          final updateTask = await _addIdToTask(result.result);
+          if (updateTask) {
+            final taskAddedToUsers = await _addTaskToParendAndChild(task);
+            final eventCreated = await _handleAddTaskEvent(task);
+            return taskAddedToUsers && eventCreated;
+          }
+          return false;
         }
       case Error<String?>():
+        return false;
+    }
+  }
+
+  Future<bool> _addIdToTask(String? id) async {
+    if (id == null) return false;
+    final result = await taskRepository.updateTask(id, {"id": id});
+    switch (result) {
+      case Ok():
+        return result.result;
+      case Error():
         return false;
     }
   }

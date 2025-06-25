@@ -20,9 +20,11 @@ class UncompletedTaskCardTile extends StatefulWidget {
 class _UncompletedTaskCardTileState extends State<UncompletedTaskCardTile> {
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, ref, child) {
-      final childCalendarProviderRef = ref.watch(childCalendarScreenProvider);
-      return Container(
+    return Consumer(
+      builder: (context, ref, child) {
+        final parentCalendarProviderRef =
+            ref.watch(parentCalendarScreenProvider);
+        return Container(
           decoration: BoxDecoration(
               color: ColorConstants.whiteColor,
               border: Border.all(color: _boxColor(widget.task.state)),
@@ -31,39 +33,48 @@ class _UncompletedTaskCardTileState extends State<UncompletedTaskCardTile> {
           margin: EdgeInsets.only(bottom: 4),
           child: GestureDetector(
             onTap: () {
-              if (widget.task.state == AppConstants.incomplete) {
+              // If task state is 'En espera'
+              // It change not only the task state, also create an event
+              // Otherwise user would be warned that nothing can be done
+              if (widget.task.state == AppConstants.waiting) {
                 CustomChangeStateDialog(
                   onOkTap: () async {
-                    setState(() {
-                      widget.task.state = AppConstants.waiting;
-                    });
-                    final result =
-                        await childCalendarProviderRef.updateTaskState(
-                            task: widget.task, newState: AppConstants.waiting);
+                      setState(() {
+                        widget.task.state = AppConstants.completed;
+                      });
+                    final result = await parentCalendarProviderRef
+                        .handleTaskComplete(task: widget.task);
+                    // context is not mounted ??
                     if (result && context.mounted) Navigator.pop(context);
+                    
                   },
                   title: 'Cambiar estado de tarea',
-                  content: '¿Quieres cambiar el estado de la tarea?',
+                  content:
+                      '¿Quiere cambiar el estado de la tarea de \'${widget.task.assignedName}\'?',
                   context: context,
                 ).show();
               } else {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  backgroundColor:
-                      ColorConstants.purpleGradient.withValues(alpha: .5),
-                  content: const SizedBox(
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor:
+                        ColorConstants.purpleGradient.withValues(alpha: .5),
+                    content: SizedBox(
                       height: 100,
-                      child: Text(AppConstants.waitingParent,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16))),
-                ));
+                      child: Text(
+                        AppConstants.waitingChild,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                    ),
+                  ),
+                );
               }
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(
-                    '${widget.task.name} (${AppConstants.stars}: ${widget.task.stars})'),
+                Text('${widget.task.name} (${widget.task.assignedName})'),
                 Text(
                   widget.task.state ?? '',
                   style: TextStyle(
@@ -72,8 +83,10 @@ class _UncompletedTaskCardTileState extends State<UncompletedTaskCardTile> {
                 ),
               ],
             ),
-          ));
-    });
+          ),
+        );
+      },
+    );
   }
 }
 

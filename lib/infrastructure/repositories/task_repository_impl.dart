@@ -44,4 +44,14 @@ class TaskRepositoryImpl extends TaskRepository {
       return Result.error(e);
     }
   }
+  
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>>? getParentUserTasks({required String userId, String? isNotState}) {
+    try {
+      final result = dataSource.getParentUserTasks(userId: userId, isNotState: isNotState);
+      return result;
+    } on TaskException catch (_) {
+      return null;
+    }
+  }
 }

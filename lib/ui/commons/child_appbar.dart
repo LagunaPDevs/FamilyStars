@@ -131,7 +131,7 @@ class _ChildAppBarState extends State<ChildAppBar> {
                                       valueListenable: _currentPage,
                                       builder: (BuildContext context, int value,
                                           Widget? child) {
-                                        value = int.parse(_user.stars!);
+                                        value = int.parse(_user.stars ?? "0");
                                         return Text('$value',
                                             textAlign: TextAlign.end,
                                             style: TextStyle(

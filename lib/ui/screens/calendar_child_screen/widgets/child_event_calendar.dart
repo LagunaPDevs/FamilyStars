@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+import 'package:familystars_2/infrastructure/utils/calendar_utilities.dart';
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/dependency_injection.dart';
 import 'package:familystars_2/infrastructure/models/task_calendar_source.dart';
@@ -28,7 +29,7 @@ class ChildEventCalendar extends StatelessWidget {
                       color: ColorConstants.blueColor));
             }
             List<Appointment> appointments =
-                childCalendarProvider.buildAppointmentList(snapshot.data);
+                CalendarUtilities().buildAppointmentList(snapshot.data);
             return Padding(
               padding: const EdgeInsets.all(16.0),
               child: SizedBox(

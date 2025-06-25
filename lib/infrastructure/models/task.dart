@@ -34,7 +34,8 @@ class Task {
   factory Task.fromJson(Map<String, dynamic> json) => Task(
         id: json["id"],
         name: json['name'],
-        assigned: json['asigned'],
+        assigned: json['assigned'],
+        assignedName: json['assigned_name'],
         category: json['category'],
         date: json['date'],
         owner: json['owner'],
@@ -43,6 +44,7 @@ class Task {
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         'created': Timestamp.fromDate(DateTime.now()),
         'owner': owner,
         'assigned': assigned,

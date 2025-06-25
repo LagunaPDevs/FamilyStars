@@ -20,6 +20,7 @@ import 'package:familystars_2/infrastructure/domain/use_cases/logout_use_case.da
 import 'package:familystars_2/infrastructure/domain/use_cases/sign_up_with_email_credentials_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/update_task_state_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/update_task_use_case.dart';
+import 'package:familystars_2/infrastructure/domain/use_cases/update_user_stars_use_case.dart';
 import 'package:familystars_2/infrastructure/providers/activation_code_screen_provider.dart';
 
 import 'package:familystars_2/infrastructure/providers/calendar_screen_provider.dart';
@@ -28,6 +29,7 @@ import 'package:familystars_2/infrastructure/providers/child_calendar_screen_pro
 import 'package:familystars_2/infrastructure/providers/create_task_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/create_user_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/forgot_password_screen_provider.dart';
+import 'package:familystars_2/infrastructure/providers/parent_calendar_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/password_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/registration_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/reward_screen_provider.dart';
@@ -77,6 +79,9 @@ final calendarScreenProvider =
 
 final childCalendarScreenProvider = ChangeNotifierProvider.autoDispose(
     (ref) => ChildCalendarScreenProvider(ref));
+
+final parentCalendarScreenProvider = ChangeNotifierProvider.autoDispose(
+    (ref) => ParentCalendarScreenProvider(ref));
 
 // firebase
 final firebaseAuth = Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
@@ -145,3 +150,5 @@ final updateTaskStateUseCase = Provider<UpdateTaskStateUseCase>((ref) =>
     UpdateTaskStateUseCase(
         taskRepository: ref.watch(taskRepository),
         taskEventRepository: ref.watch(taskEventRepository)));
+final updateUserStarsUseCase = Provider<UpdateUserStarsUseCase>(
+    (ref) => UpdateUserStarsUseCase(userRepository: ref.watch(userRepository)));

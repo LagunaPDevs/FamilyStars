@@ -9,6 +9,8 @@ import 'package:familystars_2/infrastructure/models/task.dart';
 abstract class TaskDataSource {
   Stream<QuerySnapshot<Map<String, dynamic>>>? getUserTasks(
       {required String userId, String? isNotState});
+  Stream<QuerySnapshot<Map<String, dynamic>>>? getParentUserTasks(
+      {required String userId, String? isNotState});
   Future<String?> addNewTaskToChild(Task task);
   Future<bool> updateTask(String? taskId, Map<String, dynamic> newData);
 }
@@ -43,11 +45,11 @@ class TaskDataSourceImpl extends TaskDataSource {
   Stream<QuerySnapshot<Map<String, dynamic>>>? getUserTasks(
       {required String userId, String? isNotState}) {
     try {
-      final result = firebaseFirestore
+      var result = firebaseFirestore
           .collection('tasks')
           .where('assigned', isEqualTo: userId);
       if (isNotState != null) {
-        result.where('state', isNotEqualTo: isNotState);
+        result = result.where('state', isNotEqualTo: isNotState);
       }
       return result.snapshots();
     } catch (e, stack) {
@@ -57,9 +59,9 @@ class TaskDataSourceImpl extends TaskDataSource {
   }
 
   @override
-  Future<bool> updateTask(String? taskId, Map<String, dynamic> newData) {
+  Future<bool> updateTask(String? taskId, Map<String, dynamic> newData) async {
     try {
-      final result = firebaseFirestore
+      final result = await firebaseFirestore
           .collection("tasks")
           .doc(taskId)
           .update(newData)
@@ -69,6 +71,22 @@ class TaskDataSourceImpl extends TaskDataSource {
         throw TaskEventException(message: "Error updating task");
       });
       return result;
+    } catch (e, stack) {
+      firebaseCrashlytics.recordError(e, stack);
+      throw TaskException(message: ErrorConstants.unhandled);
+    }
+  }
+  
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>>? getParentUserTasks({required String userId, String? isNotState}) {
+    try {
+      var result = firebaseFirestore
+          .collection('tasks')
+          .where('owner', isEqualTo: userId);
+      if (isNotState != null) {
+        result = result.where('state', isNotEqualTo: isNotState);
+      }
+      return result.snapshots();
     } catch (e, stack) {
       firebaseCrashlytics.recordError(e, stack);
       throw TaskException(message: ErrorConstants.unhandled);

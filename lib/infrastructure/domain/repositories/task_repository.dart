@@ -8,5 +8,7 @@ abstract class TaskRepository {
       {required String userId, String? isNotState});
   Future<Result<String?>> addNewTaskToChild(Task task);
   Future<Result<bool>> updateTask(String? taskId, Map<String, dynamic> newData);
+  Stream<QuerySnapshot<Map<String, dynamic>>>? getParentUserTasks(
+      {required String userId, String? isNotState});
 }
 

@@ -21,7 +21,9 @@ class ChildTaskListTile extends StatelessWidget {
         final childCalendarProviderRef = ref.watch(childCalendarScreenProvider);
         return StreamBuilder(
           stream: childCalendarProviderRef.buildUserTaskList(
-              userId: userPath, isNotState: AppConstants.completed),
+              userId: userPath, 
+              isNotState: AppConstants.completed
+              ),
           builder: (context, AsyncSnapshot snapshot) {
             if (!snapshot.hasData) {
               return const Center(
