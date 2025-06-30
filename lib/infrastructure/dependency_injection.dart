@@ -25,6 +25,7 @@ import 'package:familystars_2/infrastructure/domain/use_cases/update_user_stars_
 import 'package:familystars_2/infrastructure/providers/activation_code_screen_provider.dart';
 
 import 'package:familystars_2/infrastructure/providers/calendar_screen_provider.dart';
+import 'package:familystars_2/infrastructure/providers/change_user_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/child_appabar_provider.dart';
 import 'package:familystars_2/infrastructure/providers/child_calendar_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/create_task_screen_provider.dart';
@@ -83,6 +84,9 @@ final childCalendarScreenProvider = ChangeNotifierProvider.autoDispose(
 
 final parentCalendarScreenProvider = ChangeNotifierProvider.autoDispose(
     (ref) => ParentCalendarScreenProvider(ref));
+
+final changeUserScreenProvider =
+    ChangeNotifierProvider.autoDispose((ref) => ChangeUserScreenProvider(ref));
 
 // firebase
 final firebaseAuth = Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
@@ -154,4 +158,6 @@ final updateTaskStateUseCase = Provider<UpdateTaskStateUseCase>((ref) =>
 final updateUserStarsUseCase = Provider<UpdateUserStarsUseCase>(
     (ref) => UpdateUserStarsUseCase(userRepository: ref.watch(userRepository)));
 final createNewChildUserUseCase = Provider<CreateNewChildUserUseCase>((ref) =>
-    CreateNewChildUserUseCase(firebaseAuth: ref.watch(firebaseAuth), userRepository: ref.watch(userRepository)));
+    CreateNewChildUserUseCase(
+        firebaseAuth: ref.watch(firebaseAuth),
+        userRepository: ref.watch(userRepository)));
