@@ -1,6 +1,9 @@
-import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:familystars_2/infrastructure/constants/app_constants.dart';
+import 'package:familystars_2/infrastructure/dependency_injection.dart';
+import 'package:familystars_2/infrastructure/models/user.dart';
 
 // This class represents a provider that catch events in 'CreateUserScreen'
 // and notify about changes in it attributes
@@ -11,23 +14,14 @@ class CreateUserScreenProvider with ChangeNotifier {
 
   CreateUserScreenProvider(this.ref);
 
-  /// pin input controller for otp
+  /// child name user controller
   TextEditingController userNameController = TextEditingController();
 
-  /// otp textfield focus node
+  /// child name focus node
   FocusNode userNameFocusNode = FocusNode();
 
   /// text for familiar
-  String familiarText = 'Niña';
-
-  /// is girl
-  bool isNinia = true;
-
-  /// is boy
-  bool isNinio = false;
-
-  /// is other
-  bool isOther = false;
+  String familiarText = AppConstants.ninia;
 
   /// date for initial date
   DateTime dateTime = DateTime.utc(2010, 1, 1);
@@ -35,30 +29,8 @@ class CreateUserScreenProvider with ChangeNotifier {
   /// text for date of birth
   String dobText = '';
 
-  /// set familiar to ninia
-  void setNinia() {
-    isNinia = true;
-    isNinio = false;
-    isOther = false;
-    familiarText = AppConstants.ninia;
-    notifyListeners();
-  }
-
-  /// set familiar to ninio
-  void setNinio() {
-    isNinia = false;
-    isNinio = true;
-    isOther = false;
-    familiarText = AppConstants.ninio;
-    notifyListeners();
-  }
-
-  /// set familiar to other
-  void setOther() {
-    isNinia = false;
-    isNinio = false;
-    isOther = true;
-    familiarText = AppConstants.other;
+  void setFamiliar(String familiar){
+    familiarText = familiar;
     notifyListeners();
   }
 
@@ -71,8 +43,25 @@ class CreateUserScreenProvider with ChangeNotifier {
   /// clean all the fields
   void cleanFields() {
     dateTime = DateTime.utc(2010, 1, 1);
-    setNinia();
+    familiarText = AppConstants.ninia;
     userNameController.clear();
     notifyListeners();
+  }
+
+  Future<bool> createNewUser() async {
+    final UserModel user = UserModel(name: userNameController.text, familiar: familiarText, dob: dobText);
+    final createNewChildUserRef = ref.watch(createNewChildUserUseCase);
+    final result = await createNewChildUserRef.createNewChildUser(user);
+    return result;
+  }
+
+  String validateForm(bool formValidate){
+    if(formValidate){
+      bool nameIsNotEmpty = userNameController.text.isNotEmpty;
+      bool familiarIsNotEmpty = familiarText.isNotEmpty;
+      bool dobIsNotEmpty = dobText.isNotEmpty;
+      return nameIsNotEmpty && familiarIsNotEmpty && dobIsNotEmpty ? '' : 'Some required fields are empty';
+    }
+    return 'Some required fields are empty';
   }
 }

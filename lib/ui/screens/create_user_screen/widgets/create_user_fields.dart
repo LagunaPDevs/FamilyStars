@@ -1,27 +1,25 @@
-import 'package:familystars_2/infrastructure/constants/app_constants.dart';
-import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
-import 'package:familystars_2/infrastructure/dependency_injection.dart';
-import 'package:familystars_2/ui/commons/text_widgets/common_field_title.dart';
-import 'package:familystars_2/ui/commons/text_widgets/common_text_form_field.dart';
-import 'package:familystars_2/ui/screens/create_user_screen/widgets/create_user_child_select.dart';
-import 'package:familystars_2/validators/validators.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:familystars_2/infrastructure/constants/app_constants.dart';
+import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
+import 'package:familystars_2/infrastructure/dependency_injection.dart';
+
+import 'package:familystars_2/ui/commons/text_widgets/common_field_title.dart';
+import 'package:familystars_2/ui/commons/text_widgets/common_text_form_field.dart';
+import 'package:familystars_2/ui/screens/create_user_screen/widgets/create_user_child_select.dart';
+
+import 'package:familystars_2/validators/validators.dart';
+
 // This widget contains all fields necessary to create a new child
 
-class CreateUserFields extends StatefulWidget {
+class CreateUserFields extends StatelessWidget {
   const CreateUserFields({super.key});
 
   @override
-  _CreateUserFieldsState createState() => _CreateUserFieldsState();
-}
-
-class _CreateUserFieldsState extends State<CreateUserFields> {
-  @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
-      final createUserProviderRes = ref.watch(createUserScreenProvider);
+      final createUserProviderRef = ref.watch(createUserScreenProvider);
       return Column(
         children: [
           CommonFieldTitle(title: AppConstants.fullname),
@@ -30,8 +28,8 @@ class _CreateUserFieldsState extends State<CreateUserFields> {
           ),
           // A child user just need a name
           CommonTextFormField(
-            controller: createUserProviderRes.userNameController,
-            focusNode: createUserProviderRes.userNameFocusNode,
+            controller: createUserProviderRef.userNameController,
+            focusNode: createUserProviderRef.userNameFocusNode,
             onChanged: (value) {
               return Validators.validateName(context, value!);
             },
@@ -40,8 +38,6 @@ class _CreateUserFieldsState extends State<CreateUserFields> {
               return Validators.validateName(context, value!);
             },
           ),
-          // SizedBox(height: LayoutConstants.generalVerticalSpace,),
-          // CommonFieldTitle(title: AppConstants.familiar),
           SizedBox(
             height: LayoutConstants.generalVerticalSpace,
           ),
@@ -63,11 +59,9 @@ class _CreateUserFieldsState extends State<CreateUserFields> {
                 brightness: Brightness.light,
               ),
               child: CupertinoDatePicker(
-                initialDateTime: createUserProviderRes.dateTime,
+                initialDateTime: createUserProviderRef.dateTime,
                 mode: CupertinoDatePickerMode.date,
-                onDateTimeChanged: (dateTime) => setState(() {
-                  createUserProviderRes.setDob();
-                }),
+                onDateTimeChanged: (dateTime) => createUserProviderRef.setDob(),
               ),
             ),
           ),

@@ -11,6 +11,7 @@ import 'package:familystars_2/infrastructure/domain/repositories/task_repository
 import 'package:familystars_2/infrastructure/domain/repositories/user_repository.dart';
 
 import 'package:familystars_2/infrastructure/domain/use_cases/add_new_task_to_child_use_case.dart';
+import 'package:familystars_2/infrastructure/domain/use_cases/create_new_child_user_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/facebook_sso_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/get_parent_user_children_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/get_user_event_list_use_case.dart';
@@ -152,3 +153,5 @@ final updateTaskStateUseCase = Provider<UpdateTaskStateUseCase>((ref) =>
         taskEventRepository: ref.watch(taskEventRepository)));
 final updateUserStarsUseCase = Provider<UpdateUserStarsUseCase>(
     (ref) => UpdateUserStarsUseCase(userRepository: ref.watch(userRepository)));
+final createNewChildUserUseCase = Provider<CreateNewChildUserUseCase>((ref) =>
+    CreateNewChildUserUseCase(firebaseAuth: ref.watch(firebaseAuth), userRepository: ref.watch(userRepository)));
