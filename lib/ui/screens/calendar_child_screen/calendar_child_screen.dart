@@ -4,7 +4,7 @@ import 'package:familystars_2/ui/commons/child_appbar.dart';
 import 'package:familystars_2/ui/screens/calendar_child_screen/widgets/child_calendar_display_button.dart';
 import 'package:familystars_2/ui/screens/calendar_child_screen/widgets/child_task_list_tile.dart';
 import 'package:familystars_2/ui/screens/calendar_child_screen/widgets/child_event_calendar.dart';
-import 'package:familystars_2/ui/screens/drawer_screen/drawer_child_screen.dart';
+import 'package:familystars_2/ui/screens/child_drawer_screen/child_drawer_screen.dart';
 
 // This widget represents a screen which holds all child user information about
 // past, present or future task
@@ -19,7 +19,7 @@ class CalendarChildScreen extends StatelessWidget {
     String userPath = unreceived.toString();
 
     return Scaffold(
-      drawer: DrawerChildScreen(
+      drawer: ChildDrawerScreen(
         childId: userPath,
       ),
       appBar: PreferredSize(

@@ -3,12 +3,14 @@ import 'package:familystars_2/infrastructure/errors/exceptions.dart';
 import 'package:familystars_2/infrastructure/models/user.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 abstract class UserDataSource {
   Future<bool> assignTaskToUser(
       {required String userId, required String taskId});
   Future<String?> createNewChildUser(UserModel child);
+  Future<UserModel?> getCurrentAuthenticatedUser();
   Future<List<UserModel>> getParentUserChildren(String parentId);
   Future<UserModel> getUserById(String userId);
   Future<bool> updateCurrentUser(UserModel user);
@@ -16,10 +18,12 @@ abstract class UserDataSource {
 }
 
 class UserDataSourceImpl extends UserDataSource {
+  final FirebaseAuth firebaseAuth;
   final FirebaseCrashlytics firebaseCrashlytics;
   final FirebaseFirestore firebaseFirestore;
 
-  UserDataSourceImpl({
+  UserDataSourceImpl(
+      {required this.firebaseAuth,
       required this.firebaseCrashlytics,
       required this.firebaseFirestore});
 
@@ -122,7 +126,7 @@ class UserDataSourceImpl extends UserDataSource {
       throw UserException(message: ErrorConstants.unhandled);
     }
   }
-  
+
   @override
   Future<bool> setCurrentUser(UserModel user) async {
     try {
@@ -136,6 +140,31 @@ class UserDataSourceImpl extends UserDataSource {
         throw UserException(message: "Error updating user");
       });
       return result;
+    } catch (e, stack) {
+      firebaseCrashlytics.recordError(e, stack);
+      throw UserException(message: ErrorConstants.unhandled);
+    }
+  }
+
+  @override
+  Future<UserModel?> getCurrentAuthenticatedUser() async {
+    try {
+      final authenticatedUserId = firebaseAuth.currentUser?.uid;
+      if (authenticatedUserId == null) {
+        throw UserException(message: "Unauthenticated user");
+      }
+      final result = await firebaseFirestore
+          .collection('users')
+          .doc(authenticatedUserId)
+          .get()
+          .onError((e, stack) {
+        firebaseCrashlytics.recordError(e, stack);
+        throw UserException(message: "Error getting authenticated user");
+      });
+      if (result.data() != null) {
+        return UserModel.fromJson(result.data() as Map<String, dynamic>);
+      }
+      return null;
     } catch (e, stack) {
       firebaseCrashlytics.recordError(e, stack);
       throw UserException(message: ErrorConstants.unhandled);

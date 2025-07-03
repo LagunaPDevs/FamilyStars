@@ -1,7 +1,7 @@
 import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
 import 'package:familystars_2/ui/commons/child_appbar.dart';
 import 'package:familystars_2/ui/screens/child_main_screen/widgets/child_event_container.dart';
-import 'package:familystars_2/ui/screens/drawer_screen/drawer_child_screen.dart';
+import 'package:familystars_2/ui/screens/child_drawer_screen/child_drawer_screen.dart';
 import 'package:familystars_2/ui/screens/child_main_screen/widgets/child_calendar_button.dart';
 import 'package:familystars_2/ui/screens/child_main_screen/widgets/reward_button.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class _ChildMainScreenState extends State<ChildMainScreen> {
     String userPath = unreceived.toString();
     return Consumer(builder: (context, ref, child) {
       return Scaffold(
-        drawer: DrawerChildScreen(
+        drawer: ChildDrawerScreen(
           childId: userPath,
         ),
         appBar: PreferredSize(

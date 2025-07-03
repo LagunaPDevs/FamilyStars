@@ -72,6 +72,16 @@ class UserRepositoryImpl implements UserRepository {
       return Result.error(e);
     }
   }
+  
+  @override
+  Future<Result<UserModel?>> getCurrentAuthenticatedUser() async {
+    try{
+      final result = await dataSource.getCurrentAuthenticatedUser();
+      return Result.ok(result);
+    }on UserException catch(e){
+      return Result.error(e);
+    }
+  }
 
   
 }

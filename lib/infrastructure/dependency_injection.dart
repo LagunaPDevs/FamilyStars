@@ -28,8 +28,10 @@ import 'package:familystars_2/infrastructure/providers/calendar_screen_provider.
 import 'package:familystars_2/infrastructure/providers/change_user_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/child_appabar_provider.dart';
 import 'package:familystars_2/infrastructure/providers/child_calendar_screen_provider.dart';
+import 'package:familystars_2/infrastructure/providers/child_drawer_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/create_task_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/create_user_screen_provider.dart';
+import 'package:familystars_2/infrastructure/providers/drawer_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/forgot_password_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/parent_calendar_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/password_screen_provider.dart';
@@ -88,6 +90,11 @@ final parentCalendarScreenProvider = ChangeNotifierProvider.autoDispose(
 final changeUserScreenProvider =
     ChangeNotifierProvider.autoDispose((ref) => ChangeUserScreenProvider(ref));
 
+final drawerScreenProvider =
+    ChangeNotifierProvider.autoDispose((ref) => DrawerScreenProvider(ref));
+
+final childDrawerScreenProvider = ChangeNotifierProvider.autoDispose((ref)=> ChildDrawerScreenProvider(ref));
+
 // firebase
 final firebaseAuth = Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
 final firebaseCrashlytics =
@@ -107,6 +114,7 @@ final taskEventDataSource = Provider<TaskEventDataSource>((ref) =>
         firebaseCrashlytics: ref.watch(firebaseCrashlytics),
         firebaseFirestore: ref.watch(firebaseFirestore)));
 final userDataSource = Provider<UserDataSource>((ref) => UserDataSourceImpl(
+    firebaseAuth: ref.watch(firebaseAuth),
     firebaseCrashlytics: ref.watch(firebaseCrashlytics),
     firebaseFirestore: ref.watch(firebaseFirestore)));
 
