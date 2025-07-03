@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:familystars_2/ui/commons/logo_appbar.dart';
 import 'package:familystars_2/ui/screens/forgot_password_screen/widgets/forgot_password_button.dart';
 import 'package:familystars_2/ui/screens/forgot_password_screen/widgets/forgot_password_fields.dart';
 import 'package:familystars_2/ui/screens/forgot_password_screen/widgets/forgot_password_title.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // This widget represent a screen where user can reset the password of account
 // entering email

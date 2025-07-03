@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
-import 'package:flutter/material.dart';
 
 // Simple widget which all title and text of 'ForgotPasswordScreen'
 
