@@ -29,10 +29,12 @@ import 'package:familystars_2/infrastructure/providers/change_user_screen_provid
 import 'package:familystars_2/infrastructure/providers/child_appabar_provider.dart';
 import 'package:familystars_2/infrastructure/providers/child_calendar_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/child_drawer_screen_provider.dart';
+import 'package:familystars_2/infrastructure/providers/choose_signup_method_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/create_task_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/create_user_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/drawer_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/forgot_password_screen_provider.dart';
+import 'package:familystars_2/infrastructure/providers/introduction_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/parent_calendar_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/password_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/registration_screen_provider.dart';
@@ -94,6 +96,10 @@ final drawerScreenProvider =
     ChangeNotifierProvider.autoDispose((ref) => DrawerScreenProvider(ref));
 
 final childDrawerScreenProvider = ChangeNotifierProvider.autoDispose((ref)=> ChildDrawerScreenProvider(ref));
+
+final chooseSignUpMethodScreenProvider = ChangeNotifierProvider.autoDispose((ref)=> ChooseSignUpMethodScreenProvider(ref));
+
+final introductionScreenProvider = ChangeNotifierProvider.autoDispose((ref)=> IntroductionScreenProvider(ref));
 
 // firebase
 final firebaseAuth = Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
