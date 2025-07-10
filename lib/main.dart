@@ -14,7 +14,7 @@ import 'package:familystars_2/ui/screens/forgot_password_screen/forgot_password_
 import 'package:familystars_2/ui/screens/introduction_screen/introduction_screen.dart';
 import 'package:familystars_2/ui/screens/login_screen/login_screen.dart';
 import 'package:familystars_2/ui/screens/child_main_screen/child_main_screen.dart';
-import 'package:familystars_2/ui/screens/main_screen/main_screen.dart';
+import 'package:familystars_2/ui/screens/parent_main_screen/parent_main_screen.dart';
 import 'package:familystars_2/ui/screens/password_screen/password_screen.dart';
 import 'package:familystars_2/ui/screens/registration_screen/registration_screen.dart';
 import 'package:familystars_2/ui/screens/rewards_screen/rewards_screen.dart';
@@ -76,7 +76,7 @@ class MyApp extends StatelessWidget {
           const ChooseSignUpMethodScreen(),
       RoutesConstants.registrationScreen: (context) =>
           const RegistrationScreen(),
-      RoutesConstants.mainScreen: (context) => const MainScreen(),
+      RoutesConstants.parentMainScreen: (context) => const ParentMainScreen(),
       RoutesConstants.calendarScreen: (context) => const CalendarScreen(),
       RoutesConstants.rewardsScreen: (context) => const RewardsScreen(),
       RoutesConstants.createUserScreen: (context) => const CreateUserScreen(),

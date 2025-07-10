@@ -34,6 +34,7 @@ import 'package:familystars_2/infrastructure/providers/create_user_screen_provid
 import 'package:familystars_2/infrastructure/providers/drawer_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/forgot_password_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/introduction_screen_provider.dart';
+import 'package:familystars_2/infrastructure/providers/parent_app_bar.dart';
 import 'package:familystars_2/infrastructure/providers/parent_calendar_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/password_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/registration_screen_provider.dart';
@@ -96,6 +97,8 @@ final childDrawerScreenProvider = ChangeNotifierProvider.autoDispose((ref)=> Chi
 final chooseSignUpMethodScreenProvider = ChangeNotifierProvider.autoDispose((ref)=> ChooseSignUpMethodScreenProvider(ref));
 
 final introductionScreenProvider = ChangeNotifierProvider.autoDispose((ref)=> IntroductionScreenProvider(ref));
+
+final parentAppBarProvider = ChangeNotifierProvider.autoDispose((ref)=> ParentAppBarProvider(ref));
 
 // firebase
 final firebaseAuth = Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);

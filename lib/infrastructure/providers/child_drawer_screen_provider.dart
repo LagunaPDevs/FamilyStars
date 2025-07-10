@@ -71,7 +71,7 @@ class ChildDrawerScreenProvider with ChangeNotifier {
   Future<void> handleOnOkClick(BuildContext context) async {
     final result = await checkPassword();
     if (result && context.mounted) {
-      Navigator.popAndPushNamed(context, RoutesConstants.mainScreen);
+      Navigator.popAndPushNamed(context, RoutesConstants.parentMainScreen);
     } else {
       if (context.mounted) displayAccessDeniedDialog(context);
     }

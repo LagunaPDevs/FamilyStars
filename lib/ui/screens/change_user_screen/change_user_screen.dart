@@ -4,7 +4,7 @@ import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
 
 import 'package:familystars_2/ui/commons/text_widgets/title_text.dart';
-import 'package:familystars_2/ui/commons/user_appbar.dart';
+import 'package:familystars_2/ui/commons/app_bar_widgets/user_appbar.dart';
 import 'package:familystars_2/ui/screens/change_user_screen/widgets/user_grid_list.dart';
 import 'package:familystars_2/ui/screens/drawer_screen/drawer_screen.dart';
 
@@ -18,7 +18,7 @@ class ChangeUserScreen extends StatelessWidget {
     return Scaffold(
       drawer: DrawerScreen(),
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(120), child: UserAppBar()),
+          preferredSize: Size.fromHeight(120), child: ParentAppBar()),
       body: SingleChildScrollView(
         child: Column(
           children: [

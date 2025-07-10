@@ -10,7 +10,7 @@ class DrawerScreenProvider with ChangeNotifier {
   DrawerScreenProvider(this.ref);
 
   void openMainScreen(BuildContext context) =>
-      Navigator.popAndPushNamed(context, RoutesConstants.mainScreen);
+      Navigator.popAndPushNamed(context, RoutesConstants.parentMainScreen);
   void openCreateUserScreen(BuildContext context) =>
       Navigator.popAndPushNamed(context, RoutesConstants.createUserScreen);
   void openChangeUserScreen(BuildContext context) =>

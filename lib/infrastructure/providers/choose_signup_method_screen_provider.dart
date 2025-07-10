@@ -15,7 +15,7 @@ class ChooseSignUpMethodScreenProvider with ChangeNotifier {
     final googleSSOUseCaseRef = ref.watch(googleSSOUseCase);
     final result = await googleSSOUseCaseRef.googleSignIn();
     if (result && context.mounted) {
-      Navigator.popAndPushNamed(context, RoutesConstants.mainScreen);
+      Navigator.popAndPushNamed(context, RoutesConstants.parentMainScreen);
     }
     // do something with the error
   }
@@ -24,7 +24,7 @@ class ChooseSignUpMethodScreenProvider with ChangeNotifier {
     final facebookSSOUseCaseRef = ref.watch(facebookSSOUseCase);
     final result = await facebookSSOUseCaseRef.facebookSignIn();
     if (result && context.mounted) {
-      Navigator.popAndPushNamed(context, RoutesConstants.mainScreen);
+      Navigator.popAndPushNamed(context, RoutesConstants.parentMainScreen);
     }
     // do something with the error
   }

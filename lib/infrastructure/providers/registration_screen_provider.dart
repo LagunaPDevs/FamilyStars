@@ -119,7 +119,7 @@ class RegistrationScreenProvider extends ChangeNotifier {
     switch (result) {
       case Ok():
         if (context.mounted) {
-          Navigator.pushNamed(context, RoutesConstants.mainScreen);
+          Navigator.pushNamed(context, RoutesConstants.parentMainScreen);
           return true;
         }
         break;

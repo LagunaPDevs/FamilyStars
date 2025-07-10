@@ -5,7 +5,7 @@ import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
 
 import 'package:familystars_2/ui/commons/text_widgets/title_text.dart';
-import 'package:familystars_2/ui/commons/user_appbar.dart';
+import 'package:familystars_2/ui/commons/app_bar_widgets/user_appbar.dart';
 import 'package:familystars_2/ui/screens/create_user_screen/widgets/create_user_button.dart';
 import 'package:familystars_2/ui/screens/create_user_screen/widgets/create_user_fields.dart';
 import 'package:familystars_2/ui/screens/drawer_screen/drawer_screen.dart';
@@ -26,7 +26,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(120), child: UserAppBar()),
+          preferredSize: Size.fromHeight(120), child: ParentAppBar()),
       drawer: DrawerScreen(),
       floatingActionButton: CreateUserButtons(
         formKey: _formKey,

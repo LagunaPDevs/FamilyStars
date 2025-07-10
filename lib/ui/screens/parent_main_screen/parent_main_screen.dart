@@ -1,42 +1,40 @@
-import 'package:familystars_2/infrastructure/constants/app_constants.dart';
-import 'package:familystars_2/infrastructure/constants/image_constants.dart';
-import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
-import 'package:familystars_2/ui/commons/text_widgets/title_text.dart';
-import 'package:familystars_2/ui/commons/app_bar_widgets/user_appbar.dart';
-import 'package:familystars_2/ui/screens/drawer_screen/drawer_screen.dart';
 import 'package:flutter/material.dart';
 
-// This class represents a widget that holds company an contact information
+import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
+import 'package:familystars_2/ui/commons/app_bar_widgets/user_appbar.dart';
+import 'package:familystars_2/ui/screens/drawer_screen/drawer_screen.dart';
+import 'package:familystars_2/ui/screens/parent_main_screen/widgets/add_task_button.dart';
+import 'package:familystars_2/ui/screens/parent_main_screen/widgets/calendar_button.dart';
+import 'package:familystars_2/ui/screens/parent_main_screen/widgets/parent_event_container.dart';
 
-class AboutUsScreen extends StatelessWidget {
-  const AboutUsScreen({super.key});
+// This widget represents the main screen of a logged parent user
+
+class ParentMainScreen extends StatelessWidget {
+  const ParentMainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: DrawerScreen(),
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(120), child: ParentAppBar()),
-      drawer: DrawerScreen(),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
                 height: LayoutConstants.generalVerticalSpace,
               ),
-              TitleText(title: AppConstants.softchanging),
+              CalendarButton(),
               SizedBox(
                 height: LayoutConstants.generalVerticalSpace,
               ),
-              SizedBox(
-                width: 300,
-                child: Image.asset(ImageConstants.softchangingLogo),
-              ),
+              ParentEventContainer(),
               SizedBox(
                 height: LayoutConstants.generalVerticalSpace,
               ),
-              Text('C/Innovación 1'),
-              Text('+34 666 555 888'),
+              AddTaskButton(),
             ],
           ),
         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:familystars_2/ui/commons/user_appbar.dart';
+import 'package:familystars_2/ui/commons/app_bar_widgets/user_appbar.dart';
 
 import 'package:familystars_2/ui/screens/calendar_screen/widgets/calendar_floating_button.dart';
 import 'package:familystars_2/ui/screens/calendar_screen/widgets/parent_calendar_display_button.dart';
@@ -20,7 +20,7 @@ class CalendarScreen extends StatelessWidget {
       drawer: DrawerScreen(),
       floatingActionButton: CalendarFloatingButton(),
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(120), child: UserAppBar()),
+          preferredSize: Size.fromHeight(120), child: ParentAppBar()),
       body: SingleChildScrollView(
           child: Center(
         child: Column(

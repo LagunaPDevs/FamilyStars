@@ -76,7 +76,7 @@ class _PasswordScreenButtonState extends State<PasswordScreenButton> {
                   if (setPassword) {
                     // Go to main page if everything correct
                     Navigator.pushReplacementNamed(
-                        context, RoutesConstants.mainScreen);
+                        context, RoutesConstants.parentMainScreen);
                   }
                 }
               },

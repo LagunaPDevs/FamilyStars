@@ -39,7 +39,7 @@ class LogInScreenProvider extends ChangeNotifier {
     final loginWithEmailUseCaseRef = ref.watch(loginWithEmailCrendentialsUseCase);
     final result = await loginWithEmailUseCaseRef.loginWithEmailCredentials(email: emailController.text, password: passwordController.text);
     if(result){
-      Navigator.popAndPushNamed(context, RoutesConstants.mainScreen);
+      Navigator.popAndPushNamed(context, RoutesConstants.parentMainScreen);
     }
     // do something with the error
   }
@@ -48,7 +48,7 @@ class LogInScreenProvider extends ChangeNotifier {
     final googleSSOUseCaseRef = ref.watch(googleSSOUseCase);
     final result = await googleSSOUseCaseRef.googleSignIn();
     if(result){
-      Navigator.popAndPushNamed(context, RoutesConstants.mainScreen);
+      Navigator.popAndPushNamed(context, RoutesConstants.parentMainScreen);
     }
     // do something with the error
   }
@@ -57,7 +57,7 @@ class LogInScreenProvider extends ChangeNotifier {
     final facebookSSOUseCaseRef = ref.watch(facebookSSOUseCase);
     final result = await facebookSSOUseCaseRef.facebookSignIn();
     if(result){
-      Navigator.popAndPushNamed(context, RoutesConstants.mainScreen);
+      Navigator.popAndPushNamed(context, RoutesConstants.parentMainScreen);
     }
     // do something with the error
     
