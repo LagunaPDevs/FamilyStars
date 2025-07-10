@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:familystars_2/ui/commons/child_appbar.dart';
+import 'package:familystars_2/ui/commons/app_bar_widgets/child_appbar.dart';
 import 'package:familystars_2/ui/screens/child_drawer_screen/child_drawer_screen.dart';
 import 'package:familystars_2/ui/screens/rewards_screen/widgets/rewards_tab.dart';
 import 'package:familystars_2/ui/screens/rewards_screen/widgets/rewards_tab_content.dart';
