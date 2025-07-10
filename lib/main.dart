@@ -4,7 +4,6 @@ import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/theme_constants.dart';
 import 'package:familystars_2/infrastructure/services/shared_preference_services.dart';
 import 'package:familystars_2/ui/screens/about_us_screen/about_us_screen.dart';
-import 'package:familystars_2/ui/screens/activation_code_screen/activation_code_screen.dart';
 import 'package:familystars_2/ui/screens/calendar_child_screen/calendar_child_screen.dart';
 import 'package:familystars_2/ui/screens/calendar_screen/calendar_screen.dart';
 import 'package:familystars_2/ui/screens/change_user_screen/change_user_screen.dart';
@@ -80,8 +79,6 @@ class MyApp extends StatelessWidget {
       RoutesConstants.mainScreen: (context) => const MainScreen(),
       RoutesConstants.calendarScreen: (context) => const CalendarScreen(),
       RoutesConstants.rewardsScreen: (context) => const RewardsScreen(),
-      RoutesConstants.activationCodeScreen: (context) =>
-          const ActivationCodeScreen(),
       RoutesConstants.createUserScreen: (context) => const CreateUserScreen(),
       RoutesConstants.createTaskScreen: (context) => const CreateTaskScreen(),
       RoutesConstants.changeUserScreen: (context) => const ChangeUserScreen(),

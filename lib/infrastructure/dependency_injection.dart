@@ -22,7 +22,6 @@ import 'package:familystars_2/infrastructure/domain/use_cases/sign_up_with_email
 import 'package:familystars_2/infrastructure/domain/use_cases/update_task_state_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/update_task_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/update_user_stars_use_case.dart';
-import 'package:familystars_2/infrastructure/providers/activation_code_screen_provider.dart';
 
 import 'package:familystars_2/infrastructure/providers/calendar_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/change_user_screen_provider.dart';
@@ -61,9 +60,6 @@ final forgotPasswordScreenProvider = ChangeNotifierProvider.autoDispose(
 
 final registrationScreenProvider = ChangeNotifierProvider.autoDispose(
     (ref) => RegistrationScreenProvider(ref));
-
-final activationCodeScreenProvider = ChangeNotifierProvider.autoDispose(
-    (ref) => ActivationCodeScreenProvider(ref));
 
 final createUserScreenProvider =
     ChangeNotifierProvider.autoDispose((ref) => CreateUserScreenProvider(ref));
