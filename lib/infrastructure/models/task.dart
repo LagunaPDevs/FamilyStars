@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:familystars_2/infrastructure/models/event.dart';
 
 /// This class represents a task which is a assigned to a child user by a
 /// parent user
@@ -42,6 +43,16 @@ class Task {
         stars: json['stars'],
         state: json['state'],
       );
+      
+  factory Task.fromEvent(TaskEvent event) => Task(
+    id: event.taskId,
+    name: event.taskName,
+    assigned: event.assigned,
+    assignedName: event.assignedName,
+    owner: event.owner,
+    stars: event.taskStars,
+    state: event.taskState, 
+  );
 
   Map<String, dynamic> toJson() => {
         "id": id,

@@ -9,6 +9,6 @@ class GetUserEventListUseCase {
 
   Stream<QuerySnapshot<Map<String, dynamic>>>? getUserEventList(String userId,
       {int? limit}) {
-    return taskEventRepository.getUserEventList(userId);
+    return taskEventRepository.getUserEventList(userId, limit: limit);
   }
 }

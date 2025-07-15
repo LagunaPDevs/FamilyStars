@@ -3,6 +3,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:familystars_2/infrastructure/models/task.dart';
+import 'package:familystars_2/infrastructure/utils/date_utils.dart';
 
 class TaskEvent {
   String? id;
@@ -33,7 +34,7 @@ class TaskEvent {
   factory TaskEvent.fromJson(Map<String, dynamic> json) => TaskEvent(
       id: json["id"],
       date: json["date"],
-      created: json["created"],
+      created: dateToDDMMYY(DateTime.fromMillisecondsSinceEpoch((json["created"] as Timestamp).millisecondsSinceEpoch)),
       owner: json["owner"],
       assigned: json["assigned"],
       assignedName: json["assigned_name"],
