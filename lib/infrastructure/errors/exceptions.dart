@@ -1,7 +1,13 @@
-class AuthException implements Exception{
+class AuthException implements Exception {
   final String message;
 
   AuthException({required this.message});
+}
+
+class RewardException implements Exception {
+  final String message;
+
+  RewardException({required this.message});
 }
 
 class TaskEventException implements Exception {

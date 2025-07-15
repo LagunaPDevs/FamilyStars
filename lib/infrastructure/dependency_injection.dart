@@ -1,16 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:familystars_2/infrastructure/data_sources/auth_data_source.dart';
+import 'package:familystars_2/infrastructure/data_sources/rewards_data_source.dart';
 import 'package:familystars_2/infrastructure/data_sources/task_data_source.dart';
 import 'package:familystars_2/infrastructure/data_sources/task_event_data_source.dart';
 import 'package:familystars_2/infrastructure/data_sources/user_data_source.dart';
 
 import 'package:familystars_2/infrastructure/domain/repositories/auth_repository.dart';
+import 'package:familystars_2/infrastructure/domain/repositories/rewards_repository.dart';
 import 'package:familystars_2/infrastructure/domain/repositories/task_event_repository.dart';
 import 'package:familystars_2/infrastructure/domain/repositories/task_repository.dart';
 import 'package:familystars_2/infrastructure/domain/repositories/user_repository.dart';
 
 import 'package:familystars_2/infrastructure/domain/use_cases/add_new_task_to_child_use_case.dart';
+import 'package:familystars_2/infrastructure/domain/use_cases/claim_reward_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/create_new_child_user_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/facebook_sso_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/get_parent_user_children_use_case.dart';
@@ -21,7 +24,7 @@ import 'package:familystars_2/infrastructure/domain/use_cases/logout_use_case.da
 import 'package:familystars_2/infrastructure/domain/use_cases/sign_up_with_email_credentials_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/update_task_state_use_case.dart';
 import 'package:familystars_2/infrastructure/domain/use_cases/update_task_use_case.dart';
-import 'package:familystars_2/infrastructure/domain/use_cases/update_user_stars_use_case.dart';
+import 'package:familystars_2/infrastructure/domain/use_cases/update_user_stars_from_task_use_case.dart';
 
 import 'package:familystars_2/infrastructure/providers/calendar_screen_provider.dart';
 import 'package:familystars_2/infrastructure/providers/change_user_screen_provider.dart';
@@ -43,6 +46,7 @@ import 'package:familystars_2/infrastructure/providers/registration_screen_provi
 import 'package:familystars_2/infrastructure/providers/reward_screen_provider.dart';
 
 import 'package:familystars_2/infrastructure/repositories/auth_repository_impl.dart';
+import 'package:familystars_2/infrastructure/repositories/rewards_repository_impl.dart';
 import 'package:familystars_2/infrastructure/repositories/task_event_repository_impl.dart';
 import 'package:familystars_2/infrastructure/repositories/task_repository_impl.dart';
 import 'package:familystars_2/infrastructure/repositories/user_repository_impl.dart';
@@ -94,17 +98,23 @@ final changeUserScreenProvider =
 final drawerScreenProvider =
     ChangeNotifierProvider.autoDispose((ref) => DrawerScreenProvider(ref));
 
-final childDrawerScreenProvider = ChangeNotifierProvider.autoDispose((ref)=> ChildDrawerScreenProvider(ref));
+final childDrawerScreenProvider =
+    ChangeNotifierProvider.autoDispose((ref) => ChildDrawerScreenProvider(ref));
 
-final chooseSignUpMethodScreenProvider = ChangeNotifierProvider.autoDispose((ref)=> ChooseSignUpMethodScreenProvider(ref));
+final chooseSignUpMethodScreenProvider = ChangeNotifierProvider.autoDispose(
+    (ref) => ChooseSignUpMethodScreenProvider(ref));
 
-final introductionScreenProvider = ChangeNotifierProvider.autoDispose((ref)=> IntroductionScreenProvider(ref));
+final introductionScreenProvider = ChangeNotifierProvider.autoDispose(
+    (ref) => IntroductionScreenProvider(ref));
 
-final parentAppBarProvider = ChangeNotifierProvider.autoDispose((ref)=> ParentAppBarProvider(ref));
+final parentAppBarProvider =
+    ChangeNotifierProvider.autoDispose((ref) => ParentAppBarProvider(ref));
 
-final parentMainScreenProvider = ChangeNotifierProvider.autoDispose((ref)=> ParentMainScreenProvider(ref));
+final parentMainScreenProvider =
+    ChangeNotifierProvider.autoDispose((ref) => ParentMainScreenProvider(ref));
 
-final childMainScreenProvider = ChangeNotifierProvider.autoDispose((ref)=> ChildMainScreenProvider(ref));
+final childMainScreenProvider =
+    ChangeNotifierProvider.autoDispose((ref) => ChildMainScreenProvider(ref));
 
 // firebase
 final firebaseAuth = Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
@@ -117,6 +127,10 @@ final firebaseFirestore =
 final authDataSource = Provider<AuthDataSource>((ref) => AuthDataSourceImpl(
     firebaseAuth: ref.watch(firebaseAuth),
     firebaseCrashlytics: ref.watch(firebaseCrashlytics)));
+final rewardsDataSource = Provider<RewardsDataSource>((ref) =>
+    RewardsDataSourceImpl(
+        firebaseFirestore: ref.watch(firebaseFirestore),
+        firebaseCrashlytics: ref.watch(firebaseCrashlytics)));
 final taskDataSource = Provider<TaskDataSource>((ref) => TaskDataSourceImpl(
     firebaseFirestore: ref.watch(firebaseFirestore),
     firebaseCrashlytics: ref.watch(firebaseCrashlytics)));
@@ -132,6 +146,8 @@ final userDataSource = Provider<UserDataSource>((ref) => UserDataSourceImpl(
 // repositories
 final authRepository = Provider<AuthRepository>(
     (ref) => AuthRepositoryImpl(dataSource: ref.watch(authDataSource)));
+final rewardRepository = Provider<RewardsRepository>(
+    (ref) => RewardsRepositoryImpl(dataSource: ref.watch(rewardsDataSource)));
 final taskRepository = Provider<TaskRepository>(
     (ref) => TaskRepositoryImpl(dataSource: ref.watch(taskDataSource)));
 final taskEventRepository = Provider<TaskEventRepository>((ref) =>
@@ -174,9 +190,12 @@ final updateTaskStateUseCase = Provider<UpdateTaskStateUseCase>((ref) =>
     UpdateTaskStateUseCase(
         taskRepository: ref.watch(taskRepository),
         taskEventRepository: ref.watch(taskEventRepository)));
-final updateUserStarsUseCase = Provider<UpdateUserStarsUseCase>(
-    (ref) => UpdateUserStarsUseCase(userRepository: ref.watch(userRepository)));
+final updateUserStarsFromTaskUseCase = Provider<UpdateUserStarsFromTaskUseCase>(
+    (ref) => UpdateUserStarsFromTaskUseCase(
+        userRepository: ref.watch(userRepository)));
 final createNewChildUserUseCase = Provider<CreateNewChildUserUseCase>((ref) =>
     CreateNewChildUserUseCase(
         firebaseAuth: ref.watch(firebaseAuth),
         userRepository: ref.watch(userRepository)));
+final claimRewardUseCase = Provider<ClaimRewardUseCase>(
+    (ref) => ClaimRewardUseCase(userRepository: ref.watch(userRepository)));

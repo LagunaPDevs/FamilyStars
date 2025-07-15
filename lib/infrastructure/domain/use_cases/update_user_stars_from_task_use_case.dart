@@ -6,10 +6,10 @@ import 'package:familystars_2/infrastructure/models/user.dart';
 import 'package:familystars_2/infrastructure/domain/repositories/user_repository.dart';
 
 
-class UpdateUserStarsUseCase {
+class UpdateUserStarsFromTaskUseCase {
   final UserRepository userRepository;
 
-  UpdateUserStarsUseCase({required this.userRepository});
+  UpdateUserStarsFromTaskUseCase({required this.userRepository});
 
   Future<bool> updateUserStars({required Task task}) async {
     final user = await _getUser(task.assigned ?? '');

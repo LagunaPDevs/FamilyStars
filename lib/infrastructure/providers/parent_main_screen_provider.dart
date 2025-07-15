@@ -39,7 +39,7 @@ class ParentMainScreenProvider with ChangeNotifier {
   }
 
   Future<bool> _updateChildStars({required Task task}) async {
-    final updateUserStarsUseCaseRef = ref.watch(updateUserStarsUseCase);
+    final updateUserStarsUseCaseRef = ref.watch(updateUserStarsFromTaskUseCase);
     final result = await updateUserStarsUseCaseRef.updateUserStars(task: task);
     return result;
   }
