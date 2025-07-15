@@ -46,6 +46,7 @@ class Task {
       
   factory Task.fromEvent(TaskEvent event) => Task(
     id: event.taskId,
+    date: event.date,
     name: event.taskName,
     assigned: event.assigned,
     assignedName: event.assignedName,

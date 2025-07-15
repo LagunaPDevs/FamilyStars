@@ -68,7 +68,7 @@ class TaskDataSourceImpl extends TaskDataSource {
           .then((value) => true)
           .onError((e, stack) {
         firebaseCrashlytics.recordError(e, stack);
-        throw TaskEventException(message: "Error updating task");
+        throw TaskException(message: "Error updating task");
       });
       return result;
     } catch (e, stack) {
