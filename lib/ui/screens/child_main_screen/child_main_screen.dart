@@ -12,55 +12,52 @@ import 'package:familystars_2/ui/screens/child_main_screen/widgets/reward_button
 
 // This widget represent main screen for an specific child user
 
-class ChildMainScreen extends StatefulWidget {
+class ChildMainScreen extends StatelessWidget {
   const ChildMainScreen({super.key});
 
-  @override
-  _ChildMainScreenState createState() => _ChildMainScreenState();
-}
-
-class _ChildMainScreenState extends State<ChildMainScreen> {
   @override
   Widget build(BuildContext context) {
     // User path is received from another screen and paint user information
     final Object? unreceived = ModalRoute.of(context)!.settings.arguments;
     String userPath = unreceived.toString();
-    return Consumer(builder: (context, ref, child) {
-      return Scaffold(
-        drawer: ChildDrawerScreen(
-          childId: userPath,
-        ),
-        appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(120),
-            child: ChildAppBar(
-              childId: userPath,
-            )),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  height: LayoutConstants.generalVerticalSpace,
-                ),
-                ChildCalendarButton(userPath: userPath),
-                const SizedBox(
-                  height: LayoutConstants.generalVerticalSpace,
-                ),
-                ChildEventContainer(
-                  userPath: userPath,
-                ),
-                const SizedBox(
-                  height: LayoutConstants.generalVerticalSpace,
-                ),
-                RewardButton(
-                  userPath: userPath,
-                )
-              ],
+    return Consumer(
+      builder: (context, ref, child) {
+        return Scaffold(
+          drawer: ChildDrawerScreen(
+            childId: userPath,
+          ),
+          appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(120),
+              child: ChildAppBar(
+                childId: userPath,
+              )),
+          body: SingleChildScrollView(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    height: LayoutConstants.generalVerticalSpace,
+                  ),
+                  ChildCalendarButton(userPath: userPath),
+                  const SizedBox(
+                    height: LayoutConstants.generalVerticalSpace,
+                  ),
+                  ChildEventContainer(
+                    userPath: userPath,
+                  ),
+                  const SizedBox(
+                    height: LayoutConstants.generalVerticalSpace,
+                  ),
+                  RewardButton(
+                    userPath: userPath,
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }

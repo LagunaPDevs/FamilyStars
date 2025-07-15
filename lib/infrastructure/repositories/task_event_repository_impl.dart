@@ -43,4 +43,14 @@ class TaskEventRepositoryImpl extends TaskEventRepository {
       return Result.error(e);
     }
   }
+  
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>>? getChildUserEventList(String userId, {int? limit}) {
+    try{
+      final result = dataSource.getChildUserEventList(userId, limit: limit);
+      return result;
+    } on TaskEventException catch(_){
+      return null;
+    }
+  }
 }

@@ -8,5 +8,6 @@ abstract class TaskEventRepository {
       {required String eventId, required Map<String, dynamic> newData});
   Stream<QuerySnapshot<Map<String, dynamic>>>? getUserEventList(String userId,
       {int? limit});
+  Stream<QuerySnapshot<Map<String,dynamic>>>? getChildUserEventList(String userId, {int? limit});
 }
 

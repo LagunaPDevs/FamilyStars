@@ -13,7 +13,8 @@ abstract class TaskEventDataSource {
       {required String eventId, required Map<String, dynamic> newData});
   Stream<QuerySnapshot<Map<String, dynamic>>>? getUserEventList(String userId,
       {int? limit});
-}
+  Stream<QuerySnapshot<Map<String,dynamic>>>? getChildUserEventList(String userId, {int? limit});
+} 
 
 class TaskEventDataSourceImpl extends TaskEventDataSource {
   final FirebaseFirestore firebaseFirestore;
@@ -72,6 +73,22 @@ class TaskEventDataSourceImpl extends TaskEventDataSource {
         throw TaskEventException(message: "Error updating event");
       });
       return result;
+    } catch (e, stack) {
+      firebaseCrashlytics.recordError(e, stack);
+      throw TaskEventException(message: ErrorConstants.unhandled);
+    }
+  }
+  
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>>? getChildUserEventList(String userId, {int? limit}) {
+    try {
+      final events = firebaseFirestore
+          .collection('event')
+          .orderBy('created', descending: true)
+          .limit(limit ?? 10)
+          .where('assigned', isEqualTo: userId)
+          .snapshots();
+      return events;
     } catch (e, stack) {
       firebaseCrashlytics.recordError(e, stack);
       throw TaskEventException(message: ErrorConstants.unhandled);
