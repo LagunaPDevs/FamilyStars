@@ -1,6 +1,6 @@
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/constants/layout_constants.dart';
-import 'package:familystars_2/infrastructure/providers/general_provider.dart';
+import 'package:familystars_2/infrastructure/dependency_injection.dart';
 import 'package:familystars_2/ui/commons/logo_appbar.dart';
 import 'package:familystars_2/ui/screens/registration_screen/widgets/registration_dob_step.dart';
 import 'package:familystars_2/ui/screens/registration_screen/widgets/registration_done_button.dart';
@@ -87,8 +87,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             formKey: _formKey,
                           )
                   ],
-                )
-                // ---
+                ),
+                registrationProviderRes.isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(
+                            color: ColorConstants.blueColor))
+                    : SizedBox(),
               ],
             ),
           ));

@@ -1,33 +1,25 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:familystars_2/ui/commons/child_appbar.dart';
-import 'package:familystars_2/ui/screens/drawer_screen/drawer_child_screen.dart';
-import 'package:familystars_2/ui/screens/rewards_screen/widgets/rewards_tab.dart';
-import 'package:familystars_2/ui/screens/rewards_screen/widgets/rewards_tab_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
+import 'package:familystars_2/ui/commons/app_bar_widgets/child_appbar.dart';
+import 'package:familystars_2/ui/screens/child_drawer_screen/child_drawer_screen.dart';
+import 'package:familystars_2/ui/screens/rewards_screen/widgets/rewards_tab.dart';
+import 'package:familystars_2/ui/screens/rewards_screen/widgets/rewards_tab_content.dart';
+
 // This widget represent a screen where a child user can reclaim rewards
 
-class RewardsScreen extends StatefulWidget {
+class RewardsScreen extends StatelessWidget {
   const RewardsScreen({super.key});
-
-  @override
-  _RewardsScreenState createState() => _RewardsScreenState();
-}
-
-class _RewardsScreenState extends State<RewardsScreen> {
-  DocumentSnapshot? documentSnapshot;
-
-  final ValueNotifier<int> _currentPage = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
     final Object? unreceived = ModalRoute.of(context)!.settings.arguments;
     String userPath = unreceived.toString();
-    return Consumer(builder: (context, ref, child) {
-      return Scaffold(
-          drawer: DrawerChildScreen(
+    return Consumer(
+      builder: (context, ref, child) {
+        return Scaffold(
+          drawer: ChildDrawerScreen(
             childId: userPath,
           ),
           appBar: PreferredSize(
@@ -47,7 +39,9 @@ class _RewardsScreenState extends State<RewardsScreen> {
                 )
               ],
             ),
-          ));
-    });
+          ),
+        );
+      },
+    );
   }
 }

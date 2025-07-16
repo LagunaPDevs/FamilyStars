@@ -1,39 +1,35 @@
-import 'package:familystars_2/infrastructure/providers/general_provider.dart';
-import 'package:familystars_2/ui/screens/rewards_screen/widgets/rewards_culture_tab.dart';
-import 'package:familystars_2/ui/screens/rewards_screen/widgets/rewards_experience_tab.dart';
-import 'package:familystars_2/ui/screens/rewards_screen/widgets/rewards_material_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:familystars_2/ui/screens/rewards_screen/widgets/reward_category_tab.dart';
+import 'package:familystars_2/infrastructure/dependency_injection.dart';
+
 // The widget holds the different tabs for reward content
 
-class RewardsTabContent extends StatefulWidget {
+class RewardsTabContent extends StatelessWidget {
   final String childId;
   const RewardsTabContent({super.key, required this.childId});
 
   @override
-  _RewardsTabContentState createState() => _RewardsTabContentState();
-}
-
-class _RewardsTabContentState extends State<RewardsTabContent> {
-  @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, ref, child) {
-      final rewardProviderRes = ref.watch(rewardScreenProvider);
-      return TabBarView(
-        controller: rewardProviderRes.rewardController,
-        children: [
-          RewardCultureTab(
-            userId: widget.childId,
-          ),
-          RewardExperienceTab(
-            userId: widget.childId,
-          ),
-          RewardMaterialTab(
-            userId: widget.childId,
-          ),
-        ],
-      );
-    });
+    return Consumer(
+      builder: (context, ref, child) {
+        final rewardProviderRes = ref.watch(rewardScreenProvider);
+        return FutureBuilder(
+          future: rewardProviderRes.getUser(childId),
+          builder: (context, AsyncSnapshot snapshot) {
+            if (!snapshot.hasData) return Text("Loading...");
+            return TabBarView(
+              controller: rewardProviderRes.rewardController,
+              children: [
+                RewardCategoryTab(category: 'Cultura'),
+                RewardCategoryTab(category: 'Experiencias'),
+                RewardCategoryTab(category: 'Material'),
+              ],
+            );
+          },
+        );
+      },
+    );
   }
 }

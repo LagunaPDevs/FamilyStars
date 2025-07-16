@@ -5,7 +5,7 @@ class RoutesConstants {
   static const String forgotPasswordScreen = '/forgotPasswordScreen';
   static const String chooseSignUpScreen = '/chooseSignUpScreen';
   static const String registrationScreen = '/registrationScreen';
-  static const String mainScreen = '/mainScreen';
+  static const String parentMainScreen = '/parentMainScreen';
   static const String calendarScreen = '/calendarScreen';
   static const String rewardsScreen = '/rewardsScreen';
   static const String activationCodeScreen = '/activationCodeScreen';

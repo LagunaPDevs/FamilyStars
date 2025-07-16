@@ -1,10 +1,10 @@
-import 'package:familystars_2/infrastructure/constants/app_constants.dart';
-import 'package:familystars_2/infrastructure/constants/color_constants.dart';
-import 'package:familystars_2/infrastructure/providers/general_provider.dart';
-import 'package:familystars_2/infrastructure/services/firebase_services.dart';
-import 'package:familystars_2/ui/commons/alert_dialog_widgets/custom_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:familystars_2/infrastructure/constants/app_constants.dart';
+import 'package:familystars_2/infrastructure/constants/color_constants.dart';
+
+import 'package:familystars_2/infrastructure/dependency_injection.dart';
 
 // Widget that permits to user go forward with registration process if the
 // correspondent fields are validated
@@ -23,27 +23,13 @@ class _RegistrationNextButtonState extends State<RegistrationNextButton> {
     return Consumer(
       builder: (context, ref, child) {
         final registrationProviderRes = ref.watch(registrationScreenProvider);
-        int activeStep = registrationProviderRes.activeStep;
-        int upperBound = registrationProviderRes.upperBound;
-
         return GestureDetector(
           onTap: () async {
             if (widget.formKey!.currentState!.validate()) {
-              String email = registrationProviderRes.emailController.text;
-              if (activeStep < upperBound) {
-                if (registrationProviderRes.activeStep == 0) {
-                  // If email-password registration valid continue with the registration
-                  CustomLoading.progressDialog(true, context);
-                  final registrationSuccess = await FirebaseServices
-                      .registerUserWithFirebaseEmailCredentials(context, email,
-                          registrationProviderRes.passwordController.text);
-                  CustomLoading.progressDialog(false, context);
-                  if (!registrationSuccess) return;
-                }
-                setState(() {
-                  // Go forward
-                  registrationProviderRes.setActiveStepUp();
-                });
+              final handleNext =
+                  await registrationProviderRes.handleNext(context);
+              if (handleNext == false && context.mounted) {
+                _registrationErrorScaffold(context);
               }
             }
           },
@@ -67,4 +53,15 @@ class _RegistrationNextButtonState extends State<RegistrationNextButton> {
       },
     );
   }
+}
+
+_registrationErrorScaffold(BuildContext context) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    backgroundColor: ColorConstants.purpleGradient.withValues(alpha: 0.5),
+    content: SizedBox(
+        height: 100,
+        child: Text(AppConstants.errorRegisteringUser,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))),
+  ));
 }

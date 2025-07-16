@@ -1,10 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:familystars_2/infrastructure/constants/app_constants.dart';
 import 'package:familystars_2/infrastructure/constants/color_constants.dart';
 import 'package:familystars_2/infrastructure/constants/image_constants.dart';
 import 'package:familystars_2/infrastructure/constants/routes_constants.dart';
+import 'package:familystars_2/infrastructure/dependency_injection.dart';
 import 'package:familystars_2/infrastructure/services/shared_preference_services.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // First screen that is shown when the user installs the app
 // This is screen is not shown if the user has been already authenticated
@@ -25,7 +27,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
     // If user has logged previously it leads to it main screen
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       if (SharedPreferenceService().getUser() != null) {
-        Navigator.of(context).popAndPushNamed(RoutesConstants.mainScreen);
+        Navigator.of(context).popAndPushNamed(RoutesConstants.parentMainScreen);
       }
     });
   }
@@ -33,20 +35,25 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
+      final introductionProviderRef = ref.watch(introductionScreenProvider);
       return Scaffold(
         body: Container(
           decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [
-                ColorConstants.blueColor,
-                ColorConstants.blueGradient
-              ])),
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [ColorConstants.blueColor, ColorConstants.blueGradient],
+            ),
+          ),
           // If the user has not logged previously the screen is shown
-          child: SharedPreferenceService().getUser() == null
-              ? Center(
-                  child: Column(
+          child: Center(
+            child: FutureBuilder(
+              future: introductionProviderRef.getUserInStorage(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    !snapshot.hasData 
+                    ) {
+                  return Column(
                     children: [
                       const SizedBox(
                         height: 200,
@@ -55,26 +62,29 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                           width: 200,
                           child: Image.asset(ImageConstants.logoFamilyStars)),
                       GestureDetector(
-                          onTap: () {
-                            Navigator.of(context)
-                                .popAndPushNamed(RoutesConstants.loginScreen);
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              AppConstants.start,
-                              style: TextStyle(
-                                  color: ColorConstants.whiteColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  fontFamily: 'KristenITC'),
-                            ),
-                          ))
+                        onTap: () =>
+                            introductionProviderRef.onStartClick(context),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            AppConstants.start,
+                            style: TextStyle(
+                                color: ColorConstants.whiteColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                fontFamily: 'KristenITC'),
+                          ),
+                        ),
+                      )
                     ],
-                  ),
-                )
-              : const CircularProgressIndicator(
-                  color: ColorConstants.whiteColor),
+                  );
+                }
+
+                return CircularProgressIndicator(
+                    color: ColorConstants.whiteColor);
+              },
+            ),
+          ),
         ),
       );
     });

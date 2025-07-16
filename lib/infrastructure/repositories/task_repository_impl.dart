@@ -1,0 +1,57 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:familystars_2/infrastructure/data_sources/task_data_source.dart';
+import 'package:familystars_2/infrastructure/domain/repositories/task_repository.dart';
+
+import 'package:familystars_2/infrastructure/errors/exceptions.dart';
+import 'package:familystars_2/infrastructure/errors/result.dart';
+
+import 'package:familystars_2/infrastructure/models/task.dart';
+
+class TaskRepositoryImpl extends TaskRepository {
+  final TaskDataSource dataSource;
+
+  TaskRepositoryImpl({required this.dataSource});
+
+  @override
+  Future<Result<String?>> addNewTaskToChild(Task task) async {
+    try {
+      final result = await dataSource.addNewTaskToChild(task);
+      return Result.ok(result);
+    } on TaskException catch (e) {
+      return Result.error(e);
+    }
+  }
+
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>>? getUserTasks(
+      {required String userId, String? isNotState}) {
+    try {
+      final result = dataSource.getUserTasks(userId: userId, isNotState: isNotState);
+      return result;
+    } on TaskException catch (_) {
+      return null;
+    }
+  }
+
+  @override
+  Future<Result<bool>> updateTask(
+      String? taskId, Map<String, dynamic> newData) async {
+    try {
+      final result = await dataSource.updateTask(taskId, newData);
+      return Result.ok(result);
+    } on TaskException catch (e) {
+      return Result.error(e);
+    }
+  }
+  
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>>? getParentUserTasks({required String userId, String? isNotState}) {
+    try {
+      final result = dataSource.getParentUserTasks(userId: userId, isNotState: isNotState);
+      return result;
+    } on TaskException catch (_) {
+      return null;
+    }
+  }
+}
